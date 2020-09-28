@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1093510424712-1ea8khdbbf8ek8shf08jghhna9ldufch.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1093510424712-1ea8khdbbf8ek8shf08jghhna9ldufch</string>
+	<key>API_KEY</key>
+	<string>AIzaSyA5EpoYxf_R_y8trLF7ivRY7SEqR9M0zGw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1093510424712</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.sjlearmonth.Find-My-Lift</string>
+	<key>PROJECT_ID</key>
+	<string>find-my-lift</string>
+	<key>STORAGE_BUCKET</key>
+	<string>find-my-lift.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1093510424712:ios:296b3ea0ef4e3ff050973d</string>
+	<key>DATABASE_URL</key>
+	<string>https://find-my-lift.firebaseio.com</string>
+</dict>
+</plist>
