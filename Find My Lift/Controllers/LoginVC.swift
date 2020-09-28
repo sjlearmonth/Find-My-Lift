@@ -72,7 +72,7 @@ class LogInVC: UIViewController {
     private let logInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 5.0
+        button.layer.cornerRadius = 10.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
