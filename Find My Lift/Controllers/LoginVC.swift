@@ -16,11 +16,16 @@ protocol AuthenticationControllerProtocol {
     func checkFormStatus()
 }
 
+protocol AuthenticationDelegate: class {
+    func completeAuthentication()
+}
 class LogInVC: UIViewController {
 
     // MARK: - Properties
     
     private var viewModel = LogInViewModel()
+    
+    weak var delegate: AuthenticationDelegate?
     
     private let clouds: UIImageView = {
         let imageView = UIImageView()
@@ -110,7 +115,7 @@ class LogInVC: UIViewController {
             }
             
             self.showLoader(false)
-//            self.delegate?.authenticationComplete()
+            self.delegate?.completeAuthentication()
         }
     }
     

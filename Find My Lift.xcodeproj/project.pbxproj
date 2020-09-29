@@ -18,6 +18,12 @@
 		C42AA38B25224F9500B7A5A6 /* InputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA38A25224F9500B7A5A6 /* InputContainerView.swift */; };
 		C42AA38D25224FEB00B7A5A6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA38C25224FEB00B7A5A6 /* AuthService.swift */; };
 		C42AA38F252251E100B7A5A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */; };
+		C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA390252258A200B7A5A6 /* HomeTBC.swift */; };
+		C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D3D2523A0B700DF0870 /* GroupsVC.swift */; };
+		C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D402523A0D500DF0870 /* ChatVC.swift */; };
+		C4677D442523A0F000DF0870 /* ActiveOffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */; };
+		C4677D472523A10F00DF0870 /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D462523A10F00DF0870 /* MoreVC.swift */; };
+		C4677D4A2523A45400DF0870 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D492523A45400DF0870 /* HomeVC.swift */; };
 		D32F215D7B4DECC262DADC47 /* Pods_Find_My_Lift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA21C532E28C626563BC31C /* Pods_Find_My_Lift.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +43,12 @@
 		C42AA38A25224F9500B7A5A6 /* InputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContainerView.swift; sourceTree = "<group>"; };
 		C42AA38C25224FEB00B7A5A6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C42AA390252258A200B7A5A6 /* HomeTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTBC.swift; sourceTree = "<group>"; };
+		C4677D3D2523A0B700DF0870 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
+		C4677D402523A0D500DF0870 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOffersVC.swift; sourceTree = "<group>"; };
+		C4677D462523A10F00DF0870 /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
+		C4677D492523A45400DF0870 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		E317283D01924CCB3ABEADBB /* Pods-Find My Lift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Lift.release.xcconfig"; path = "Target Support Files/Pods-Find My Lift/Pods-Find My Lift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +122,12 @@
 			isa = PBXGroup;
 			children = (
 				C42AA3802522462900B7A5A6 /* LoginVC.swift */,
+				C42AA390252258A200B7A5A6 /* HomeTBC.swift */,
+				C4677D492523A45400DF0870 /* HomeVC.swift */,
+				C4677D3D2523A0B700DF0870 /* GroupsVC.swift */,
+				C4677D402523A0D500DF0870 /* ChatVC.swift */,
+				C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */,
+				C4677D462523A10F00DF0870 /* MoreVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -270,9 +288,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				C42AA38925224F8000B7A5A6 /* CustomTextField.swift in Sources */,
+				C4677D4A2523A45400DF0870 /* HomeVC.swift in Sources */,
+				C4677D472523A10F00DF0870 /* MoreVC.swift in Sources */,
+				C4677D442523A0F000DF0870 /* ActiveOffersVC.swift in Sources */,
 				C42AA38B25224F9500B7A5A6 /* InputContainerView.swift in Sources */,
 				C42AA38D25224FEB00B7A5A6 /* AuthService.swift in Sources */,
+				C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */,
+				C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */,
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
+				C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */,
 				C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */,
 				C42AA3812522462900B7A5A6 /* LoginVC.swift in Sources */,
 				C42AA38525224ED200B7A5A6 /* LoginViewModel.swift in Sources */,
@@ -344,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -398,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -416,7 +440,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EY96RACD4Q;
 				INFOPLIST_FILE = "Find My Lift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,7 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = EY96RACD4Q;
 				INFOPLIST_FILE = "Find My Lift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
