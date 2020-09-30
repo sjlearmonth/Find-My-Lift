@@ -10,10 +10,30 @@ import UIKit
 
 class MoreVC: UIViewController {
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        configureUI()
+ 
+    }
+    
+    private func configureUI() {
+        
+        configureGradientLayer()
+        
+        title = "More Content"
 
-        view.backgroundColor = .cyan
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(handleLogOut))
+
+        navigationController?.navigationBar.barTintColor = .systemBlue
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationController?.navigationBar.barStyle = .black
+
     }
 
 }
