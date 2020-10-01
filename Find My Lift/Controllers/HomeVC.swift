@@ -80,7 +80,7 @@ class HomeVC: UIViewController {
         configureGradientLayer()
         
         title = "Home"
-
+        navigationItem.backButtonTitle = ""
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(handleLogOut))
 
         navigationController?.navigationBar.barTintColor = .systemBlue

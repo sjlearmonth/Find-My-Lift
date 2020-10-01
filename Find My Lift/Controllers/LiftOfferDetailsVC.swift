@@ -29,7 +29,6 @@ class LiftOfferDetailsVC: UIViewController {
         configureGradientLayer()
         
         title = "Lift Offer Details"
-        navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
