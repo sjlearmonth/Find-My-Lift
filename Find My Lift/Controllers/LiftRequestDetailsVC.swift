@@ -195,7 +195,14 @@ class LiftRequestDetailsVC: UIViewController {
         return label
     }()
     
-    private let groupsView = GroupsView()
+    private lazy var groupSelectorView : GroupSelectorView = {
+        let gsv = GroupSelectorView()
+        gsv.delegate = self
+        gsv.setWidth(width: 350)
+        gsv.setHeight(height: 250)
+        return gsv
+    }()
+
     
     private let checkLiftAvailabilityButton: UIButton = {
         let button = UIButton(type: .system)
@@ -204,7 +211,7 @@ class LiftRequestDetailsVC: UIViewController {
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 30
-        button.addTarget(self, action: #selector(handleCheckForLiftClicked), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleCheckLiftAvailabilityClicked), for: .touchUpInside)
 
         return button
     }()
@@ -245,15 +252,20 @@ class LiftRequestDetailsVC: UIViewController {
     
     @objc func handleSelectGroupClicked() {
         print("DEBUG: handle select group clicked")
-        view.addSubview(groupsView)
-        groupsView.groupsViewDelegate = self
-        groupsView.centerX(inView: view)
-        groupsView.centerY(inView: view)
+        view.addSubview(groupSelectorView)
+        groupSelectorView.delegate = self
+        groupSelectorView.centerX(inView: view)
+        groupSelectorView.centerY(inView: view)
         return
     }
     
-    @objc func handleCheckForLiftClicked() {
+    @objc func handleCheckLiftAvailabilityClicked() {
         print("DEBUG: check for lift clicked")
+        let controller = LiftAvailabilityTVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
+        
     }
     
     // MARK: - Helper Functions
@@ -262,6 +274,7 @@ class LiftRequestDetailsVC: UIViewController {
         configureGradientLayer()
         
         title = "Lift Request Details"
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
@@ -397,10 +410,10 @@ extension LiftRequestDetailsVC: PassengerSelectorDelegate {
     }
 }
 
-extension LiftRequestDetailsVC: GroupsViewDelegate {
-    func readSelectedGroup(group: String) {
+extension LiftRequestDetailsVC: GroupSelectorDelegate {
+    func readGroupSelected(group: String) {
         selectedGroupLabel.text = group
-        groupsView.removeFromSuperview()
+        groupSelectorView.removeFromSuperview()
     }
     
 }
