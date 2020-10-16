@@ -56,6 +56,8 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        
+        authenticateUser()
  
     }
     
@@ -79,20 +81,44 @@ class HomeVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "Home"
-        navigationItem.backButtonTitle = ""
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .done, target: self, action: #selector(handleLogOut))
-
-        navigationController?.navigationBar.barTintColor = .systemBlue
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
-        navigationController?.navigationBar.barStyle = .black
+        configureNavigationBar()
         
         view.addSubview(buttonsStackView)
         buttonsStackView.centerY(inView: view)
         buttonsStackView.anchor(left: view.leftAnchor, right: view.rightAnchor,
                                 paddingLeft: 32, paddingRight: 32)
 
+    }
+    
+    private func authenticateUser() {
+        if Auth.auth().currentUser?.uid == nil {
+            presentLogInVC()
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out",
+                                                                style: .done,
+                                                                target: self,
+                                                                action: #selector(handleLogOut))
+            navigationItem.rightBarButtonItem?.tintColor = .white
+        }
+    }
+    
+    private func presentLogInVC() {
+        let controller = LogInVC()
+        controller.delegate = self
+        controller.modalPresentationStyle = .fullScreen
+        self.present(controller.self, animated: true, completion: nil)
+    }
+    
+    private func configureNavigationBar() {
+        title = "Home"
+        navigationItem.backButtonTitle = ""
+
+        navigationController?.navigationBar.barTintColor = .systemBlue
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+        navigationController?.navigationBar.barStyle = .black
+        navigationController?.navigationBar.isTranslucent = false
     }
     
     @objc func handleLogOut() {
@@ -108,13 +134,12 @@ class HomeVC: UIViewController {
                 print("DEBUG: Error signing out. \(error.localizedDescription)")
             }
     }
-
 }
 
 extension HomeVC: AuthenticationDelegate {
     func completeAuthentication() {
         dismiss(animated: true, completion: nil)
-        configureUI()
+        authenticateUser()
     }
 }
 

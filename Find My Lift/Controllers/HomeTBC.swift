@@ -16,7 +16,6 @@ class HomeTBC: UITabBarController {
         super.viewDidLoad()
         
         configureUI()
-
     }
     
     private func configureUI() {
@@ -43,6 +42,8 @@ class HomeTBC: UITabBarController {
 
         let tabBarItems = [homeNav, groupsNav, chatNav, activeOffersNav, moreNav]
         viewControllers = tabBarItems
+        
+//        tabBar.barTintColor = .systemYellow
 
     }
     

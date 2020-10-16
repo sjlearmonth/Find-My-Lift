@@ -1,5 +1,5 @@
 //
-//  LoginViewModel.swift
+//  LogInViewModel.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 28/09/2020.
