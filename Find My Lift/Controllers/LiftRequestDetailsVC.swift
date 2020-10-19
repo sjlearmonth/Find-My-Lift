@@ -261,7 +261,7 @@ class LiftRequestDetailsVC: UIViewController {
     
     @objc func handleCheckLiftAvailabilityClicked() {
         print("DEBUG: check for lift clicked")
-        let controller = LiftAvailabilityTVC()
+        let controller = LiftAvailabilityVC()
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         navigationController?.pushViewController(controller, animated: true)

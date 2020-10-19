@@ -24,6 +24,7 @@
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
 		C464446D253A0B5C008A4FC4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C464446C253A0B5C008A4FC4 /* SignUpVC.swift */; };
 		C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */; };
+		C4644475253DD18E008A4FC4 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4644474253DD18E008A4FC4 /* SortView.swift */; };
 		C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D3D2523A0B700DF0870 /* GroupsVC.swift */; };
 		C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D402523A0D500DF0870 /* ChatVC.swift */; };
 		C4677D442523A0F000DF0870 /* ActiveOffersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */; };
@@ -32,10 +33,9 @@
 		C4677D942524F14900DF0870 /* LiftRequestDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D932524F14900DF0870 /* LiftRequestDetailsVC.swift */; };
 		C4677D972524F29000DF0870 /* LiftOfferDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D962524F29000DF0870 /* LiftOfferDetailsVC.swift */; };
 		C497C52525276033005DAEC8 /* GroupSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C52425276033005DAEC8 /* GroupSelectorView.swift */; };
-		C497C54225276773005DAEC8 /* LiftAvailabilityTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C54125276773005DAEC8 /* LiftAvailabilityTVC.swift */; };
+		C497C54225276773005DAEC8 /* LiftAvailabilityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C54125276773005DAEC8 /* LiftAvailabilityVC.swift */; };
 		C497C5462527733A005DAEC8 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C5452527733A005DAEC8 /* HeaderView.swift */; };
 		C497C54925277DD4005DAEC8 /* LiftAvailabilityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C54825277DD4005DAEC8 /* LiftAvailabilityCell.swift */; };
-		C497C54E252787E8005DAEC8 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C54D252787E8005DAEC8 /* FooterView.swift */; };
 		C497C55125279F1D005DAEC8 /* LiftOfferReviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497C55025279F1D005DAEC8 /* LiftOfferReviewVC.swift */; };
 		D32F215D7B4DECC262DADC47 /* Pods_Find_My_Lift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA21C532E28C626563BC31C /* Pods_Find_My_Lift.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +62,7 @@
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
 		C464446C253A0B5C008A4FC4 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		C4644474253DD18E008A4FC4 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		C4677D3D2523A0B700DF0870 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
 		C4677D402523A0D500DF0870 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveOffersVC.swift; sourceTree = "<group>"; };
@@ -70,10 +71,9 @@
 		C4677D932524F14900DF0870 /* LiftRequestDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftRequestDetailsVC.swift; sourceTree = "<group>"; };
 		C4677D962524F29000DF0870 /* LiftOfferDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferDetailsVC.swift; sourceTree = "<group>"; };
 		C497C52425276033005DAEC8 /* GroupSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupSelectorView.swift; sourceTree = "<group>"; };
-		C497C54125276773005DAEC8 /* LiftAvailabilityTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftAvailabilityTVC.swift; sourceTree = "<group>"; };
+		C497C54125276773005DAEC8 /* LiftAvailabilityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftAvailabilityVC.swift; sourceTree = "<group>"; };
 		C497C5452527733A005DAEC8 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		C497C54825277DD4005DAEC8 /* LiftAvailabilityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftAvailabilityCell.swift; sourceTree = "<group>"; };
-		C497C54D252787E8005DAEC8 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		C497C55025279F1D005DAEC8 /* LiftOfferReviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferReviewVC.swift; sourceTree = "<group>"; };
 		E317283D01924CCB3ABEADBB /* Pods-Find My Lift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Lift.release.xcconfig"; path = "Target Support Files/Pods-Find My Lift/Pods-Find My Lift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -158,7 +158,7 @@
 				C4677D462523A10F00DF0870 /* MoreVC.swift */,
 				C4677D932524F14900DF0870 /* LiftRequestDetailsVC.swift */,
 				C4677D962524F29000DF0870 /* LiftOfferDetailsVC.swift */,
-				C497C54125276773005DAEC8 /* LiftAvailabilityTVC.swift */,
+				C497C54125276773005DAEC8 /* LiftAvailabilityVC.swift */,
 				C497C55025279F1D005DAEC8 /* LiftOfferReviewVC.swift */,
 			);
 			path = Controllers;
@@ -174,7 +174,7 @@
 				C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */,
 				C497C52425276033005DAEC8 /* GroupSelectorView.swift */,
 				C497C5452527733A005DAEC8 /* HeaderView.swift */,
-				C497C54D252787E8005DAEC8 /* FooterView.swift */,
+				C4644474253DD18E008A4FC4 /* SortView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +334,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4644475253DD18E008A4FC4 /* SortView.swift in Sources */,
 				C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */,
 				C42AA38925224F8000B7A5A6 /* CustomTextField.swift in Sources */,
 				C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */,
@@ -345,7 +346,7 @@
 				C42AA38B25224F9500B7A5A6 /* InputContainerView.swift in Sources */,
 				C497C52525276033005DAEC8 /* GroupSelectorView.swift in Sources */,
 				C464446D253A0B5C008A4FC4 /* SignUpVC.swift in Sources */,
-				C497C54225276773005DAEC8 /* LiftAvailabilityTVC.swift in Sources */,
+				C497C54225276773005DAEC8 /* LiftAvailabilityVC.swift in Sources */,
 				C42AA38D25224FEB00B7A5A6 /* AuthService.swift in Sources */,
 				C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */,
 				C4677D942524F14900DF0870 /* LiftRequestDetailsVC.swift in Sources */,
@@ -358,7 +359,6 @@
 				C497C54925277DD4005DAEC8 /* LiftAvailabilityCell.swift in Sources */,
 				C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */,
 				C42AA3812522462900B7A5A6 /* LoginVC.swift in Sources */,
-				C497C54E252787E8005DAEC8 /* FooterView.swift in Sources */,
 				C42AA38525224ED200B7A5A6 /* LogInViewModel.swift in Sources */,
 				C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */,
 			);

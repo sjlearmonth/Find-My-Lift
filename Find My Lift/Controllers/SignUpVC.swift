@@ -113,8 +113,10 @@ class SignUpVC: UIViewController {
               let fullname = fullnameTextField.text,
               let username = usernameTextField.text?.lowercased() else { return }
         
-        let credentials = RegistrationCredentials(email: email, password: password,
-                                                  fullname: fullname, username: username)
+        let credentials = RegistrationCredentials(email: email,
+                                                  password: password,
+                                                  fullname: fullname,
+                                                  username: username)
         
         showLoader(true, withText: "Signing You Up")
         

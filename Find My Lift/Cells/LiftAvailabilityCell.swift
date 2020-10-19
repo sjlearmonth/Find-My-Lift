@@ -12,18 +12,6 @@ class LiftAvailabilityCell: UITableViewCell {
     
     // MARK: - Properties
     
-    lazy var groupLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Group"
-        label.textColor = .black
-        label.textAlignment = .center
-        label.backgroundColor = .white
-        label.font = UIFont(name: "AvenirNext-Regular", size: 18)
-        label.layer.borderWidth = 0.5
-        label.layer.borderColor = UIColor.black.cgColor
-        return label
-    }()
-
     lazy var driverLabel: UILabel = {
         let label = UILabel()
         label.text = "Driver"
@@ -64,8 +52,7 @@ class LiftAvailabilityCell: UITableViewCell {
     
     private func configureUI() {
         
-        let stackView = UIStackView(arrangedSubviews: [groupLabel,
-                                                       driverLabel,
+        let stackView = UIStackView(arrangedSubviews: [driverLabel,
                                                        pickupTimeLabel])
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually

@@ -12,16 +12,16 @@ class HeaderView: UIView {
     
     // MARK: - Properties
     
-    private lazy var groupHeaderLabel: UILabel = {
+    lazy var groupHeaderLabel: UILabel = {
         let label = UILabel()
-        label.text = "Group"
+        label.text = ""
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
-        label.font = UIFont(name: "AvenirNext-Bold", size: 20)
+        label.font = UIFont(name: "AvenirNext-Bold", size: 30)
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: self.frame.width/3)
+        label.setWidth(width: self.frame.width)
         label.setHeight(height: 60.0)
         return label
     }()
@@ -35,7 +35,7 @@ class HeaderView: UIView {
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: self.frame.width/3)
+        label.setWidth(width: self.frame.width/2)
         label.setHeight(height: 60.0)
         return label
     }()
@@ -49,12 +49,11 @@ class HeaderView: UIView {
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
         label.layer.borderWidth = 2
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: self.frame.width/3)
+        label.setWidth(width: self.frame.width/2)
         label.setHeight(height: 60.0)
         return label
     }()
 
-    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -71,16 +70,21 @@ class HeaderView: UIView {
     
     private func configureUI() {
         
-        let headerStackView = UIStackView(arrangedSubviews: [groupHeaderLabel,
-                                                             driverHeaderLabel,
+        self.addSubview(groupHeaderLabel)
+        groupHeaderLabel.anchor(top: self.topAnchor)
+        groupHeaderLabel.centerX(inView: self)
+        
+        let headerStackView = UIStackView(arrangedSubviews: [driverHeaderLabel,
                                                              pickupTimeHeaderLabel])
         headerStackView.axis = .horizontal
         headerStackView.distribution = .fill
         headerStackView.spacing = -1
         
         self.addSubview(headerStackView)
+        headerStackView.anchor(top:groupHeaderLabel.bottomAnchor,
+                               paddingTop: 0,
+                               width: self.frame.width)
         headerStackView.centerX(inView: self)
-        headerStackView.centerY(inView: self)
     }
     
 }
