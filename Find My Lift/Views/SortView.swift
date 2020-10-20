@@ -83,12 +83,7 @@ class SortView: UIView {
         tf.delegate = self
         return tf
     }()
-    
-    enum radioButtonStates : Int {
-        case driver
-        case pickupTime
-    }
-    
+        
     private var radioButtonState = radioButtonStates.driver
     
     weak var delegate: SortViewDelegate?
@@ -179,8 +174,14 @@ extension SortView: UITextFieldDelegate {
     
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        print("DEBUG: delegate method called text is \(string)")
-        delegate?.executeDynamicSearch(query: textField.text ?? "", type: radioButtonState.rawValue)
+        var searchString = ""
+        guard let textString = textField.text else { return true }
+        if string.isEmpty {
+            searchString = ""
+        } else {
+            searchString = textString + string
+        }
+        delegate?.executeDynamicSearch(query: searchString, type: radioButtonState.rawValue)
         return true
     }
 

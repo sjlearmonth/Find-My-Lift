@@ -155,7 +155,7 @@ extension LiftAvailabilityVC: UITableViewDataSource {
 
 extension LiftAvailabilityVC: SortViewDelegate {
     
-    func executeDynamicSearch(query: String) {
+    func executeDynamicSearch(query: String, type: Int) {
         print("DEBUG: executeDynamicSearch called \(query)")
         liftAvailabilityDetailsQuerySearch = [[String:String]]()
         listSearchResults = false

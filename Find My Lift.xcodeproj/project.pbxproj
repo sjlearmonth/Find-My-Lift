@@ -19,6 +19,7 @@
 		C42AA38D25224FEB00B7A5A6 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA38C25224FEB00B7A5A6 /* AuthService.swift */; };
 		C42AA38F252251E100B7A5A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */; };
 		C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA390252258A200B7A5A6 /* HomeTBC.swift */; };
+		C42EE4ED253F07A700EC1F51 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE4EC253F07A700EC1F51 /* Enumerations.swift */; };
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
@@ -57,6 +58,7 @@
 		C42AA38C25224FEB00B7A5A6 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C42AA390252258A200B7A5A6 /* HomeTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTBC.swift; sourceTree = "<group>"; };
+		C42EE4EC253F07A700EC1F51 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				C42AA38625224F2600B7A5A6 /* Extensions.swift */,
+				C42EE4EC253F07A700EC1F51 /* Enumerations.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				C4677D4A2523A45400DF0870 /* HomeVC.swift in Sources */,
 				C4677D472523A10F00DF0870 /* MoreVC.swift in Sources */,
 				C4677D972524F29000DF0870 /* LiftOfferDetailsVC.swift in Sources */,
+				C42EE4ED253F07A700EC1F51 /* Enumerations.swift in Sources */,
 				C4677D442523A0F000DF0870 /* ActiveOffersVC.swift in Sources */,
 				C497C5462527733A005DAEC8 /* HeaderView.swift in Sources */,
 				C42AA38B25224F9500B7A5A6 /* InputContainerView.swift in Sources */,
