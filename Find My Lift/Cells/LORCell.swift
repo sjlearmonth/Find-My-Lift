@@ -1,38 +1,38 @@
 //
-//  LiftAvailabilityCell.swift
+//  LiftOfferReviewCell.swift
 //  Find My Lift
 //
-//  Created by Stephen Learmonth on 02/10/2020.
+//  Created by Stephen Learmonth on 21/10/2020.
 //  Copyright © 2020 Stephen Learmonth. All rights reserved.
 //
 
 import UIKit
 
-class LiftAvailabilityCell: UITableViewCell {
-    
+class LORCell: UITableViewCell {
+
     // MARK: - Properties
     
-    lazy var driverLabel: UILabel = {
+    lazy var infoTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Driver"
         label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .white
         label.font = UIFont(name: "AvenirNext-Regular", size: 18)
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.black.cgColor
+        label.setWidth(width: 5.0 * self.frame.width / 9.0)
         return label
     }()
 
-    lazy var pickupTimeLabel: UILabel = {
+    lazy var infoValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "Pickup Time"
         label.textColor = .black
         label.textAlignment = .center
         label.backgroundColor = .white
         label.font = UIFont(name: "AvenirNext-Regular", size: 18)
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.black.cgColor
+        label.setWidth(width: 4.0 * self.frame.width / 9.0)
         return label
     }()
 
@@ -47,15 +47,15 @@ class LiftAvailabilityCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Helper Functions
     
     private func configureUI() {
         
-        let stackView = UIStackView(arrangedSubviews: [driverLabel,
-                                                       pickupTimeLabel])
+        let stackView = UIStackView(arrangedSubviews: [infoTitleLabel,
+                                                       infoValueLabel])
         stackView.axis = .horizontal
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.spacing = 0
         
         self.addSubview(stackView)
@@ -69,5 +69,4 @@ class LiftAvailabilityCell: UITableViewCell {
                          paddingRight: 0)
     }
 
-    
 }

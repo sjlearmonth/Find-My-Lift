@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol SortViewDelegate: class {
-    func executeDynamicSearch(query: String, type: Int)
+protocol LASortViewDelegate: class {
+    func executeDynamicSearch(query: String, type: radioButtonStates)
 }
 
-class SortView: UIView {
+class LASortView: UIView {
     
     // MARK: - Properties
     
@@ -68,6 +68,7 @@ class SortView: UIView {
         tf.setWidth(width: 150)
         tf.layer.cornerRadius = 5
         tf.delegate = self
+        tf.returnKeyType = .done
         return tf
     }()
 
@@ -81,12 +82,13 @@ class SortView: UIView {
         tf.setWidth(width: 150)
         tf.layer.cornerRadius = 5
         tf.delegate = self
+        tf.returnKeyType = .done
         return tf
     }()
         
     private var radioButtonState = radioButtonStates.driver
     
-    weak var delegate: SortViewDelegate?
+    weak var delegate: LASortViewDelegate?
     
     // MARK: - Lifecycle
     
@@ -166,7 +168,7 @@ class SortView: UIView {
     }
 }
 
-extension SortView: UITextFieldDelegate {
+extension LASortView: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.endEditing(true)
         return false
@@ -181,7 +183,7 @@ extension SortView: UITextFieldDelegate {
         } else {
             searchString = textString + string
         }
-        delegate?.executeDynamicSearch(query: searchString, type: radioButtonState.rawValue)
+        delegate?.executeDynamicSearch(query: searchString, type: radioButtonState)
         return true
     }
 

@@ -80,6 +80,23 @@ extension UIView {
         translatesAutoresizingMaskIntoConstraints = false
         widthAnchor.constraint(equalToConstant: width).isActive = true
     }
+    
+    func trail(left: NSLayoutXAxisAnchor? = nil,
+               right: NSLayoutXAxisAnchor? = nil,
+               leftT: CGFloat = 0,
+               rightT: CGFloat = 0) {
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        
+        if let left = left {
+            leadingAnchor.constraint(equalTo: left, constant: leftT).isActive = true;
+        }
+        
+        if let right = right {
+            trailingAnchor.constraint(equalTo: right, constant: rightT).isActive = true
+        }
+    }
+
 }
 
 extension UIViewController {

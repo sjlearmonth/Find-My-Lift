@@ -21,7 +21,7 @@ class LiftAvailabilityVC: UIViewController {
         tableView.rowHeight = 40
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(LiftAvailabilityCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(LACell.self, forCellReuseIdentifier: cellID)
         tableView.setHeight(height: CGFloat(120.0 + Double(40 * maxNumberOfRows)))
         tableView.setWidth(width: self.view.frame.width)
         tableView.bounces = false
@@ -40,7 +40,10 @@ class LiftAvailabilityVC: UIViewController {
                                                                ["Driver":"Leslie", "Pickup Time":"1:50pm"],
                                                                ["Driver":"Lorna", "Pickup Time":"2:05pm"],
                                                                ["Driver":"Brian", "Pickup Time":"1:55pm"],
-                                                               ["Driver":"Bobby", "Pickup Time":"2:15pm"]]
+                                                               ["Driver":"Bradley", "Pickup Time":"2:15pm"],
+                                                               ["Driver":"Bob", "Pickup Time":"2:15pm"],
+                                                               ["Driver":"Brendan", "Pickup Time":"2:15pm"],
+                                                               ["Driver":"Ben", "Pickup Time":"2:15pm"]]
     
     private var liftAvailabilityDetailsQuerySearch = [[String : String]]()
     
@@ -50,8 +53,9 @@ class LiftAvailabilityVC: UIViewController {
     
     private let maxNumberOfRows = 10
     
-    private lazy var sortView = SortView()
+    private lazy var sortView = LASortView()
     
+    var selectedGroup: String = ""
     
     // MARK: - Lifecycle
     
@@ -112,8 +116,8 @@ extension LiftAvailabilityVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = HeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120.0))
-        headerView.groupHeaderLabel.text = "Work Group"
+        let headerView = LAHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120.0))
+        headerView.groupHeaderLabel.text = selectedGroup + " Group"
         return headerView
     }
 
@@ -141,7 +145,7 @@ extension LiftAvailabilityVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! LiftAvailabilityCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! LACell
         if listSearchResults == false {
             cell.driverLabel.text = liftAvailabilityDetails[indexPath.row]["Driver"]
             cell.pickupTimeLabel.text = liftAvailabilityDetails[indexPath.row]["Pickup Time"]
@@ -153,21 +157,34 @@ extension LiftAvailabilityVC: UITableViewDataSource {
     }
 }
 
-extension LiftAvailabilityVC: SortViewDelegate {
+extension LiftAvailabilityVC: LASortViewDelegate {
     
-    func executeDynamicSearch(query: String, type: Int) {
+    func executeDynamicSearch(query: String, type: radioButtonStates) {
         print("DEBUG: executeDynamicSearch called \(query)")
         liftAvailabilityDetailsQuerySearch = [[String:String]]()
         listSearchResults = false
         for tableRow in liftAvailabilityDetails {
+            if type == .driver {
+                
+            
             guard let driverName = tableRow["Driver"] else { return }
             
             if driverName.contains(query) {
-                print("DEBUG: -------------------> got here")
+                
                 let querySearchResultRow = tableRow
                 liftAvailabilityDetailsQuerySearch.append(querySearchResultRow)
              
                 listSearchResults = true
+            }
+            } else {
+                guard let pickupTime = tableRow["Pickup Time"] else { return }
+                
+                if pickupTime.contains(query) {
+                    let querySearchResultRow = tableRow
+                    liftAvailabilityDetailsQuerySearch.append(querySearchResultRow)
+                    
+                    listSearchResults = true
+                }
             }
         }
         print("DEBUG: \(liftAvailabilityDetailsQuerySearch)")

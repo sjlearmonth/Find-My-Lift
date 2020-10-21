@@ -108,7 +108,11 @@ class LogInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureUI()
+        
+        configureNotificationObservers()
+        
     }
     
     // MARK: - Selectors
@@ -156,7 +160,20 @@ class LogInVC: UIViewController {
         checkFormStatus()
     }
     
+    @objc func keyboardWillShow() {
+        if view.frame.origin.y == 0 {
+            view.frame.origin.y -= 175
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        if view.frame.origin.y != 0 {
+        view.frame.origin.y = 0
+        }
+    }
+
     // MARK: Helper Functions
+    
     private func configureUI() {
         
         configureGradientLayer()
@@ -191,6 +208,17 @@ class LogInVC: UIViewController {
         view.addSubview(signUpButton)
         signUpButton.anchor(top: logInButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
                            paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+    }
+    
+    private func configureNotificationObservers() {
+        
+        emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
 }
 

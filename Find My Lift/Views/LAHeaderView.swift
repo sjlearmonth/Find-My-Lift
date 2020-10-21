@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderView: UIView {
+class LAHeaderView: UIView {
     
     // MARK: - Properties
     
