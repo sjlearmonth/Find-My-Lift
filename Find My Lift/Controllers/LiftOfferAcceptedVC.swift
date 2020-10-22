@@ -43,7 +43,8 @@ class LiftOfferAcceptedVC: UIViewController {
         return label
     }()
 
-    private var countDownValue = 86400*4 + 3600*2 + 65
+//    private var countDownValue = 86400*4 + 3600*2 + 65
+    private var countDownValue = 15
     
     private let arrivesLabel: UILabel = {
         let label = UILabel()
@@ -83,6 +84,36 @@ class LiftOfferAcceptedVC: UIViewController {
         button.addTarget(self, action: #selector(handleMessageDriver), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var messageTextView: UITextView = {
+        let tv = UITextView()
+        tv.setDimensions(height: 200, width: self.view.frame.width - 64.0)
+        tv.text = "Type your message here."
+        tv.font = UIFont(name: "AvenirNext-Regular", size: 18.0)
+        tv.textColor = .black
+        tv.textAlignment = .left
+        tv.backgroundColor = UIColor.white
+        tv.layer.borderWidth = 0.25
+        tv.layer.borderColor = UIColor.white.cgColor
+        tv.layer.cornerRadius = 5.0
+        return tv
+    }()
+
+    
+    
+    private lazy var sendButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Send Message", for: .normal)
+        button.layer.cornerRadius = 10.0
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
+        button.backgroundColor = .systemGreen
+        button.setTitleColor(.white, for: .normal)
+        button.setHeight(height: 50.0)
+        button.isEnabled = true
+        button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
+        return button
+    }()
+
 
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
@@ -109,6 +140,21 @@ class LiftOfferAcceptedVC: UIViewController {
         button.addTarget(self, action: #selector(handleFindAnotherLift), for: .touchUpInside)
         return button
     }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+    
+    var messageDriverClicked = false
 
     // MARK: - Lifecycle
     
@@ -116,6 +162,9 @@ class LiftOfferAcceptedVC: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        
+        configureScrollView()
+        
     }
     
     // MARK: - Helper Functions
@@ -126,17 +175,29 @@ class LiftOfferAcceptedVC: UIViewController {
         
         configureNavigationBar()
                 
-        view.addSubview(confirmLabel)
-        confirmLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40.0, paddingLeft: 16.0, paddingRight: 16.0)
+        contentView.addSubview(confirmLabel)
+        confirmLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 40.0, paddingLeft: 16.0, paddingRight: 16.0)
         
-        view.addSubview(timeTitleLabel)
+        contentView.addSubview(timeTitleLabel)
         timeTitleLabel.anchor(top: confirmLabel.bottomAnchor, paddingTop: 25.0)
-        timeTitleLabel.centerX(inView: view)
+        timeTitleLabel.centerX(inView: contentView)
         
-        view.addSubview(timeValueLabel)
+        contentView.addSubview(timeValueLabel)
         timeValueLabel.anchor(top: timeTitleLabel.bottomAnchor, paddingTop: 25.0)
-        timeValueLabel.centerX(inView: view)
+        timeValueLabel.centerX(inView: contentView)
         
+        contentView.addSubview(amendButton)
+        amendButton.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 250.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+        contentView.addSubview(messageButton)
+        messageButton.anchor(top: amendButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+        contentView.addSubview(cancelButton)
+        cancelButton.anchor(top: messageButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+        
+        contentView.addSubview(findButton)
+        findButton.anchor(top: cancelButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountDownLabel), userInfo: nil, repeats: true)
     }
     
@@ -149,12 +210,37 @@ class LiftOfferAcceptedVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
     private func computeTimeLeft(timeInSeconds: Int) -> String {
         let days = countDownValue / 86400
         let hours = (countDownValue % 86400) / 3600
         let minutes = (countDownValue % 3600) / 60
         let seconds = (countDownValue % 3600) % 60
-        return "\(days) days : \(hours) hrs : \(minutes) mins : \(seconds) secs"
+        let dayString = days == 1 ? "day" : "days"
+        let hourString = hours == 1 ? "hour" : "hours"
+        let minuteString = minutes == 1 ? "min" : "mins"
+        let secondString = seconds == 1 ? "sec" : "secs"
+        return "\(days) " + dayString + " \(hours) " + hourString + " \(minutes) " + minuteString + " \(seconds) " + secondString
     }
     
     // MARK: - Selectors
@@ -166,24 +252,82 @@ class LiftOfferAcceptedVC: UIViewController {
         } else {
             timeTitleLabel.removeFromSuperview()
             timeValueLabel.removeFromSuperview()
-            view.addSubview(arrivesLabel)
-            arrivesLabel.anchor(top: confirmLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            amendButton.removeFromSuperview()
+            messageButton.removeFromSuperview()
+            cancelButton.removeFromSuperview()
+            findButton.removeFromSuperview()
+            if messageDriverClicked == true {
+                messageTextView.removeFromSuperview()
+                sendButton.removeFromSuperview()
+                messageDriverClicked = false
+            }
+            contentView.addSubview(arrivesLabel)
+            arrivesLabel.anchor(top: confirmLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
         }
     }
     
     @objc func handleAmendLift() {
-        
+        let controller = navigationController?.viewControllers[1]
+        controller?.modalPresentationStyle = .fullScreen
+        controller?.modalTransitionStyle = .crossDissolve
+        navigationController?.popToViewController(controller!, animated: true)
     }
     
     @objc func handleMessageDriver() {
+        print("DEBUG: message driver clicked")
         
+        messageDriverClicked = true
+        
+        messageButton.removeFromSuperview()
+        cancelButton.removeFromSuperview()
+        findButton.removeFromSuperview()
+        
+        view.addSubview(messageTextView)
+        messageTextView.anchor(top: amendButton.bottomAnchor, paddingTop: 25.0)
+        messageTextView.centerX(inView: view)
+        
+        view.addSubview(sendButton)
+        sendButton.anchor(top: messageTextView.bottomAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             paddingTop: 25.0,
+                             paddingLeft: 32,
+                             paddingRight: 32)
+
+        view.addSubview(cancelButton)
+        cancelButton.anchor(top: sendButton.bottomAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             paddingTop: 25.0,
+                             paddingLeft: 32,
+                             paddingRight: 32)
+        
+        view.addSubview(findButton)
+        findButton.anchor(top: cancelButton.bottomAnchor,
+                             left: view.leftAnchor,
+                             right: view.rightAnchor,
+                             paddingTop: 25.0,
+                             paddingLeft: 32,
+                             paddingRight: 32)
+
     }
     
     @objc func handleCancelLift() {
-        
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc func handleFindAnotherLift() {
-        
+        let controller = navigationController?.viewControllers[2]
+        controller?.modalPresentationStyle = .fullScreen
+        controller?.modalTransitionStyle = .crossDissolve
+        navigationController?.popToViewController(controller!, animated: true)
+    }
+    
+    @objc func handleSendMessage() {
+        print("DEBUG: send message clicked")
+        let controller = ChatVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
