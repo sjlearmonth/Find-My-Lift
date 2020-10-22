@@ -130,7 +130,6 @@ class LogInVC: UIViewController {
                 self.showLoader(false)
                 return
             }
-            
             self.showLoader(false)
             self.delegate?.completeAuthentication()
         }
@@ -182,8 +181,7 @@ class LogInVC: UIViewController {
         clouds.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
         
         view.addSubview(titleLabelView)
-        titleLabelView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 75, width: 375, height: 80)
-        titleLabelView.centerX(inView: view)
+        titleLabelView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 75, paddingLeft: 32.0, paddingRight: 32.0, height: 80)
                 
         let stackView = UIStackView(arrangedSubviews: [emailContainerView,
                                                        passwordContainerView])

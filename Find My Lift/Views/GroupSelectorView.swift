@@ -36,6 +36,7 @@ class GroupSelectorView: UIView {
         pv.delegate = self
         pv.dataSource = self
         pv.clipsToBounds = true
+        
         return pv
     }()
     
@@ -79,7 +80,11 @@ class GroupSelectorView: UIView {
     }
     
     @objc func handleSetClicked() {
-        delegate?.readGroupSelected(group: selectedGroup)
+        if groupSelector.selectedRow(inComponent: 0) == 0 {
+            delegate?.readGroupSelected(group: groupCategories[0])
+        } else {
+            delegate?.readGroupSelected(group: selectedGroup)
+        }
         self.removeFromSuperview()
     }
 
@@ -103,7 +108,6 @@ class GroupSelectorView: UIView {
         
         self.addSubview(setButton)
         setButton.anchor(bottom: self.bottomAnchor, right: self.rightAnchor, paddingBottom: 0, paddingRight: 16)
-
     }
     
 }
@@ -115,6 +119,7 @@ extension GroupSelectorView: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
         return groupCategories[row]
     }
     
@@ -124,8 +129,10 @@ extension GroupSelectorView: UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedGroup = groupCategories[row]
+        print("DEBUG: selectedGroup: \(selectedGroup)")
         return
     }
+    
 }
 
 extension GroupSelectorView: UIPickerViewDataSource {

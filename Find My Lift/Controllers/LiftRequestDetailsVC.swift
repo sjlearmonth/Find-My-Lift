@@ -32,6 +32,7 @@ class LiftRequestDetailsVC: UIViewController {
         textField.layer.cornerRadius = 5
         textField.setDimensions(height: 35, width: 150)
         textField.textAlignment = .center
+        textField.returnKeyType = .done
         return textField
     }()
 
@@ -62,6 +63,7 @@ class LiftRequestDetailsVC: UIViewController {
         textField.layer.cornerRadius = 5
         textField.setDimensions(height: 35, width: 150)
         textField.textAlignment = .center
+        textField.returnKeyType = .done
         return textField
     }()
     
@@ -89,7 +91,7 @@ class LiftRequestDetailsVC: UIViewController {
 
     private let selectedDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "01-10-2020"
+        label.text = "01/10/2020"
         label.textColor = .black
         label.backgroundColor = .white
         label.layer.cornerRadius = 5
@@ -191,7 +193,7 @@ class LiftRequestDetailsVC: UIViewController {
         label.layer.masksToBounds = true
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20)
-        label.setWidth(width: 175)
+        label.setWidth(width: 125)
         return label
     }()
     
@@ -208,7 +210,7 @@ class LiftRequestDetailsVC: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Check Lift Availability", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 30)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 30
         button.addTarget(self, action: #selector(handleCheckLiftAvailabilityClicked), for: .touchUpInside)

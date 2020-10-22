@@ -23,7 +23,7 @@ class LiftAvailabilityVC: UIViewController {
         tableView.dataSource = self
         tableView.register(LACell.self, forCellReuseIdentifier: cellID)
         tableView.setHeight(height: CGFloat(120.0 + Double(40 * maxNumberOfRows)))
-        tableView.setWidth(width: self.view.frame.width)
+        tableView.setWidth(width: self.view.frame.width - 64.0)
         tableView.bounces = false
         return tableView
     }()
@@ -51,7 +51,7 @@ class LiftAvailabilityVC: UIViewController {
     
     private let cellID = "LiftAvailabilityCell"
     
-    private let maxNumberOfRows = 10
+    private let maxNumberOfRows = 5
     
     private lazy var sortView = LASortView()
     
@@ -189,8 +189,5 @@ extension LiftAvailabilityVC: LASortViewDelegate {
         }
         print("DEBUG: \(liftAvailabilityDetailsQuerySearch)")
         tableView.reloadData()
-        
     }
-    
-
 }

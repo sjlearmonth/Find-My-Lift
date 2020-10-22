@@ -19,7 +19,7 @@ class LAHeaderView: UIView {
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
         label.font = UIFont(name: "AvenirNext-Bold", size: 30)
-        label.layer.borderWidth = 2
+        label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         label.setWidth(width: self.frame.width)
         label.setHeight(height: 60.0)
@@ -33,7 +33,7 @@ class LAHeaderView: UIView {
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
-        label.layer.borderWidth = 2
+        label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         label.setWidth(width: self.frame.width/2)
         label.setHeight(height: 60.0)
@@ -47,7 +47,7 @@ class LAHeaderView: UIView {
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
         label.font = UIFont(name: "AvenirNext-Bold", size: 20)
-        label.layer.borderWidth = 2
+        label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         label.setWidth(width: self.frame.width/2)
         label.setHeight(height: 60.0)

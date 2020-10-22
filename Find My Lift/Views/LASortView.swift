@@ -65,7 +65,7 @@ class LASortView: UIView {
         tf.placeholder = "Louise"
         tf.font = UIFont(name: "AvenirNext-DemiBold", size: 15)
         tf.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
-        tf.setWidth(width: 150)
+        tf.setWidth(width: 100)
         tf.layer.cornerRadius = 5
         tf.delegate = self
         tf.returnKeyType = .done
@@ -79,7 +79,7 @@ class LASortView: UIView {
         tf.placeholder = "2:00pm"
         tf.font = UIFont(name: "AvenirNext-DemiBold", size: 15)
         tf.backgroundColor = UIColor(white: 0.95, alpha: 1.0)
-        tf.setWidth(width: 150)
+        tf.setWidth(width: 100)
         tf.layer.cornerRadius = 5
         tf.delegate = self
         tf.returnKeyType = .done
@@ -165,6 +165,7 @@ class LASortView: UIView {
         self.addSubview(stackView)
         stackView.centerX(inView: self)
         stackView.centerY(inView: self)
+        stackView.setDimensions(height: 60.0, width: 310.0)
     }
 }
 

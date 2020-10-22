@@ -16,12 +16,13 @@ class LiftOfferAcceptedVC: UIViewController {
         let label = UILabel()
         label.text = "Your lift with Louise is confirmed"
         label.textColor = UIColor(white: 1.0, alpha: 1.0)
-        label.font = UIFont(name: "AvenirNext-DemiBold", size: 23)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 28)
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
-        label.setHeight(height: 50.0)
-        label.layer.cornerRadius = 25.0
+        label.setHeight(height: 80.0)
+        label.layer.cornerRadius = 40.0
         label.layer.masksToBounds = true
+        label.numberOfLines = 0
         return label
     }()
     
@@ -176,7 +177,7 @@ class LiftOfferAcceptedVC: UIViewController {
         configureNavigationBar()
                 
         contentView.addSubview(confirmLabel)
-        confirmLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 40.0, paddingLeft: 16.0, paddingRight: 16.0)
+        confirmLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 40.0, paddingLeft: 32.0, paddingRight: 32.0)
         
         contentView.addSubview(timeTitleLabel)
         timeTitleLabel.anchor(top: confirmLabel.bottomAnchor, paddingTop: 25.0)

@@ -29,7 +29,7 @@ class DateSelectorView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Set Pickup Date"
+        label.text = "Set Date"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18)
         label.backgroundColor = .clear

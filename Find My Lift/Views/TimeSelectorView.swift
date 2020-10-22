@@ -29,7 +29,7 @@ class TimeSelectorView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Set Pickup Time"
+        label.text = "Set Time"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18)
         label.backgroundColor = .clear
