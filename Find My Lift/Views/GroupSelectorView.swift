@@ -16,7 +16,7 @@ class GroupSelectorView: UIView {
     
     // MARK: - Properties
     
-    private let groupCategories : [String] = ["Work", "Gym", "College", "My Village", "Running Club", "Swimming Club", "Tennis Club"]
+    private let groupCategories : [String] = ["Work", "Gym", "College", "My Village", "Running", "Swimming", "Tennis"]
     
     weak var delegate: GroupSelectorDelegate?
     

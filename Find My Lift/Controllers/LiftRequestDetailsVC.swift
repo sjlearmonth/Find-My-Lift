@@ -204,7 +204,6 @@ class LiftRequestDetailsVC: UIViewController {
         gsv.setHeight(height: 250)
         return gsv
     }()
-
     
     private let checkLiftAvailabilityButton: UIButton = {
         let button = UIButton(type: .system)
@@ -267,8 +266,7 @@ class LiftRequestDetailsVC: UIViewController {
         controller.selectedGroup = selectedGroupLabel.text ?? ""
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
-        navigationController?.pushViewController(controller, animated: true)
-        
+        navigationController?.pushViewController(controller, animated: true)        
     }
     
     // MARK: - Helper Functions

@@ -19,7 +19,7 @@ class LACell: UITableViewCell {
         label.textAlignment = .center
         label.backgroundColor = .white
         label.font = UIFont(name: "AvenirNext-Regular", size: 18)
-        label.layer.borderWidth = 0.5
+        label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         return label
     }()
@@ -31,7 +31,7 @@ class LACell: UITableViewCell {
         label.textAlignment = .center
         label.backgroundColor = .white
         label.font = UIFont(name: "AvenirNext-Regular", size: 18)
-        label.layer.borderWidth = 0.5
+        label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         return label
     }()

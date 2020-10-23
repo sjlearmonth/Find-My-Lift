@@ -233,6 +233,9 @@ class LiftOfferDetailsVC: UIViewController {
         let sw = UISwitch()
         sw.onTintColor = .systemBlue
         sw.thumbTintColor = .white
+        sw.tintColor = .systemBlue
+        sw.layer.borderWidth = 0.25
+        sw.layer.cornerRadius = 15.5
         return sw
     }()
     
@@ -263,7 +266,6 @@ class LiftOfferDetailsVC: UIViewController {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.rowHeight = 40.0
-        tableView.isHidden = true
         return tableView
     }()
     
@@ -284,6 +286,17 @@ class LiftOfferDetailsVC: UIViewController {
         return cv
     }()
     
+    private let submitButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Submit Lift Offer", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 25.0
+        button.addTarget(self, action: #selector(handleSubmitClicked), for: .touchUpInside)
+
+        return button
+    }()
 
 
     // MARK: - Lifecycle
@@ -343,8 +356,16 @@ class LiftOfferDetailsVC: UIViewController {
         return
     }
 
+    @objc func handleSubmitClicked() {
+        print("DEBUG: submit lift offer clicked")
+        let controller = MatchingLiftRequestsVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
     // MARK: - Helper Functions
+    
     private func configureUI() {
         
         configureGradientLayer()
@@ -453,6 +474,10 @@ class LiftOfferDetailsVC: UIViewController {
         
         contentView.addSubview(groupsTableView)
         groupsTableView.anchor(top: shareButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0, height: 200.0)
+        
+        contentView.addSubview(submitButton)
+        submitButton.anchor(top: groupsTableView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0, height: 50.0)
+        
     }
     
     private func configureScrollView() {
@@ -520,8 +545,10 @@ extension LiftOfferDetailsVC: UITextFieldDelegate {
 extension LiftOfferDetailsVC: GroupSelectorDelegate {
     func readGroupSelected(group: String) {
         groupSelectorView.removeFromSuperview()
-        groupsShared.append(group)
-        groupsTableView.isHidden = false
+        
+        if groupsShared.contains(group) == false {
+            groupsShared.append(group)
+        }
         groupsTableView.reloadData()
     }
     

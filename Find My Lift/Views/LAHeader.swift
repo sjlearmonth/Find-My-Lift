@@ -78,7 +78,7 @@ class LAHeader: UIView {
                                                              pickupTimeHeaderLabel])
         headerStackView.axis = .horizontal
         headerStackView.distribution = .fill
-        headerStackView.spacing = -1
+        headerStackView.spacing = 0
         
         self.addSubview(headerStackView)
         headerStackView.anchor(top:groupHeaderLabel.bottomAnchor,

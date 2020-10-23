@@ -103,7 +103,6 @@ class LiftAvailabilityVC: UIViewController {
     @objc func handleClickMe() {
         print("DEBUG: click me clicked")
     }
-    
 }
 
 extension LiftAvailabilityVC: UITableViewDelegate {
@@ -116,7 +115,7 @@ extension LiftAvailabilityVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = LAHeaderView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120.0))
+        let headerView = LAHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 120.0))
         headerView.groupHeaderLabel.text = selectedGroup + " Group"
         return headerView
     }
@@ -160,7 +159,7 @@ extension LiftAvailabilityVC: UITableViewDataSource {
 extension LiftAvailabilityVC: LASortViewDelegate {
     
     func executeDynamicSearch(query: String, type: radioButtonStates) {
-        print("DEBUG: executeDynamicSearch called \(query)")
+        
         liftAvailabilityDetailsQuerySearch = [[String:String]]()
         listSearchResults = false
         for tableRow in liftAvailabilityDetails {
@@ -187,7 +186,7 @@ extension LiftAvailabilityVC: LASortViewDelegate {
                 }
             }
         }
-        print("DEBUG: \(liftAvailabilityDetailsQuerySearch)")
+
         tableView.reloadData()
     }
 }
