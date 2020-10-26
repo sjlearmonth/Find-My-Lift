@@ -54,7 +54,7 @@ class MatchingLiftRequestsVC: UIViewController {
     
     private let maxNumberOfRows = 5
     
-    private lazy var sortView = LASortView()
+    private lazy var sortView = MLRSortView()
 
   
     // MARK: - Lifecycle
@@ -63,6 +63,8 @@ class MatchingLiftRequestsVC: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        
+        configureNotificationObservers()
         
     }
 
@@ -85,13 +87,61 @@ class MatchingLiftRequestsVC: UIViewController {
         view.addSubview(tableView)
         tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 40.0, width: view.frame.width - 16.0)
         tableView.centerX(inView: view)
+        
+        sortView.isUserInteractionEnabled = true
+        
+        view.addSubview(sortView)
+        sortView.delegate = self
+        sortView.anchor(top: tableView.bottomAnchor,
+                        left: view.leftAnchor,
+                        right: view.rightAnchor,
+                        paddingTop: 40,
+                        paddingLeft: 32,
+                        paddingRight: 32,
+                        width: self.view.frame.width - 64.0,
+                        height: 100.0)
+    }
+    
+    private func configureNotificationObservers() {
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
-
+    
+    // MARK: - Selectors
+    
+    @objc func keyboardWillShow() {
+        if view.frame.origin.y == 64 {
+            view.frame.origin.y -= 164
+        }
+    }
+    
+    @objc func keyboardWillHide() {
+        if view.frame.origin.y != 64 {
+        view.frame.origin.y = 64
+        }
+    }
 }
 
 extension MatchingLiftRequestsVC : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = MatchingLiftReview()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        if listSearchResults == false {
+            controller.selectedGroup = liftMatchDetails[indexPath.row]["Group"]!
+            controller.selectedPassenger = liftMatchDetails[indexPath.row]["Passenger"]!
+            controller.selectedPickupTime = liftMatchDetails[indexPath.row]["Pickup Time"]!
+        } else {
+            controller.selectedGroup = liftMatchDetailsQuerySearch[indexPath.row]["Group"]!
+            controller.selectedPassenger = liftMatchDetailsQuerySearch[indexPath.row]["Passenger"]!
+            controller.selectedPickupTime = liftMatchDetailsQuerySearch[indexPath.row]["Pickup Time"]!
+        }
+        navigationController?.pushViewController(controller, animated: true)
+    }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = MLRHeader(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60.0))
         return headerView
@@ -111,7 +161,12 @@ extension MatchingLiftRequestsVC : UITableViewDelegate {
 
 extension MatchingLiftRequestsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        liftMatchDetails.count
+        if listSearchResults == false {
+            return liftMatchDetails.count
+        } else {
+            return liftMatchDetailsQuerySearch.count
+        }
+
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -121,12 +176,58 @@ extension MatchingLiftRequestsVC : UITableViewDataSource {
             cell.passengerLabel.text = liftMatchDetails[indexPath.row]["Passenger"]
             cell.pickupTimeLabel.text = liftMatchDetails[indexPath.row]["Pickup Time"]
         } else {
-//            cell.driverLabel.text = liftMatchDetailsQuerySearch[indexPath.row]["Driver"]
-//            cell.pickupTimeLabel.text = liftAvailabilityDetailsQuerySearch[indexPath.row]["Pickup Time"]
+            cell.groupLabel.text = liftMatchDetailsQuerySearch[indexPath.row]["Group"]
+            cell.passengerLabel.text = liftMatchDetailsQuerySearch[indexPath.row]["Passenger"]
+            cell.pickupTimeLabel.text = liftMatchDetailsQuerySearch[indexPath.row]["Pickup Time"]
         }
 
         return cell
     }
-    
+}
 
+extension MatchingLiftRequestsVC: MLRSortViewDelegate {
+    
+    func executeDynamicSearch(query: String, type: radioButtonStates) {
+        
+        liftMatchDetailsQuerySearch.removeAll()
+        listSearchResults = false
+        for tableRow in liftMatchDetails {
+            
+            if type == .group {
+                
+                guard let groupName = tableRow["Group"] else { return }
+                
+                if groupName.contains(query) {
+                    
+                    let querySearchResultRow = tableRow
+                    liftMatchDetailsQuerySearch.append(querySearchResultRow)
+                    
+                    listSearchResults = true
+                    
+                }
+            } else if type == .passenger {
+                
+                guard let passengerName = tableRow["Passenger"] else { return }
+                
+                if passengerName.contains(query) {
+                    
+                    let querySearchResultRow = tableRow
+                    liftMatchDetailsQuerySearch.append(querySearchResultRow)
+                    
+                    listSearchResults = true
+                }
+            } else {
+                guard let pickupTime = tableRow["Pickup Time"] else { return }
+                
+                if pickupTime.contains(query) {
+                    let querySearchResultRow = tableRow
+                    liftMatchDetailsQuerySearch.append(querySearchResultRow)
+                    
+                    listSearchResults = true
+                }
+            }
+        }
+        
+        tableView.reloadData()
+    }
 }

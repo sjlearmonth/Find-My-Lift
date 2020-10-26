@@ -9,6 +9,8 @@
 import UIKit
 
 enum radioButtonStates : Int {
+    case passenger
+    case group
     case driver
     case pickupTime
 }

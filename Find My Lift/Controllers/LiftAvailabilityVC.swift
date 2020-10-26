@@ -90,7 +90,7 @@ class LiftAvailabilityVC: UIViewController {
         
         view.addSubview(sortView)
         sortView.delegate = self
-        sortView.anchor(top:tableView.bottomAnchor,
+        sortView.anchor(top: tableView.bottomAnchor,
                         left: view.leftAnchor,
                         right: view.rightAnchor,
                         paddingTop: 40,
@@ -165,7 +165,6 @@ extension LiftAvailabilityVC: LASortViewDelegate {
         for tableRow in liftAvailabilityDetails {
             if type == .driver {
                 
-            
             guard let driverName = tableRow["Driver"] else { return }
             
             if driverName.contains(query) {
