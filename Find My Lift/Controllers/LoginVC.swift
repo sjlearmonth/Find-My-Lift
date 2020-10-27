@@ -87,18 +87,18 @@ class LogInVC: UIViewController {
         return button
     }()
     
-    private let signUpButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Sign Up", for: .normal)
-        button.layer.cornerRadius = 10.0
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        button.backgroundColor = .systemGreen
-        button.setTitleColor(.white, for: .normal)
-        button.setHeight(height: 50.0)
-        button.isEnabled = true
-        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        return button
-    }()
+//    private let signUpButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Sign Up", for: .normal)
+//        button.layer.cornerRadius = 10.0
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+//        button.backgroundColor = .systemGreen
+//        button.setTitleColor(.white, for: .normal)
+//        button.setHeight(height: 50.0)
+//        button.isEnabled = true
+//        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+//        return button
+//    }()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -139,14 +139,14 @@ class LogInVC: UIViewController {
         print("DEBUG: forgot password clicked")
     }
     
-    @objc func handleSignUp() {
-        print("DEBUG: sign up clicked")
-        let controller = SignUpVC()
-        controller.delegate = delegate
-        controller.modalPresentationStyle = .fullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        present(controller, animated: true, completion: nil)
-    }
+//    @objc func handleSignUp() {
+//        print("DEBUG: sign up clicked")
+//        let controller = SignUpVC()
+//        controller.delegate = delegate
+//        controller.modalPresentationStyle = .fullScreen
+//        controller.modalTransitionStyle = .crossDissolve
+//        present(controller, animated: true, completion: nil)
+//    }
     
     @objc func textDidChange(sender: UITextField) {
         
@@ -203,9 +203,9 @@ class LogInVC: UIViewController {
         logInButton.anchor(top: forgotPassword.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
                            paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
-        view.addSubview(signUpButton)
-        signUpButton.anchor(top: logInButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
-                           paddingTop: 32, paddingLeft: 32, paddingRight: 32)
+//        view.addSubview(signUpButton)
+//        signUpButton.anchor(top: logInButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+//                           paddingTop: 32, paddingLeft: 32, paddingRight: 32)
     }
     
     private func configureNotificationObservers() {

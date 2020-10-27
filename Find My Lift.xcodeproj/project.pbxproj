@@ -12,6 +12,8 @@
 		C41430412547464F00462CA7 /* MLR2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430402547464F00462CA7 /* MLR2Cell.swift */; };
 		C414304425474AE400462CA7 /* MLR2Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414304325474AE400462CA7 /* MLR2Header.swift */; };
 		C4143048254750CB00462CA7 /* LiftOfferSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4143047254750CB00462CA7 /* LiftOfferSent.swift */; };
+		C41430742548894B00462CA7 /* CreateNewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430732548894B00462CA7 /* CreateNewGroupVC.swift */; };
+		C41430792548A4E600462CA7 /* OpenAGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430782548A4E600462CA7 /* OpenAGroupVC.swift */; };
 		C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA366252243FA00B7A5A6 /* AppDelegate.swift */; };
 		C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA368252243FA00B7A5A6 /* SceneDelegate.swift */; };
 		C42AA370252243FB00B7A5A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AA36F252243FB00B7A5A6 /* Assets.xcassets */; };
@@ -28,7 +30,6 @@
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
-		C464446D253A0B5C008A4FC4 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C464446C253A0B5C008A4FC4 /* SignUpVC.swift */; };
 		C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */; };
 		C4644475253DD18E008A4FC4 /* LASortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4644474253DD18E008A4FC4 /* LASortView.swift */; };
 		C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D3D2523A0B700DF0870 /* GroupsVC.swift */; };
@@ -60,6 +61,8 @@
 		C41430402547464F00462CA7 /* MLR2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLR2Cell.swift; sourceTree = "<group>"; };
 		C414304325474AE400462CA7 /* MLR2Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLR2Header.swift; sourceTree = "<group>"; };
 		C4143047254750CB00462CA7 /* LiftOfferSent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferSent.swift; sourceTree = "<group>"; };
+		C41430732548894B00462CA7 /* CreateNewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewGroupVC.swift; sourceTree = "<group>"; };
+		C41430782548A4E600462CA7 /* OpenAGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAGroupVC.swift; sourceTree = "<group>"; };
 		C42AA363252243FA00B7A5A6 /* Find My Lift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find My Lift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C42AA366252243FA00B7A5A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C42AA368252243FA00B7A5A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,7 +81,6 @@
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
-		C464446C253A0B5C008A4FC4 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		C4644474253DD18E008A4FC4 /* LASortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LASortView.swift; sourceTree = "<group>"; };
 		C4677D3D2523A0B700DF0870 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
@@ -175,7 +177,6 @@
 				C42AA390252258A200B7A5A6 /* HomeTBC.swift */,
 				C4677D492523A45400DF0870 /* HomeVC.swift */,
 				C42AA3802522462900B7A5A6 /* LoginVC.swift */,
-				C464446C253A0B5C008A4FC4 /* SignUpVC.swift */,
 				C4677D3D2523A0B700DF0870 /* GroupsVC.swift */,
 				C4677D402523A0D500DF0870 /* ChatVC.swift */,
 				C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */,
@@ -188,6 +189,8 @@
 				C4E7D2AF2543349100F95265 /* MatchingLiftRequestsVC.swift */,
 				C414303D2547414F00462CA7 /* MatchingLiftReview.swift */,
 				C4143047254750CB00462CA7 /* LiftOfferSent.swift */,
+				C41430732548894B00462CA7 /* CreateNewGroupVC.swift */,
+				C41430782548A4E600462CA7 /* OpenAGroupVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -384,7 +387,6 @@
 				C497C5462527733A005DAEC8 /* LAHeader.swift in Sources */,
 				C42AA38B25224F9500B7A5A6 /* InputContainerView.swift in Sources */,
 				C497C52525276033005DAEC8 /* GroupSelectorView.swift in Sources */,
-				C464446D253A0B5C008A4FC4 /* SignUpVC.swift in Sources */,
 				C497C54225276773005DAEC8 /* LiftAvailabilityVC.swift in Sources */,
 				C4E7D29B25409BF700F95265 /* LiftOfferAcceptedVC.swift in Sources */,
 				C414304425474AE400462CA7 /* MLR2Header.swift in Sources */,
@@ -401,6 +403,7 @@
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
 				C4143048254750CB00462CA7 /* LiftOfferSent.swift in Sources */,
 				C414303E2547414F00462CA7 /* MatchingLiftReview.swift in Sources */,
+				C41430792548A4E600462CA7 /* OpenAGroupVC.swift in Sources */,
 				C4E7D2B92543427400F95265 /* MLRHeader.swift in Sources */,
 				C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */,
 				C497C54925277DD4005DAEC8 /* LACell.swift in Sources */,
@@ -409,6 +412,7 @@
 				C42AA3812522462900B7A5A6 /* LoginVC.swift in Sources */,
 				C42AA38525224ED200B7A5A6 /* LogInViewModel.swift in Sources */,
 				C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */,
+				C41430742548894B00462CA7 /* CreateNewGroupVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
