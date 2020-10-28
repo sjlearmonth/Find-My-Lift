@@ -89,6 +89,10 @@ class OpenAGroupVC: UIViewController {
     
     @objc func handleListOfMembers() {
         print("DEBUG: list of members clicked")
+        let controller = ListOfMembersVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func handleRequestToAdd() {

@@ -27,6 +27,9 @@
 		C42AA38F252251E100B7A5A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */; };
 		C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA390252258A200B7A5A6 /* HomeTBC.swift */; };
 		C42EE4ED253F07A700EC1F51 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42EE4EC253F07A700EC1F51 /* Enumerations.swift */; };
+		C437A0D82549D617002E9B00 /* ListOfMembersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0D72549D617002E9B00 /* ListOfMembersVC.swift */; };
+		C437A0DB2549D8A6002E9B00 /* LOMCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0DA2549D8A6002E9B00 /* LOMCell.swift */; };
+		C437A0DE2549F0C5002E9B00 /* LOMHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0DD2549F0C5002E9B00 /* LOMHeader.swift */; };
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
@@ -78,6 +81,9 @@
 		C42AA38E252251E100B7A5A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C42AA390252258A200B7A5A6 /* HomeTBC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTBC.swift; sourceTree = "<group>"; };
 		C42EE4EC253F07A700EC1F51 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
+		C437A0D72549D617002E9B00 /* ListOfMembersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfMembersVC.swift; sourceTree = "<group>"; };
+		C437A0DA2549D8A6002E9B00 /* LOMCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOMCell.swift; sourceTree = "<group>"; };
+		C437A0DD2549F0C5002E9B00 /* LOMHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LOMHeader.swift; sourceTree = "<group>"; };
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
@@ -191,6 +197,7 @@
 				C4143047254750CB00462CA7 /* LiftOfferSent.swift */,
 				C41430732548894B00462CA7 /* CreateNewGroupVC.swift */,
 				C41430782548A4E600462CA7 /* OpenAGroupVC.swift */,
+				C437A0D72549D617002E9B00 /* ListOfMembersVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -210,6 +217,7 @@
 				C4E7D2B82543427400F95265 /* MLRHeader.swift */,
 				C414303A254730C200462CA7 /* MLRSortView.swift */,
 				C414304325474AE400462CA7 /* MLR2Header.swift */,
+				C437A0DD2549F0C5002E9B00 /* LOMHeader.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -254,6 +262,7 @@
 				C4E7D2792540787500F95265 /* LORCell.swift */,
 				C4E7D2B32543405600F95265 /* MLRCell.swift */,
 				C41430402547464F00462CA7 /* MLR2Cell.swift */,
+				C437A0DA2549D8A6002E9B00 /* LOMCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -400,6 +409,7 @@
 				C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */,
 				C4E7D27F25407D3B00F95265 /* LORHeader.swift in Sources */,
 				C497C55125279F1D005DAEC8 /* LiftOfferReviewVC.swift in Sources */,
+				C437A0DE2549F0C5002E9B00 /* LOMHeader.swift in Sources */,
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
 				C4143048254750CB00462CA7 /* LiftOfferSent.swift in Sources */,
 				C414303E2547414F00462CA7 /* MatchingLiftReview.swift in Sources */,
@@ -411,6 +421,8 @@
 				C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */,
 				C42AA3812522462900B7A5A6 /* LoginVC.swift in Sources */,
 				C42AA38525224ED200B7A5A6 /* LogInViewModel.swift in Sources */,
+				C437A0DB2549D8A6002E9B00 /* LOMCell.swift in Sources */,
+				C437A0D82549D617002E9B00 /* ListOfMembersVC.swift in Sources */,
 				C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */,
 				C41430742548894B00462CA7 /* CreateNewGroupVC.swift in Sources */,
 			);
