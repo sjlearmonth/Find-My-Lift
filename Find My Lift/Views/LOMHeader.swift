@@ -18,7 +18,7 @@ class LOMHeader: UIView {
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
-        label.font = UIFont(name: "AvenirNext-Bold", size: 12.0)
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18.0)
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
         label.setWidth(width: 4.0 * self.frame.width / 16.0)
@@ -27,40 +27,40 @@ class LOMHeader: UIView {
 
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = "Rating"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
-        label.font = UIFont(name: "AvenirNext-Bold", size: 12.0)
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18.0)
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
+        label.setWidth(width: 5.0 * self.frame.width / 16.0)
         return label
     }()
 
     private lazy var footprintLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = "Footprint"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
         label.font = UIFont(name: "AvenirNext-Bold", size: 12.0)
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
+        label.setWidth(width: 3.5 * self.frame.width / 16.0)
         return label
     }()
 
     private lazy var feedbackLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name"
+        label.text = "Feedback"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
         label.font = UIFont(name: "AvenirNext-Bold", size: 12.0)
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
+        label.setWidth(width: 3.5 * self.frame.width / 16.0)
         return label
     }()
 

@@ -20,7 +20,6 @@ class LOMCell: UITableViewCell {
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
         return label
     }()
 
@@ -30,7 +29,6 @@ class LOMCell: UITableViewCell {
         ratingImageView.anchor(top: cv.topAnchor, left: cv.leftAnchor, bottom: cv.bottomAnchor, right: cv.rightAnchor, paddingTop: 0.0, paddingLeft: 0.0, paddingBottom: 0.0, paddingRight: 0.0)
         cv.layer.borderWidth = 0.25
         cv.layer.borderColor = UIColor.black.cgColor
-        cv.setWidth(width: 4.0 * self.frame.width / 16.0 )
         return cv
     }()
     
@@ -50,7 +48,6 @@ class LOMCell: UITableViewCell {
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
         return label
     }()
     
@@ -62,7 +59,6 @@ class LOMCell: UITableViewCell {
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
-        label.setWidth(width: 4.0 * self.frame.width / 16.0)
         return label
     }()
     
@@ -87,10 +83,10 @@ class LOMCell: UITableViewCell {
                                                        footprintLabel,
                                                        feedbackLabel])
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.spacing = 0
         
-        self.addSubview(stackView)
+        contentView.addSubview(stackView)
         stackView.anchor(top: self.topAnchor,
                          left: self.leftAnchor,
                          bottom: self.bottomAnchor,
@@ -99,6 +95,11 @@ class LOMCell: UITableViewCell {
                          paddingLeft: 0.0,
                          paddingBottom: 0.0,
                          paddingRight: 0.0)
+        
+        nameLabel.setWidthProportionalToSuperview(by: 4.0 / 16.0)
+        containerView.setWidthProportionalToSuperview(by: 5.0 / 16.0)
+        footprintLabel.setWidthProportionalToSuperview(by: 3.5 / 16.0)
+        feedbackLabel.setWidthProportionalToSuperview(by: 3.5 / 16.0)
         
         print("DEBUG: cell width = \(self.frame.width)")
     }

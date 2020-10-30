@@ -20,6 +20,7 @@ class CustomTextField: UITextField {
         attributedPlaceholder = NSAttributedString(string: placeholder,
                                                    attributes: [.foregroundColor : UIColor.white])
         self.isSecureTextEntry = isSecureTextEntry
+        returnKeyType = .done
     }
     
     required init?(coder: NSCoder) {

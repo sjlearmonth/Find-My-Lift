@@ -163,7 +163,7 @@ class SignUpVC: UIViewController {
     
     @objc func keyboardWillShow() {
         if view.frame.origin.y == 0 {
-            view.frame.origin.y -= 175
+            view.frame.origin.y -= 225
         }
     }
     

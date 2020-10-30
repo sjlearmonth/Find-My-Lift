@@ -20,12 +20,23 @@ class ListOfMembersVC: UIViewController {
         tv.register(LOMCell.self, forCellReuseIdentifier: cellID)
         tv.delegate = self
         tv.dataSource = self
+        tv.bounces = false
+        tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
     private let maxNumberOfRows = 6
     
-    private let listOfMembers: [[String : Any]] = [["Name":"Louise", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 2 out of 5"), "Footprint": 2, "Feedback": "??"]]
+    private let listOfMembers: [[String : Any]] = [["Name":"Louise",
+                                                    "Rating":UIImage(imageLiteralResourceName: "Rating Stars 2 out of 5"), "Footprint": 2, "Feedback": "??"],
+                                                   ["Name":"Chris", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 4 out of 5"), "Footprint": 5, "Feedback": "??"],
+                                                   ["Name":"Sally", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 3 out of 5"), "Footprint": 3, "Feedback": "??"],
+                                                   ["Name":"Sharon", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 4 out of 5"), "Footprint": 4, "Feedback": "??"],
+                                                   ["Name":"Mark", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 2 out of 5"), "Footprint": 1, "Feedback": "??"],
+                                                   ["Name":"Martin", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 3 out of 5"), "Footprint": 2, "Feedback": "??"],
+                                                   ["Name":"Christine", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 4 out of 5"), "Footprint": 5, "Feedback": "??"],
+                                                   ["Name":"Anne", "Rating":UIImage(imageLiteralResourceName: "Rating Stars 3 out of 5"), "Footprint": 3, "Feedback": "??"]
+    ]
     
     // MARK: - Lifecycle
     
@@ -50,7 +61,14 @@ class ListOfMembersVC: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         view.addSubview(tableView)
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 40.0, paddingLeft: 32.0, paddingRight: 32.0, height: 60.0 + 40.8 * CGFloat(maxNumberOfRows))
+        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
+                         left: view.leftAnchor,
+                         right: view.rightAnchor,
+                         paddingTop: 40.0,
+                         paddingLeft: 32.0,
+                         paddingRight: 32.0,
+                         height: 60.0 + 40.0 * CGFloat(maxNumberOfRows))
+        
     }
 
 }
@@ -80,10 +98,11 @@ extension ListOfMembersVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! LOMCell
         cell.nameLabel.text = listOfMembers[indexPath.row]["Name"] as? String
-        cell.ratingImageView.image = (listOfMembers[indexPath.row]["Rating"] as? UIImage)?.withAlignmentRectInsets(UIEdgeInsets(top: -5, left: -10, bottom: -5, right: -10))
-        cell.footprintLabel.text = String((listOfMembers[indexPath.row]["Footprint"] as? Int)!)
+        cell.ratingImageView.image = (listOfMembers[indexPath.row]["Rating"] as? UIImage)
+        cell.footprintLabel.text = String((listOfMembers[indexPath.row]["Footprint"] as? Int)!) /**?.withAlignmentRectInsets(UIEdgeInsets(top: -5, left: -10, bottom: -5, right: -10))*/
         cell.feedbackLabel.text = listOfMembers[indexPath.row]["Feedback"] as? String
-        print("DEBUG: cell width 2 = \(cell.frame.width)")
+        print("DEBUG: cell width in cellForRowAt = \(cell.frame.width)")
+        
         return cell
     }
     

@@ -61,6 +61,7 @@ class GroupsVC: UIViewController {
         configureGradientLayer()
         
         title = "Groups"
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
@@ -94,8 +95,6 @@ extension GroupsVC: UITableViewDelegate {
         return 60.0
     }
     
-
-    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Groups"
@@ -104,6 +103,14 @@ extension GroupsVC: UITableViewDelegate {
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 30.0)
         return label
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = OpenAGroupVC()
+        controller.selectedGroup = groupCategories[indexPath.row]
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -115,9 +122,9 @@ extension GroupsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID)!
         cell.textLabel?.text = groupCategories[indexPath.row]
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = UIColor.systemBlue
-        cell.selectedBackgroundView = backgroundView
+//        let backgroundView = UIView()
+//        backgroundView.backgroundColor = UIColor.systemBlue
+//        cell.selectedBackgroundView = backgroundView
         return cell
     }
     

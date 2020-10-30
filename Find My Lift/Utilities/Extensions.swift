@@ -133,14 +133,8 @@ extension UIViewController {
 }
 
 extension UIView {
-    @objc func reportSuperviews(filtering:Bool = true) {
-        var currentSuper : UIView? = self.superview
-        print("DEBUG: Reporting on \(self)\n")
-        while let ancestor = currentSuper {
-            let ok = ancestor.bounds.contains(ancestor.convert(self.frame, from: self.superview))
-            let report = "DEBUG: It is \(ok ? "inside" : "OUTSIDE") \(ancestor)\n"
-            if !filtering || !ok { print(report) }
-            currentSuper = ancestor.superview
-        }
+    func setWidthProportionalToSuperview(by multiplier: CGFloat) {
+        guard let superview = superview else { fatalError("Missing superview") }
+        widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: multiplier).isActive = true
     }
 }

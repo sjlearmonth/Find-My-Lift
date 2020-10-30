@@ -68,6 +68,7 @@ class OpenAGroupVC: UIViewController {
         configureGradientLayer()
         
         title = selectedGroup
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
@@ -97,10 +98,18 @@ class OpenAGroupVC: UIViewController {
     
     @objc func handleRequestToAdd() {
         print("DEBUG: request to add clicked")
+        let controller = RequestAddMemberVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
     
     @objc func handleContactAdmin() {
         print("DEBUG: contact admin clicked")
+        let controller = ContactAdminVC()
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
 
 }

@@ -124,6 +124,7 @@ class CreateNewGroupVC: UIViewController {
         configureGradientLayer()
         
         title = "Create New Group"
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
