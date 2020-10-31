@@ -19,6 +19,7 @@ protocol AuthenticationControllerProtocol {
 protocol AuthenticationDelegate: class {
     func completeAuthentication()
 }
+
 class LogInVC: UIViewController {
 
     // MARK: - Properties
@@ -47,7 +48,7 @@ class LogInVC: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Find My Lift"
-        label.font = UIFont(name: "Rockwell", size: 50)
+        label.font = UIFont(name: "Rockwell", size: 40)
         label.setHeight(height: 60)
         label.backgroundColor = .clear
         label.textColor = .white
@@ -104,6 +105,21 @@ class LogInVC: UIViewController {
         return .lightContent
     }
     
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+    
+
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -112,6 +128,8 @@ class LogInVC: UIViewController {
         configureUI()
         
         configureNotificationObservers()
+        
+        configureScrollView()
         
     }
     
@@ -177,34 +195,34 @@ class LogInVC: UIViewController {
         
         configureGradientLayer()
         
-        view.addSubview(clouds)
-        clouds.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+        contentView.addSubview(clouds)
+        clouds.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, height: 300)
         
-        view.addSubview(titleLabelView)
-        titleLabelView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 75, paddingLeft: 32.0, paddingRight: 32.0, height: 80)
+        contentView.addSubview(titleLabelView)
+        titleLabelView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 75, paddingLeft: 32.0, paddingRight: 32.0, height: 80)
                 
         let stackView = UIStackView(arrangedSubviews: [emailContainerView,
                                                        passwordContainerView])
         stackView.axis = .vertical
         stackView.spacing = 16
         
-        view.addSubview(stackView)
-        stackView.anchor(top: clouds.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+        contentView.addSubview(stackView)
+        stackView.anchor(top: clouds.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,
                      paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
-        view.addSubview(forgotPassword)
-        forgotPassword.anchor(top: stackView.bottomAnchor, right: view.rightAnchor, paddingTop: 12, paddingRight: 32)
+        contentView.addSubview(forgotPassword)
+        forgotPassword.anchor(top: stackView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 12, paddingRight: 32)
         
-        view.addSubview(logInButton)
-        logInButton.anchor(top: forgotPassword.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+        contentView.addSubview(logInButton)
+        logInButton.anchor(top: forgotPassword.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,
                            paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
-        view.addSubview(signUpButton)
-        signUpButton.anchor(top: logInButton.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
+        contentView.addSubview(signUpButton)
+        signUpButton.anchor(top: logInButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor,
                            paddingTop: 32, paddingLeft: 32, paddingRight: 32)
     }
     
@@ -218,6 +236,27 @@ class LogInVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
 }
 
 extension LogInVC: AuthenticationControllerProtocol {

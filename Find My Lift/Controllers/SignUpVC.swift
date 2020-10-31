@@ -92,6 +92,21 @@ class SignUpVC: UIViewController {
         
         return button
     }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+    
+
 
     // MARK: - Lifecycle
     
@@ -101,6 +116,8 @@ class SignUpVC: UIViewController {
         configureUI()
         
         configureNotificationObservers()
+        
+        configureScrollView()
 
     }
     
@@ -179,12 +196,12 @@ class SignUpVC: UIViewController {
         
         configureGradientLayer()
         
-        view.addSubview(clouds)
-        clouds.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, right: view.rightAnchor, height: 300)
+        contentView.addSubview(clouds)
+        clouds.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, height: 300)
         
-        view.addSubview(titleLabelView)
-        titleLabelView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 75, width: 375, height: 80)
-        titleLabelView.centerX(inView: view)
+        contentView.addSubview(titleLabelView)
+        titleLabelView.anchor(top: contentView.topAnchor, paddingTop: 75, width: 375, height: 80)
+        titleLabelView.centerX(inView: contentView)
         
         let stack = UIStackView(arrangedSubviews: [emailContainerView,
                                                    passwordContainerView,
@@ -196,10 +213,10 @@ class SignUpVC: UIViewController {
         stack.axis = .vertical
         stack.spacing = 16
         
-        view.addSubview(stack)
+        contentView.addSubview(stack)
         stack.anchor(top: titleLabel.bottomAnchor,
-                     left: view.leftAnchor,
-                     right: view.rightAnchor,
+                     left: contentView.leftAnchor,
+                     right: contentView.rightAnchor,
                      paddingTop: 120,
                      paddingLeft: 32,
                      paddingRight: 32)
@@ -216,6 +233,27 @@ class SignUpVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
 }
 
 extension SignUpVC: AuthenticationControllerProtocol {
