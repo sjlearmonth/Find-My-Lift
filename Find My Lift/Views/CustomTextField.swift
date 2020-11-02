@@ -21,6 +21,7 @@ class CustomTextField: UITextField {
                                                    attributes: [.foregroundColor : UIColor.white])
         self.isSecureTextEntry = isSecureTextEntry
         returnKeyType = .done
+        
     }
     
     required init?(coder: NSCoder) {

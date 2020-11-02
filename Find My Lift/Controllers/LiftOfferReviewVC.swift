@@ -29,6 +29,7 @@ class LiftOfferReviewVC: UIViewController {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
         sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
         return sv
     }()
     
@@ -88,6 +89,7 @@ class LiftOfferReviewVC: UIViewController {
         tv.layer.borderWidth = 0.25
         tv.layer.borderColor = UIColor.white.cgColor
         tv.layer.cornerRadius = 5.0
+        tv.delegate = self
         return tv
     }()
 
@@ -189,17 +191,23 @@ class LiftOfferReviewVC: UIViewController {
                              left: contentView.leftAnchor,
                              right: contentView.rightAnchor,
                              paddingTop: 25.0,
-                             paddingLeft: 32,
-                             paddingRight: 32)
+                             paddingLeft: 32.0,
+                             paddingRight: 32.0)
 
         contentView.addSubview(acceptButton)
         acceptButton.anchor(top: sendButton.bottomAnchor,
                              left: contentView.leftAnchor,
                              right: contentView.rightAnchor,
                              paddingTop: 25.0,
-                             paddingLeft: 32,
-                             paddingRight: 32)
+                             paddingLeft: 32.0,
+                             paddingRight: 32.0)
 
+    }
+    
+    @objc func handleDoneClicked() {
+        print("DEBUG: done clicked")
+        messageTextView.endEditing(true)
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
     }
     
     @objc func handleAcceptLift() {
@@ -316,6 +324,11 @@ extension LiftOfferReviewVC: UITableViewDataSource {
         
         return cell
     }
-    
-    
+}
+
+extension LiftOfferReviewVC: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDoneClicked))
+        
+    }
 }

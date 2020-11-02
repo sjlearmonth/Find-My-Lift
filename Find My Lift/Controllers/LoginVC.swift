@@ -109,6 +109,7 @@ class LogInVC: UIViewController {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
         sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
         return sv
     }()
     
@@ -211,8 +212,10 @@ class LogInVC: UIViewController {
                      paddingTop: 32, paddingLeft: 32, paddingRight: 32)
         
         emailTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        emailTextField.delegate = self
         
         passwordTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        passwordTextField.delegate = self
         
         contentView.addSubview(forgotPassword)
         forgotPassword.anchor(top: stackView.bottomAnchor, right: contentView.rightAnchor, paddingTop: 12, paddingRight: 32)
@@ -268,5 +271,13 @@ extension LogInVC: AuthenticationControllerProtocol {
             logInButton.isEnabled = false
             logInButton.backgroundColor = .systemGreen
         }
+    }
+}
+
+extension LogInVC: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
 }

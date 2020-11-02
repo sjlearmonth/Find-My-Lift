@@ -1,5 +1,5 @@
 //
-//  LiftOfferSent.swift
+//  LiftOfferSentVC.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 26/10/2020.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class LiftOfferSent: UIViewController {
+class LiftOfferSentVC: UIViewController {
     
     // MARK: - Properties
     
@@ -97,6 +97,7 @@ class LiftOfferSent: UIViewController {
         tv.layer.borderWidth = 0.25
         tv.layer.borderColor = UIColor.white.cgColor
         tv.layer.cornerRadius = 5.0
+        tv.delegate = self
         return tv
     }()
     
@@ -143,6 +144,7 @@ class LiftOfferSent: UIViewController {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
         sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
         return sv
     }()
     
@@ -329,4 +331,8 @@ class LiftOfferSent: UIViewController {
         navigationController?.pushViewController(controller, animated: true)
     }
 
+}
+
+extension LiftOfferSentVC: UITextViewDelegate {
+    
 }

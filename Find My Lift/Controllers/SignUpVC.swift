@@ -35,7 +35,7 @@ class SignUpVC: UIViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Find My Lift"
-        label.font = UIFont(name: "Rockwell", size: 50)
+        label.font = UIFont(name: "Rockwell", size: 40)
         label.setHeight(height: 60)
         label.backgroundColor = .clear
         label.textColor = .white
@@ -97,6 +97,7 @@ class SignUpVC: UIViewController {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
         sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
         return sv
     }()
     
@@ -200,8 +201,12 @@ class SignUpVC: UIViewController {
         clouds.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, height: 300)
         
         contentView.addSubview(titleLabelView)
-        titleLabelView.anchor(top: contentView.topAnchor, paddingTop: 75, width: 375, height: 80)
-        titleLabelView.centerX(inView: contentView)
+        titleLabelView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 75, paddingLeft: 32.0, paddingRight: 32.0, height: 80)
+        
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        fullnameTextField.delegate = self
+        usernameTextField.delegate = self
         
         let stack = UIStackView(arrangedSubviews: [emailContainerView,
                                                    passwordContainerView,
@@ -267,5 +272,12 @@ extension SignUpVC: AuthenticationControllerProtocol {
             signUpButton.isEnabled = false
             signUpButton.backgroundColor = .systemGreen
         }
+    }
+}
+
+extension SignUpVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
 }

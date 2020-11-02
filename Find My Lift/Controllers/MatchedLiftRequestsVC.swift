@@ -1,5 +1,5 @@
 //
-//  MatchingLiftRequestsVC.swift
+//  MatchedLiftRequestsVC.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 23/10/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatchingLiftRequestsVC: UIViewController {
+class MatchedLiftRequestsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -56,7 +56,20 @@ class MatchingLiftRequestsVC: UIViewController {
     
     private lazy var sortView = MLRSortView()
 
-  
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -66,6 +79,8 @@ class MatchingLiftRequestsVC: UIViewController {
         
         configureNotificationObservers()
         
+        configureScrollView()
+        
     }
 
     // MARK: - Helper Functions
@@ -74,7 +89,7 @@ class MatchingLiftRequestsVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "Matching Lift Requests"
+        title = "Matched Lift Requests"
         navigationItem.backButtonTitle = ""
         
         navigationController?.navigationBar.barTintColor = .systemBlue
@@ -84,21 +99,21 @@ class MatchingLiftRequestsVC: UIViewController {
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        view.addSubview(tableView)
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 40.0, width: view.frame.width - 16.0)
-        tableView.centerX(inView: view)
+        contentView.addSubview(tableView)
+        tableView.anchor(top: contentView.topAnchor, paddingTop: 40.0, width: contentView.frame.width - 16.0)
+        tableView.centerX(inView: contentView)
         
         sortView.isUserInteractionEnabled = true
         
-        view.addSubview(sortView)
+        contentView.addSubview(sortView)
         sortView.delegate = self
         sortView.anchor(top: tableView.bottomAnchor,
-                        left: view.leftAnchor,
-                        right: view.rightAnchor,
+                        left: contentView.leftAnchor,
+                        right: contentView.rightAnchor,
                         paddingTop: 40,
                         paddingLeft: 32,
                         paddingRight: 32,
-                        width: self.view.frame.width - 64.0,
+                        width: contentView.frame.width - 64.0,
                         height: 100.0)
     }
     
@@ -107,8 +122,28 @@ class MatchingLiftRequestsVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
     
     // MARK: - Selectors
     
@@ -125,10 +160,10 @@ class MatchingLiftRequestsVC: UIViewController {
     }
 }
 
-extension MatchingLiftRequestsVC : UITableViewDelegate {
+extension MatchedLiftRequestsVC : UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = MatchingLiftReview()
+        let controller = MatchesReview()
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         if listSearchResults == false {
@@ -159,7 +194,7 @@ extension MatchingLiftRequestsVC : UITableViewDelegate {
     }
 }
 
-extension MatchingLiftRequestsVC : UITableViewDataSource {
+extension MatchedLiftRequestsVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if listSearchResults == false {
             return liftMatchDetails.count
@@ -185,7 +220,7 @@ extension MatchingLiftRequestsVC : UITableViewDataSource {
     }
 }
 
-extension MatchingLiftRequestsVC: MLRSortViewDelegate {
+extension MatchedLiftRequestsVC: MLRSortViewDelegate {
     
     func executeDynamicSearch(query: String, type: radioButtonStates) {
         

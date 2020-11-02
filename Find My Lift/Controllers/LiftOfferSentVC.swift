@@ -1,20 +1,21 @@
 //
-//  LiftOfferAcceptedVC.swift
+//  LiftOfferSentVC.swift
 //  Find My Lift
 //
-//  Created by Stephen Learmonth on 21/10/2020.
+//  Created by Stephen Learmonth on 26/10/2020.
 //  Copyright © 2020 Stephen Learmonth. All rights reserved.
 //
 
+
 import UIKit
 
-class LiftOfferAcceptedVC: UIViewController {
-
+class LiftOfferSentVC: UIViewController {
+    
     // MARK: - Properties
     
     private let confirmLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your lift with Louise is confirmed"
+        label.text = "Lift offer has been sent"
         label.textColor = UIColor(white: 1.0, alpha: 1.0)
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 28)
         label.backgroundColor = .systemGreen
@@ -22,19 +23,18 @@ class LiftOfferAcceptedVC: UIViewController {
         label.setHeight(height: 80.0)
         label.layer.cornerRadius = 40.0
         label.layer.masksToBounds = true
-        label.numberOfLines = 0
         return label
     }()
     
     private let timeTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Time until lift arrives:"
+        label.text = "Time until passenger is collected:"
         label.textColor = UIColor(white: 1.0, alpha: 1.0)
         label.backgroundColor = .clear
         label.font = UIFont(name: "AvenirNext-Regular", size: 20)
         return label
     }()
-
+    
     private lazy var timeValueLabel: UILabel = {
         let label = UILabel()
         label.text = computeTimeLeft(timeInSeconds: countDownValue)
@@ -43,13 +43,13 @@ class LiftOfferAcceptedVC: UIViewController {
         label.font = UIFont(name: "AvenirNext-Regular", size: 20)
         return label
     }()
-
-//    private var countDownValue = 86400*4 + 3600*2 + 65
+    
+    //    private var countDownValue = 86400*4 + 3600*2 + 65
     private var countDownValue = 15
     
-    private let arrivesLabel: UILabel = {
+    private let waitingLabel: UILabel = {
         let label = UILabel()
-        label.text = "Your lift has arrived!"
+        label.text = "Your passenger is waiting!"
         label.textColor = UIColor(white: 1.0, alpha: 1.0)
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 23)
         label.backgroundColor = .systemGreen
@@ -62,27 +62,27 @@ class LiftOfferAcceptedVC: UIViewController {
     
     private lazy var amendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Amend Lift Requirements", for: .normal)
+        button.setTitle("Amend Offer", for: .normal)
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50.0)
         button.isEnabled = true
-        button.addTarget(self, action: #selector(handleAmendLift), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleAmendOffer), for: .touchUpInside)
         return button
     }()
-
+    
     private lazy var messageButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Message Driver", for: .normal)
+        button.setTitle("Message Passenger", for: .normal)
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50.0)
         button.isEnabled = true
-        button.addTarget(self, action: #selector(handleMessageDriver), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleMessagePassenger), for: .touchUpInside)
         return button
     }()
     
@@ -97,10 +97,9 @@ class LiftOfferAcceptedVC: UIViewController {
         tv.layer.borderWidth = 0.25
         tv.layer.borderColor = UIColor.white.cgColor
         tv.layer.cornerRadius = 5.0
+        tv.delegate = self
         return tv
     }()
-
-    
     
     private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
@@ -114,31 +113,30 @@ class LiftOfferAcceptedVC: UIViewController {
         button.addTarget(self, action: #selector(handleSendMessage), for: .touchUpInside)
         return button
     }()
-
-
+    
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Cancel Lift", for: .normal)
+        button.setTitle("Cancel Lift Offer", for: .normal)
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50.0)
         button.isEnabled = true
-        button.addTarget(self, action: #selector(handleCancelLift), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleCancelOffer), for: .touchUpInside)
         return button
     }()
     
     private lazy var findButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Find Another Lift", for: .normal)
+        button.setTitle("Offer Another Lift", for: .normal)
         button.layer.cornerRadius = 10.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.setHeight(height: 50.0)
         button.isEnabled = true
-        button.addTarget(self, action: #selector(handleFindAnotherLift), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleOfferAnotherLift), for: .touchUpInside)
         return button
     }()
     
@@ -156,13 +154,13 @@ class LiftOfferAcceptedVC: UIViewController {
         return cv
     }()
     
-    var messageDriverClicked = false
-
+    var messagePassengerClicked = false
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureUI()
         
         configureScrollView()
@@ -176,7 +174,7 @@ class LiftOfferAcceptedVC: UIViewController {
         configureGradientLayer()
         
         configureNavigationBar()
-                
+        
         contentView.addSubview(confirmLabel)
         confirmLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 40.0, paddingLeft: 32.0, paddingRight: 32.0)
         
@@ -190,23 +188,23 @@ class LiftOfferAcceptedVC: UIViewController {
         
         contentView.addSubview(amendButton)
         amendButton.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 250.0, paddingLeft: 32.0, paddingRight: 32.0)
-
+        
         contentView.addSubview(messageButton)
         messageButton.anchor(top: amendButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
-
+        
         contentView.addSubview(cancelButton)
         cancelButton.anchor(top: messageButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
         
         contentView.addSubview(findButton)
         findButton.anchor(top: cancelButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
-
+        
         Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountDownLabel), userInfo: nil, repeats: true)
     }
     
     private func configureNavigationBar() {
-        title = "Lift Offer Accepted"
+        title = "Lift Offer Sent"
         navigationItem.backButtonTitle = ""
-
+        
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
@@ -229,10 +227,10 @@ class LiftOfferAcceptedVC: UIViewController {
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
         contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
         contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
-
+        
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
-
+    
     private func computeTimeLeft(timeInSeconds: Int) -> String {
         let days = countDownValue / 86400
         let hours = (countDownValue % 86400) / 3600
@@ -258,27 +256,27 @@ class LiftOfferAcceptedVC: UIViewController {
             messageButton.removeFromSuperview()
             cancelButton.removeFromSuperview()
             findButton.removeFromSuperview()
-            if messageDriverClicked == true {
+            if messagePassengerClicked == true {
                 messageTextView.removeFromSuperview()
                 sendButton.removeFromSuperview()
-                messageDriverClicked = false
+                messagePassengerClicked = false
             }
-            contentView.addSubview(arrivesLabel)
-            arrivesLabel.anchor(top: confirmLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(waitingLabel)
+            waitingLabel.anchor(top: confirmLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
         }
     }
     
-    @objc func handleAmendLift() {
+    @objc func handleAmendOffer() {
         let controller = navigationController?.viewControllers[1]
         controller?.modalPresentationStyle = .fullScreen
         controller?.modalTransitionStyle = .crossDissolve
         navigationController?.popToViewController(controller!, animated: true)
     }
     
-    @objc func handleMessageDriver() {
-        print("DEBUG: message driver clicked")
+    @objc func handleMessagePassenger() {
+        print("DEBUG: message passsenger clicked")
         
-        messageDriverClicked = true
+        messagePassengerClicked = true
         
         messageButton.removeFromSuperview()
         cancelButton.removeFromSuperview()
@@ -290,35 +288,35 @@ class LiftOfferAcceptedVC: UIViewController {
         
         view.addSubview(sendButton)
         sendButton.anchor(top: messageTextView.bottomAnchor,
-                             left: view.leftAnchor,
-                             right: view.rightAnchor,
-                             paddingTop: 25.0,
-                             paddingLeft: 32,
-                             paddingRight: 32)
-
+                          left: view.leftAnchor,
+                          right: view.rightAnchor,
+                          paddingTop: 25.0,
+                          paddingLeft: 32,
+                          paddingRight: 32)
+        
         view.addSubview(cancelButton)
         cancelButton.anchor(top: sendButton.bottomAnchor,
-                             left: view.leftAnchor,
-                             right: view.rightAnchor,
-                             paddingTop: 25.0,
-                             paddingLeft: 32,
-                             paddingRight: 32)
+                            left: view.leftAnchor,
+                            right: view.rightAnchor,
+                            paddingTop: 25.0,
+                            paddingLeft: 32,
+                            paddingRight: 32)
         
         view.addSubview(findButton)
         findButton.anchor(top: cancelButton.bottomAnchor,
-                             left: view.leftAnchor,
-                             right: view.rightAnchor,
-                             paddingTop: 25.0,
-                             paddingLeft: 32,
-                             paddingRight: 32)
-
+                          left: view.leftAnchor,
+                          right: view.rightAnchor,
+                          paddingTop: 25.0,
+                          paddingLeft: 32,
+                          paddingRight: 32)
+        
     }
     
-    @objc func handleCancelLift() {
+    @objc func handleCancelOffer() {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    @objc func handleFindAnotherLift() {
+    @objc func handleOfferAnotherLift() {
         let controller = navigationController?.viewControllers[2]
         controller?.modalPresentationStyle = .fullScreen
         controller?.modalTransitionStyle = .crossDissolve
@@ -331,5 +329,18 @@ class LiftOfferAcceptedVC: UIViewController {
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func handleDoneClicked() {
+        print("DEBUG: done clicked")
+        messageTextView.endEditing(true)
+        navigationItem.rightBarButtonItem = UIBarButtonItem()
+    }
+
+}
+
+extension LiftOfferSentVC: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(handleDoneClicked))
     }
 }

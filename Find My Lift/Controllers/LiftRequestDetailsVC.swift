@@ -24,7 +24,7 @@ class LiftRequestDetailsVC: UIViewController {
         return label
     }()
 
-    private let pickupLocationTextField: UITextField = {
+    private lazy var pickupLocationTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "LU6 1AW"
         textField.textColor = .black
@@ -33,6 +33,7 @@ class LiftRequestDetailsVC: UIViewController {
         textField.setDimensions(height: 35, width: 150)
         textField.textAlignment = .center
         textField.returnKeyType = .done
+        textField.delegate = self
         return textField
     }()
 
@@ -55,7 +56,7 @@ class LiftRequestDetailsVC: UIViewController {
         return label
     }()
     
-    private let destinationLocationTextField: UITextField = {
+    private lazy var destinationLocationTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "NN14 7NU"
         textField.textColor = .black
@@ -64,6 +65,7 @@ class LiftRequestDetailsVC: UIViewController {
         textField.setDimensions(height: 35, width: 150)
         textField.textAlignment = .center
         textField.returnKeyType = .done
+        textField.delegate = self
         return textField
     }()
     
@@ -211,17 +213,34 @@ class LiftRequestDetailsVC: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 25)
         button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 25
         button.addTarget(self, action: #selector(handleCheckLiftAvailabilityClicked), for: .touchUpInside)
 
         return button
+    }()
+    
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
     }()
 
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureUI()
+        
+        configureScrollView()
     }
 
     // MARK: - Selectors
@@ -231,32 +250,32 @@ class LiftRequestDetailsVC: UIViewController {
     }
     
     @objc func handleSelectDateClicked() {
-        view.addSubview(dateSelectorView)
-        dateSelectorView.centerX(inView: view)
-        dateSelectorView.centerY(inView: view)
+        contentView.addSubview(dateSelectorView)
+        dateSelectorView.centerX(inView: contentView)
+        dateSelectorView.centerY(inView: contentView)
         return
     }
     
     @objc func handleSelectTimeClicked() {
-        view.addSubview(timeSelectorView)
-        timeSelectorView.centerX(inView: view)
-        timeSelectorView.centerY(inView: view)
+        contentView.addSubview(timeSelectorView)
+        timeSelectorView.centerX(inView: contentView)
+        timeSelectorView.centerY(inView: contentView)
         return
     }
     
     @objc func handlePassengerCountClicked() {
-        view.addSubview(passengerSelectorView)
-        passengerSelectorView.centerX(inView: view)
-        passengerSelectorView.centerY(inView: view)
+        contentView.addSubview(passengerSelectorView)
+        passengerSelectorView.centerX(inView: contentView)
+        passengerSelectorView.centerY(inView: contentView)
         return
     }
     
     @objc func handleSelectGroupClicked() {
         print("DEBUG: handle select group clicked")
-        view.addSubview(groupSelectorView)
+        contentView.addSubview(groupSelectorView)
         groupSelectorView.delegate = self
-        groupSelectorView.centerX(inView: view)
-        groupSelectorView.centerY(inView: view)
+        groupSelectorView.centerX(inView: contentView)
+        groupSelectorView.centerY(inView: contentView)
         return
     }
     
@@ -296,16 +315,19 @@ class LiftRequestDetailsVC: UIViewController {
         destinationStackView.distribution = .fill
         destinationStackView.spacing = 5
 
-        view.addSubview(pickupStackView)
-        pickupStackView.anchor(top: view.safeAreaLayoutGuide.topAnchor,
-                               left: view.leftAnchor,
-                               right: view.rightAnchor, paddingTop: 40, paddingLeft: 32, paddingRight: 32,
+        contentView.addSubview(pickupStackView)
+        pickupStackView.anchor(top: contentView.topAnchor,
+                               left: contentView.leftAnchor,
+                               right: contentView.rightAnchor,
+                               paddingTop: 40,
+                               paddingLeft: 32,
+                               paddingRight: 32,
                                height: 35)
         
-        view.addSubview(destinationStackView)
+        contentView.addSubview(destinationStackView)
         destinationStackView.anchor(top: pickupStackView.bottomAnchor,
-                               left: view.leftAnchor,
-                               right: view.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32,
+                               left: contentView.leftAnchor,
+                               right: contentView.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32,
                                height: 35)
 
         let dateStackView = UIStackView(arrangedSubviews: [selectDateButton,
@@ -314,10 +336,10 @@ class LiftRequestDetailsVC: UIViewController {
         dateStackView.distribution = .fillEqually
         dateStackView.spacing = 20
         
-        view.addSubview(dateStackView)
+        contentView.addSubview(dateStackView)
         dateStackView.anchor(top: destinationStackView.bottomAnchor,
-                                 left: view.leftAnchor,
-                                 right: view.rightAnchor,
+                                 left: contentView.leftAnchor,
+                                 right: contentView.rightAnchor,
                                  paddingTop: 32,
                                  paddingLeft: 32,
                                  paddingRight: 32)
@@ -328,10 +350,10 @@ class LiftRequestDetailsVC: UIViewController {
         timeStackView.distribution = .fillEqually
         timeStackView.spacing = 20
         
-        view.addSubview(timeStackView)
+        contentView.addSubview(timeStackView)
         timeStackView.anchor(top: dateStackView.bottomAnchor,
-                                 left: view.leftAnchor,
-                                 right: view.rightAnchor,
+                                 left: contentView.leftAnchor,
+                                 right: contentView.rightAnchor,
                                  paddingTop: 32,
                                  paddingLeft: 32,
                                  paddingRight: 32)
@@ -342,10 +364,10 @@ class LiftRequestDetailsVC: UIViewController {
         passengerCountStackView.distribution = .fill
         passengerCountStackView.spacing = 20
         
-        view.addSubview(passengerCountStackView)
+        contentView.addSubview(passengerCountStackView)
         passengerCountStackView.anchor(top: timeStackView.bottomAnchor,
-                                       left: view.leftAnchor,
-                                       right: view.rightAnchor,
+                                       left: contentView.leftAnchor,
+                                       right: contentView.rightAnchor,
                                        paddingTop: 32,
                                        paddingLeft: 32,
                                        paddingRight: 32)
@@ -356,31 +378,45 @@ class LiftRequestDetailsVC: UIViewController {
         selectedGroupStackView.distribution = .fill
         selectedGroupStackView.spacing = 20
         
-        view.addSubview(selectedGroupStackView)
+        contentView.addSubview(selectedGroupStackView)
         selectedGroupStackView.anchor(top: passengerCountStackView.bottomAnchor,
-                                      left: view.leftAnchor,
-                                      right: view.rightAnchor,
+                                      left: contentView.leftAnchor,
+                                      right: contentView.rightAnchor,
                                       paddingTop: 32,
                                       paddingLeft: 32,
                                       paddingRight: 32)
         
-        view.addSubview(checkLiftAvailabilityButton)
-        checkLiftAvailabilityButton.centerX(inView: view)
-        checkLiftAvailabilityButton.anchor(left: view.leftAnchor,
-                                           bottom: view.safeAreaLayoutGuide.bottomAnchor,
-                                           right: view.rightAnchor,
-                                           paddingLeft: 32,
-                                           paddingBottom: 32,
-                                           paddingRight: 32)
-        
-        
-        for family in UIFont.familyNames {
-                print("family:", family)
-                for font in UIFont.fontNames(forFamilyName: family) {
-                    print("font:", font)
-                }
-            }
+        contentView.addSubview(checkLiftAvailabilityButton)
+        checkLiftAvailabilityButton.anchor(top: selectedGroupStackView.bottomAnchor,
+                                           left: contentView.leftAnchor,
+                                           right: contentView.rightAnchor,
+                                           paddingTop: 25.0,
+                                           paddingLeft: 32.0,
+                                           paddingRight: 32.0,
+                                           height: 50.0)
+                
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
 }
 
 extension LiftRequestDetailsVC: DateSelectorDelegate {
@@ -417,4 +453,12 @@ extension LiftRequestDetailsVC: GroupSelectorDelegate {
         groupSelectorView.removeFromSuperview()
     }
     
+}
+
+extension LiftRequestDetailsVC: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
+    }
 }

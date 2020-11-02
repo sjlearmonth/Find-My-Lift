@@ -277,6 +277,7 @@ class LiftOfferDetailsVC: UIViewController {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
         sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
         return sv
     }()
     
@@ -358,7 +359,7 @@ class LiftOfferDetailsVC: UIViewController {
 
     @objc func handleSubmitClicked() {
         print("DEBUG: submit lift offer clicked")
-        let controller = MatchingLiftRequestsVC()
+        let controller = MatchedLiftRequestsVC()
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         navigationController?.pushViewController(controller, animated: true)
@@ -538,6 +539,7 @@ extension LiftOfferDetailsVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField.keyboardType == .numberPad {
             navigationItem.rightBarButtonItem = doneButtonItem
+            textField.text = ""
         }
     }
 }

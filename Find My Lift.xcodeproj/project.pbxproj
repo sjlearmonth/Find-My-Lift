@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C414303B254730C200462CA7 /* MLRSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414303A254730C200462CA7 /* MLRSortView.swift */; };
-		C414303E2547414F00462CA7 /* MatchingLiftReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414303D2547414F00462CA7 /* MatchingLiftReview.swift */; };
+		C414303E2547414F00462CA7 /* MatchesReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414303D2547414F00462CA7 /* MatchesReview.swift */; };
 		C41430412547464F00462CA7 /* MLR2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430402547464F00462CA7 /* MLR2Cell.swift */; };
 		C414304425474AE400462CA7 /* MLR2Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = C414304325474AE400462CA7 /* MLR2Header.swift */; };
-		C4143048254750CB00462CA7 /* LiftOfferSent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4143047254750CB00462CA7 /* LiftOfferSent.swift */; };
+		C4143048254750CB00462CA7 /* LiftOfferSentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4143047254750CB00462CA7 /* LiftOfferSentVC.swift */; };
 		C41430742548894B00462CA7 /* CreateNewGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430732548894B00462CA7 /* CreateNewGroupVC.swift */; };
 		C41430792548A4E600462CA7 /* OpenAGroupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41430782548A4E600462CA7 /* OpenAGroupVC.swift */; };
 		C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA366252243FA00B7A5A6 /* AppDelegate.swift */; };
@@ -34,6 +34,7 @@
 		C437A0ED254C791E002E9B00 /* RequestAddMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0EC254C791E002E9B00 /* RequestAddMemberVC.swift */; };
 		C437A0F1254C8C87002E9B00 /* AddMemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0F0254C8C87002E9B00 /* AddMemberViewModel.swift */; };
 		C437A0F4254C9D34002E9B00 /* ContactAdminVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0F3254C9D34002E9B00 /* ContactAdminVC.swift */; };
+		C437A10025505B7C002E9B00 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0FF25505B7C002E9B00 /* Misc.swift */; };
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
@@ -54,7 +55,7 @@
 		C4E7D27A2540787500F95265 /* LORCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D2792540787500F95265 /* LORCell.swift */; };
 		C4E7D27F25407D3B00F95265 /* LORHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D27E25407D3B00F95265 /* LORHeader.swift */; };
 		C4E7D29B25409BF700F95265 /* LiftOfferAcceptedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D29A25409BF700F95265 /* LiftOfferAcceptedVC.swift */; };
-		C4E7D2B02543349100F95265 /* MatchingLiftRequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D2AF2543349100F95265 /* MatchingLiftRequestsVC.swift */; };
+		C4E7D2B02543349100F95265 /* MatchedLiftRequestsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D2AF2543349100F95265 /* MatchedLiftRequestsVC.swift */; };
 		C4E7D2B42543405600F95265 /* MLRCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D2B32543405600F95265 /* MLRCell.swift */; };
 		C4E7D2B92543427400F95265 /* MLRHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7D2B82543427400F95265 /* MLRHeader.swift */; };
 		D32F215D7B4DECC262DADC47 /* Pods_Find_My_Lift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEA21C532E28C626563BC31C /* Pods_Find_My_Lift.framework */; };
@@ -64,10 +65,10 @@
 		11D75362F2B45FE7C39F7A76 /* Pods-Find My Lift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Lift.debug.xcconfig"; path = "Target Support Files/Pods-Find My Lift/Pods-Find My Lift.debug.xcconfig"; sourceTree = "<group>"; };
 		BEA21C532E28C626563BC31C /* Pods_Find_My_Lift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Find_My_Lift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C414303A254730C200462CA7 /* MLRSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRSortView.swift; sourceTree = "<group>"; };
-		C414303D2547414F00462CA7 /* MatchingLiftReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingLiftReview.swift; sourceTree = "<group>"; };
+		C414303D2547414F00462CA7 /* MatchesReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesReview.swift; sourceTree = "<group>"; };
 		C41430402547464F00462CA7 /* MLR2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLR2Cell.swift; sourceTree = "<group>"; };
 		C414304325474AE400462CA7 /* MLR2Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLR2Header.swift; sourceTree = "<group>"; };
-		C4143047254750CB00462CA7 /* LiftOfferSent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferSent.swift; sourceTree = "<group>"; };
+		C4143047254750CB00462CA7 /* LiftOfferSentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferSentVC.swift; sourceTree = "<group>"; };
 		C41430732548894B00462CA7 /* CreateNewGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewGroupVC.swift; sourceTree = "<group>"; };
 		C41430782548A4E600462CA7 /* OpenAGroupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAGroupVC.swift; sourceTree = "<group>"; };
 		C42AA363252243FA00B7A5A6 /* Find My Lift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find My Lift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +93,7 @@
 		C437A0EC254C791E002E9B00 /* RequestAddMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAddMemberVC.swift; sourceTree = "<group>"; };
 		C437A0F0254C8C87002E9B00 /* AddMemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMemberViewModel.swift; sourceTree = "<group>"; };
 		C437A0F3254C9D34002E9B00 /* ContactAdminVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAdminVC.swift; sourceTree = "<group>"; };
+		C437A0FF25505B7C002E9B00 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
@@ -112,7 +114,7 @@
 		C4E7D2792540787500F95265 /* LORCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LORCell.swift; sourceTree = "<group>"; };
 		C4E7D27E25407D3B00F95265 /* LORHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LORHeader.swift; sourceTree = "<group>"; };
 		C4E7D29A25409BF700F95265 /* LiftOfferAcceptedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOfferAcceptedVC.swift; sourceTree = "<group>"; };
-		C4E7D2AF2543349100F95265 /* MatchingLiftRequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchingLiftRequestsVC.swift; sourceTree = "<group>"; };
+		C4E7D2AF2543349100F95265 /* MatchedLiftRequestsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchedLiftRequestsVC.swift; sourceTree = "<group>"; };
 		C4E7D2B32543405600F95265 /* MLRCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRCell.swift; sourceTree = "<group>"; };
 		C4E7D2B82543427400F95265 /* MLRHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLRHeader.swift; sourceTree = "<group>"; };
 		E317283D01924CCB3ABEADBB /* Pods-Find My Lift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Find My Lift.release.xcconfig"; path = "Target Support Files/Pods-Find My Lift/Pods-Find My Lift.release.xcconfig"; sourceTree = "<group>"; };
@@ -201,9 +203,9 @@
 				C497C54125276773005DAEC8 /* LiftAvailabilityVC.swift */,
 				C497C55025279F1D005DAEC8 /* LiftOfferReviewVC.swift */,
 				C4E7D29A25409BF700F95265 /* LiftOfferAcceptedVC.swift */,
-				C4E7D2AF2543349100F95265 /* MatchingLiftRequestsVC.swift */,
-				C414303D2547414F00462CA7 /* MatchingLiftReview.swift */,
-				C4143047254750CB00462CA7 /* LiftOfferSent.swift */,
+				C4E7D2AF2543349100F95265 /* MatchedLiftRequestsVC.swift */,
+				C414303D2547414F00462CA7 /* MatchesReview.swift */,
+				C4143047254750CB00462CA7 /* LiftOfferSentVC.swift */,
 				C41430732548894B00462CA7 /* CreateNewGroupVC.swift */,
 				C41430782548A4E600462CA7 /* OpenAGroupVC.swift */,
 				C437A0D72549D617002E9B00 /* ListOfMembersVC.swift */,
@@ -253,6 +255,7 @@
 			children = (
 				C42AA38625224F2600B7A5A6 /* Extensions.swift */,
 				C42EE4EC253F07A700EC1F51 /* Enumerations.swift */,
+				C437A0FF25505B7C002E9B00 /* Misc.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -417,7 +420,7 @@
 				C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */,
 				C4677D942524F14900DF0870 /* LiftRequestDetailsVC.swift in Sources */,
 				C4E7D2B42543405600F95265 /* MLRCell.swift in Sources */,
-				C4E7D2B02543349100F95265 /* MatchingLiftRequestsVC.swift in Sources */,
+				C4E7D2B02543349100F95265 /* MatchedLiftRequestsVC.swift in Sources */,
 				C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */,
 				C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */,
 				C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */,
@@ -426,8 +429,9 @@
 				C497C55125279F1D005DAEC8 /* LiftOfferReviewVC.swift in Sources */,
 				C437A0DE2549F0C5002E9B00 /* LOMHeader.swift in Sources */,
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
-				C4143048254750CB00462CA7 /* LiftOfferSent.swift in Sources */,
-				C414303E2547414F00462CA7 /* MatchingLiftReview.swift in Sources */,
+				C4143048254750CB00462CA7 /* LiftOfferSentVC.swift in Sources */,
+				C437A10025505B7C002E9B00 /* Misc.swift in Sources */,
+				C414303E2547414F00462CA7 /* MatchesReview.swift in Sources */,
 				C41430792548A4E600462CA7 /* OpenAGroupVC.swift in Sources */,
 				C4E7D2B92543427400F95265 /* MLRHeader.swift in Sources */,
 				C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */,

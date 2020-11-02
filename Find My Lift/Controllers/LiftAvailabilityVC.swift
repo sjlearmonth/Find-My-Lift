@@ -57,12 +57,28 @@ class LiftAvailabilityVC: UIViewController {
     
     var selectedGroup: String = ""
     
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureUI()
+        
+        configureScrollView()
 
     }
     
@@ -82,23 +98,46 @@ class LiftAvailabilityVC: UIViewController {
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        view.addSubview(tableView)
-        tableView.anchor(top: view.safeAreaLayoutGuide.topAnchor, paddingTop: 40.0)
-        tableView.centerX(inView: view)
+        contentView.addSubview(tableView)
+        tableView.anchor(top: contentView.topAnchor, paddingTop: 40.0)
+        tableView.centerX(inView: contentView)
         
         sortView.isUserInteractionEnabled = true
         
-        view.addSubview(sortView)
+        contentView.addSubview(sortView)
         sortView.delegate = self
         sortView.anchor(top: tableView.bottomAnchor,
-                        left: view.leftAnchor,
-                        right: view.rightAnchor,
+                        left: contentView.leftAnchor,
+                        right: contentView.rightAnchor,
                         paddingTop: 40,
                         paddingLeft: 32,
                         paddingRight: 32,
-                        width: view.frame.width,
+                        width: contentView.frame.width,
                         height: 100)
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
+    
+    // MARK: - Selectors
     
     @objc func handleClickMe() {
         print("DEBUG: click me clicked")
