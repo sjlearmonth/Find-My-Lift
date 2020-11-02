@@ -320,21 +320,21 @@ class LiftOfferDetailsVC: UIViewController {
     @objc func handleSelectDateClicked() {
         contentView.addSubview(dateSelectorView)
         dateSelectorView.centerX(inView: contentView)
-        dateSelectorView.centerY(inView: contentView)
+        dateSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
     @objc func handleSelectTimeClicked() {
         contentView.addSubview(timeSelectorView)
         timeSelectorView.centerX(inView: contentView)
-        timeSelectorView.centerY(inView: contentView)
+        timeSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
     @objc func handlePassengerCountClicked() {
         contentView.addSubview(passengerSelectorView)
         passengerSelectorView.centerX(inView: contentView)
-        passengerSelectorView.centerY(inView: contentView)
+        passengerSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
@@ -352,7 +352,7 @@ class LiftOfferDetailsVC: UIViewController {
         print("DEBUG: handle select group clicked")
         contentView.addSubview(groupSelectorView)
         groupSelectorView.delegate = self
-        groupSelectorView.centerX(inView: view)
+        groupSelectorView.centerX(inView: contentView)
         groupSelectorView.centerY(inView: view)
         return
     }

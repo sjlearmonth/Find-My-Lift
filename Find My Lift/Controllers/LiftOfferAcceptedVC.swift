@@ -20,7 +20,7 @@ class LiftOfferAcceptedVC: UIViewController {
         label.backgroundColor = .systemGreen
         label.textAlignment = .center
         label.setHeight(height: 80.0)
-        label.layer.cornerRadius = 40.0
+        label.layer.cornerRadius = 5.0
         label.layer.masksToBounds = true
         label.numberOfLines = 0
         return label
@@ -63,7 +63,7 @@ class LiftOfferAcceptedVC: UIViewController {
     private lazy var amendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Amend Lift Requirements", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -76,7 +76,7 @@ class LiftOfferAcceptedVC: UIViewController {
     private lazy var messageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Message Driver", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -105,7 +105,7 @@ class LiftOfferAcceptedVC: UIViewController {
     private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Send Message", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -119,7 +119,7 @@ class LiftOfferAcceptedVC: UIViewController {
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel Lift", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -132,7 +132,7 @@ class LiftOfferAcceptedVC: UIViewController {
     private lazy var findButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Find Another Lift", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)

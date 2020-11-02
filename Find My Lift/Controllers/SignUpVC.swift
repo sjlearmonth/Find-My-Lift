@@ -55,7 +55,7 @@ class SignUpVC: UIViewController {
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -68,7 +68,7 @@ class SignUpVC: UIViewController {
     private let cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -82,7 +82,7 @@ class SignUpVC: UIViewController {
     private let logInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)

@@ -78,7 +78,7 @@ class LogInVC: UIViewController {
     private let logInButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Log In", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -91,7 +91,7 @@ class LogInVC: UIViewController {
     private let signUpButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -118,9 +118,7 @@ class LogInVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
         return cv
     }()
-    
-
-    
+        
     // MARK: - LifeCycle
     
     override func viewDidLoad() {

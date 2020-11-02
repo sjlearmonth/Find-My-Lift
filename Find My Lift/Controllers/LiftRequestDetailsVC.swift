@@ -252,21 +252,21 @@ class LiftRequestDetailsVC: UIViewController {
     @objc func handleSelectDateClicked() {
         contentView.addSubview(dateSelectorView)
         dateSelectorView.centerX(inView: contentView)
-        dateSelectorView.centerY(inView: contentView)
+        dateSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
     @objc func handleSelectTimeClicked() {
         contentView.addSubview(timeSelectorView)
         timeSelectorView.centerX(inView: contentView)
-        timeSelectorView.centerY(inView: contentView)
+        timeSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
     @objc func handlePassengerCountClicked() {
         contentView.addSubview(passengerSelectorView)
         passengerSelectorView.centerX(inView: contentView)
-        passengerSelectorView.centerY(inView: contentView)
+        passengerSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
@@ -275,7 +275,7 @@ class LiftRequestDetailsVC: UIViewController {
         contentView.addSubview(groupSelectorView)
         groupSelectorView.delegate = self
         groupSelectorView.centerX(inView: contentView)
-        groupSelectorView.centerY(inView: contentView)
+        groupSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
         return
     }
     
@@ -326,9 +326,12 @@ class LiftRequestDetailsVC: UIViewController {
         
         contentView.addSubview(destinationStackView)
         destinationStackView.anchor(top: pickupStackView.bottomAnchor,
-                               left: contentView.leftAnchor,
-                               right: contentView.rightAnchor, paddingTop: 32, paddingLeft: 32, paddingRight: 32,
-                               height: 35)
+                                    left: contentView.leftAnchor,
+                                    right: contentView.rightAnchor,
+                                    paddingTop: 32.0,
+                                    paddingLeft: 32.0,
+                                    paddingRight: 32.0,
+                                    height: 35.0)
 
         let dateStackView = UIStackView(arrangedSubviews: [selectDateButton,
                                                            selectedDateLabel])

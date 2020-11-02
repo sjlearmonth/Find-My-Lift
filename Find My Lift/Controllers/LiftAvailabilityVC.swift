@@ -25,6 +25,7 @@ class LiftAvailabilityVC: UIViewController {
         tableView.setHeight(height: CGFloat(120.0 + Double(40 * maxNumberOfRows)))
         tableView.setWidth(width: self.view.frame.width - 64.0)
         tableView.bounces = false
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     

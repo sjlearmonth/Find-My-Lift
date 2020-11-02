@@ -24,7 +24,7 @@ class HomeVC: UIViewController {
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 25.0
         button.addTarget(self, action: #selector(handleFindALift), for: .touchUpInside)
         return button
     }()
@@ -36,17 +36,23 @@ class HomeVC: UIViewController {
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
         button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        button.layer.cornerRadius = 5
+        button.layer.cornerRadius = 25.0
         button.addTarget(self, action: #selector(handleOfferALift), for: .touchUpInside)
         return button
     }()
     
-    private lazy var buttonsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [findALiftButton, offerALiftButton])
-        stackView.axis = .vertical
-        stackView.spacing = 20
-        stackView.distribution = .fillProportionally
-        return stackView
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
     }()
 
 
@@ -56,6 +62,8 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         
         configureUI()
+        
+        configureScrollView()
         
         authenticateUser()
  
@@ -83,12 +91,41 @@ class HomeVC: UIViewController {
         
         configureNavigationBar()
         
-        view.addSubview(buttonsStackView)
-        buttonsStackView.centerY(inView: view)
-        buttonsStackView.anchor(left: view.leftAnchor, right: view.rightAnchor,
-                                paddingLeft: 32, paddingRight: 32)
-
+        let stackView = UIStackView(arrangedSubviews: [findALiftButton,
+                                                       offerALiftButton])
+        stackView.axis = .vertical
+        stackView.spacing = 20
+        stackView.distribution = .fill
+        
+        contentView.addSubview(stackView)
+        stackView.anchor(top: contentView.topAnchor,
+                         left: contentView.leftAnchor,
+                         right: contentView.rightAnchor,
+                         paddingTop: 300.0,
+                         paddingLeft: 32.0,
+                         paddingRight: 32.0)
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
     
     private func authenticateUser() {
         if Auth.auth().currentUser?.uid == nil {

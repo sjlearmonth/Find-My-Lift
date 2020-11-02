@@ -55,6 +55,40 @@ class RequestAddMemberVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
         return cv
     }()
+    
+    private let verifyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Member verified:"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+    
+    private let yesLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Yes"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+    
+    private let noLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+
+    private lazy var verifySwitch: UISwitch = {
+        let sw = UISwitch()
+        sw.onTintColor = .systemBlue
+        sw.thumbTintColor = .white
+        sw.tintColor = .systemBlue
+        sw.layer.borderWidth = 0.25
+        sw.layer.cornerRadius = 15.5
+        return sw
+    }()
 
     private var viewModel = AddMemberViewModel()
     
@@ -84,6 +118,12 @@ class RequestAddMemberVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
+        fullnameTextField.delegate = self
+        emailTextField.delegate = self
+        addressTextField.delegate = self
+        phoneTextField.delegate = self
+        webTextField.delegate = self
+        
         let stackView = UIStackView(arrangedSubviews: [fullnameContainerView,
                                                    emailContainerView,
                                                    addressContainerView,
@@ -100,8 +140,24 @@ class RequestAddMemberVC: UIViewController {
                      paddingLeft: 32.0,
                      paddingRight: 32.0)
         
+        contentView.addSubview(verifyLabel)
+        verifyLabel.anchor(top: stackView.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+        
+        contentView.addSubview(verifySwitch)
+        verifySwitch.anchor(left: verifyLabel.rightAnchor, paddingLeft: 50.0)
+        verifySwitch.centerY(inView: verifyLabel)
+        
+        contentView.addSubview(noLabel)
+        noLabel.anchor(right: verifySwitch.leftAnchor, paddingRight: 8.0)
+        noLabel.centerY(inView: verifySwitch)
+        
+        contentView.addSubview(yesLabel)
+        yesLabel.anchor(left: verifySwitch.rightAnchor, paddingLeft: 8.0)
+        yesLabel.centerY(inView: verifySwitch)
+
+        
         contentView.addSubview(addMemberButton)
-        addMemberButton.anchor(top: stackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0, height: 50.0)
+        addMemberButton.anchor(top: verifyLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0, height: 50.0)
     }
     
     private func configureScrollView() {
@@ -171,5 +227,12 @@ extension RequestAddMemberVC: AddMemberControllerProtocol {
             addMemberButton.isEnabled = false
             addMemberButton.backgroundColor = .systemGreen
         }
+    }
+}
+
+extension RequestAddMemberVC: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
 }

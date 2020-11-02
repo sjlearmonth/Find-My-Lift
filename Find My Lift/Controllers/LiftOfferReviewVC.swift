@@ -42,7 +42,7 @@ class LiftOfferReviewVC: UIViewController {
     private lazy var messageButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Message Driver", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -55,7 +55,7 @@ class LiftOfferReviewVC: UIViewController {
     private lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Send Message", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen
         button.setTitleColor(.white, for: .normal)
@@ -68,7 +68,7 @@ class LiftOfferReviewVC: UIViewController {
     private lazy var acceptButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Accept Lift", for: .normal)
-        button.layer.cornerRadius = 10.0
+        button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemBlue
         button.setTitleColor(.white, for: .normal)
