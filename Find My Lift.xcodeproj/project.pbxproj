@@ -37,7 +37,9 @@
 		C437A10025505B7C002E9B00 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A0FF25505B7C002E9B00 /* Misc.swift */; };
 		C437A1262551B566002E9B00 /* ChatVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A1252551B566002E9B00 /* ChatVCCell.swift */; };
 		C437A1292551C140002E9B00 /* CreateNewChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A1282551C140002E9B00 /* CreateNewChatVC.swift */; };
-		C437A12D2551CCAD002E9B00 /* OpenCurrentChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A12C2551CCAD002E9B00 /* OpenCurrentChatVC.swift */; };
+		C437A12D2551CCAD002E9B00 /* OpenCurrentChatCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A12C2551CCAD002E9B00 /* OpenCurrentChatCVC.swift */; };
+		C437A13425544612002E9B00 /* CustomInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A13325544612002E9B00 /* CustomInputAccessoryView.swift */; };
+		C437A13725544763002E9B00 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C437A13625544763002E9B00 /* MessageCell.swift */; };
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
@@ -99,7 +101,9 @@
 		C437A0FF25505B7C002E9B00 /* Misc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Misc.swift; sourceTree = "<group>"; };
 		C437A1252551B566002E9B00 /* ChatVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVCCell.swift; sourceTree = "<group>"; };
 		C437A1282551C140002E9B00 /* CreateNewChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewChatVC.swift; sourceTree = "<group>"; };
-		C437A12C2551CCAD002E9B00 /* OpenCurrentChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCurrentChatVC.swift; sourceTree = "<group>"; };
+		C437A12C2551CCAD002E9B00 /* OpenCurrentChatCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenCurrentChatCVC.swift; sourceTree = "<group>"; };
+		C437A13325544612002E9B00 /* CustomInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInputAccessoryView.swift; sourceTree = "<group>"; };
+		C437A13625544763002E9B00 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
@@ -203,7 +207,7 @@
 				C4677D3D2523A0B700DF0870 /* GroupsVC.swift */,
 				C4677D402523A0D500DF0870 /* ChatVC.swift */,
 				C437A1282551C140002E9B00 /* CreateNewChatVC.swift */,
-				C437A12C2551CCAD002E9B00 /* OpenCurrentChatVC.swift */,
+				C437A12C2551CCAD002E9B00 /* OpenCurrentChatCVC.swift */,
 				C4677D432523A0F000DF0870 /* ActiveOffersVC.swift */,
 				C4677D462523A10F00DF0870 /* MoreVC.swift */,
 				C4677D932524F14900DF0870 /* LiftRequestDetailsVC.swift */,
@@ -239,6 +243,8 @@
 				C414303A254730C200462CA7 /* MLRSortView.swift */,
 				C414304325474AE400462CA7 /* MLR2Header.swift */,
 				C437A0DD2549F0C5002E9B00 /* LOMHeader.swift */,
+				C437A13325544612002E9B00 /* CustomInputAccessoryView.swift */,
+				C437A13625544763002E9B00 /* MessageCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -433,7 +439,7 @@
 				C4E7D2B02543349100F95265 /* MatchedLiftRequestsVC.swift in Sources */,
 				C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */,
 				C42AA391252258A200B7A5A6 /* HomeTBC.swift in Sources */,
-				C437A12D2551CCAD002E9B00 /* OpenCurrentChatVC.swift in Sources */,
+				C437A12D2551CCAD002E9B00 /* OpenCurrentChatCVC.swift in Sources */,
 				C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */,
 				C4E7D27F25407D3B00F95265 /* LORHeader.swift in Sources */,
 				C437A0ED254C791E002E9B00 /* RequestAddMemberVC.swift in Sources */,
@@ -441,6 +447,7 @@
 				C437A0DE2549F0C5002E9B00 /* LOMHeader.swift in Sources */,
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
 				C437A1262551B566002E9B00 /* ChatVCCell.swift in Sources */,
+				C437A13425544612002E9B00 /* CustomInputAccessoryView.swift in Sources */,
 				C4143048254750CB00462CA7 /* LiftOfferSentVC.swift in Sources */,
 				C437A10025505B7C002E9B00 /* Misc.swift in Sources */,
 				C414303E2547414F00462CA7 /* MatchesReview.swift in Sources */,
@@ -453,6 +460,7 @@
 				C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */,
 				C42AA3812522462900B7A5A6 /* LoginVC.swift in Sources */,
 				C42AA38525224ED200B7A5A6 /* LogInViewModel.swift in Sources */,
+				C437A13725544763002E9B00 /* MessageCell.swift in Sources */,
 				C437A0DB2549D8A6002E9B00 /* LOMCell.swift in Sources */,
 				C437A0D82549D617002E9B00 /* ListOfMembersVC.swift in Sources */,
 				C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */,

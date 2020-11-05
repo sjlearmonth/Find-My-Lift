@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Find My Lift 1.xcscheme_^#shared#^_</key>
+		<key>Find My Lift 1 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<false/>
 			<key>orderHint</key>
 			<integer>24</integer>
+		</dict>
+		<key>Find My Lift 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Find My Lift 2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Find My Lift.xcscheme</key>
 		<dict>

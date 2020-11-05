@@ -28,7 +28,7 @@ class ChatVC: UIViewController {
     private let chats:[[String:String]] = [
         ["Name":"Louise", "Message":"Hey Craig, I need a lift tonight", "Timestamp":"14:38 hrs"],
         ["Name":"James", "Message":"Sorry mate, I need to cancel the lift", "Timestamp":"17:59 hrs"],
-        ["Name":"Sally", "Message":"Any chance of lift soon Craig?", "Timestamp":"16:29hrs"]
+        ["Name":"Sally", "Message":"Any chance of a lift soon Craig?", "Timestamp":"16:29hrs"]
     ]
     
     private let newMessageButton: UIButton = {
@@ -107,10 +107,9 @@ extension ChatVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let controller = OpenCurrentChatVC()
+        let controller = OpenCurrentChatCVC(message: chats[indexPath.row])
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
-        controller.selectedChat = chats[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
 }
