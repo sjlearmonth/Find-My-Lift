@@ -42,7 +42,7 @@ class MessageCell: UICollectionViewCell {
     
     private let bubbleContainer: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemPurple
+//        view.backgroundColor = .systemPurple
         return view
     }()
     
@@ -81,14 +81,12 @@ class MessageCell: UICollectionViewCell {
         guard let message = message else { return }
         userNameLabel.text = message["Name"]
         if message["Name"] == "currentUser" {
-            bubbleContainer.backgroundColor = .lightGray
-            messageTextView.textColor = .black
+            bubbleContainer.backgroundColor = .systemBlue
             bubbleLeftAnchor.isActive = false
             bubbleRightAnchor.isActive = true
             userNameLabel.isHidden = true
         } else {
-            bubbleContainer.backgroundColor = .systemPurple
-            messageTextView.textColor = .white
+            bubbleContainer.backgroundColor = .systemGreen
             bubbleLeftAnchor.isActive = true
             bubbleRightAnchor.isActive = false
             userNameLabel.isHidden = false

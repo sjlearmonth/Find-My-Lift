@@ -32,9 +32,9 @@ class HomeTBC: UITabBarController {
         chatVC.tabBarItem = .init(title: "Chat", image: UIImage(systemName: "bubble.right"), tag: 2)
         let chatNav = UINavigationController(rootViewController: chatVC)
 
-        let activeOffersVC = ActiveOffersVC()
-        activeOffersVC.tabBarItem = .init(title: "Active Offers", image: UIImage(systemName: "cart"), tag: 3)
-        let activeOffersNav = UINavigationController(rootViewController: activeOffersVC)
+        let activeOffersAndLiftsVC = ActiveOffersAndLiftsVC()
+        activeOffersAndLiftsVC.tabBarItem = .init(title: "Active Offers And Lifts", image: UIImage(systemName: "cart"), tag: 3)
+        let activeOffersNav = UINavigationController(rootViewController: activeOffersAndLiftsVC)
 
         let moreVC = MoreVC()
         moreVC.tabBarItem = .init(title: "More", image: UIImage(systemName: "plus.app.fill"), tag: 4)

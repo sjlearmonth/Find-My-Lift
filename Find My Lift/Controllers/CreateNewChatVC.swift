@@ -118,7 +118,8 @@ class CreateNewChatVC: UIViewController {
 
     @objc func handleSendMessage() {
         print("DEBUG: send message clicked")
-        let controller = OpenCurrentChatCVC(message: [String:String]())
+        let message:[String:String] = ["Name":"currentUser", "Message":messageTextView.text]
+        let controller = OpenCurrentChatCVC(message: message)
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
 //        controller.selectedChat = ["Name":searchTextField.text ?? "Craig", "Message":messageTextView.text, "Timestamp":" 18:06 hrs"]
