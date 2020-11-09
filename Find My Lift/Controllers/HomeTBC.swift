@@ -33,7 +33,7 @@ class HomeTBC: UITabBarController {
         let chatNav = UINavigationController(rootViewController: chatVC)
 
         let activeOffersAndLiftsVC = ActiveOffersAndLiftsVC()
-        activeOffersAndLiftsVC.tabBarItem = .init(title: "Active Offers And Lifts", image: UIImage(systemName: "cart"), tag: 3)
+        activeOffersAndLiftsVC.tabBarItem = .init(title: "Active", image: UIImage(systemName: "cart"), tag: 3)
         let activeOffersNav = UINavigationController(rootViewController: activeOffersAndLiftsVC)
 
         let moreVC = MoreVC()

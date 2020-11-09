@@ -72,9 +72,9 @@ class LiftsOfferedHistoryHeader: UIView {
         return label
     }()
     
-    private lazy var passLabel: UILabel = {
+    private lazy var detourLabel: UILabel = {
         let label = UILabel()
-        label.text = "Pass"
+        label.text = "Detour"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
@@ -95,7 +95,7 @@ class LiftsOfferedHistoryHeader: UIView {
                                                        endLabel,
                                                        dateLabel,
                                                        timeLabel,
-                                                       passLabel])
+                                                       detourLabel])
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.spacing = 0
@@ -114,7 +114,7 @@ class LiftsOfferedHistoryHeader: UIView {
         endLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
         dateLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
         timeLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
-        passLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
+        detourLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
     }
     
     required init?(coder: NSCoder) {
