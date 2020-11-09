@@ -77,7 +77,7 @@ class GroupsVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "Groups"
+        navigationItem.title = "Groups"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue

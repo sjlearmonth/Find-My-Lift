@@ -216,7 +216,8 @@ class ActiveOffersAndLiftsVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "Active Offers & Lifts"
+        navigationItem.title = "Active Lifts & Offers"
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white
@@ -321,10 +322,10 @@ extension ActiveOffersAndLiftsVC: UITableViewDelegate {
             header = ConfirmedLiftsHeader()
             break
         case offersHistoryTableView:
-            header = LiftsOfferedHistoryHeader()
+            header = OfferedHistoryHeader()
             break
         case acceptedHistoryTableView:
-            header = LiftsAcceptedHistoryHeader()
+            header = AcceptedHistoryHeader()
             break
         default:
             break
@@ -339,6 +340,32 @@ extension ActiveOffersAndLiftsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch tableView {
+        case pendingOffersTableView, pendingLiftsTableView:
+            let controller = PendingLiftsOffersVC(offers: pendingOffers, lifts: pendingLifts)
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(controller, animated: true)
+            break
+        case confirmedOffersTableView, confirmedLiftsTableView:
+            let controller = ConfirmedLiftsOffersVC(offers: confirmedOffers, lifts: confirmedLifts)
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(controller, animated: true)
+            break
+        case offersHistoryTableView, acceptedHistoryTableView:
+            let controller = LiftsOffersHistoryVC(offers: offersHistory, lifts: acceptedHistory)
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(controller, animated: true)
+            break
+        default:
+            break
+        }
     }
 }
 
@@ -417,6 +444,7 @@ extension ActiveOffersAndLiftsVC: UITableViewDataSource {
             cell.subHeader4Label.text = offersHistory[indexPath.row]["Detour"]
             blankCell = cell
             break
+            
         case acceptedHistoryTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: acceptedHistoryCellID, for: indexPath) as! ActiveOffersAndLiftsCell
             

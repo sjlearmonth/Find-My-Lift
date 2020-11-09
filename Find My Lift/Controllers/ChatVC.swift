@@ -62,7 +62,7 @@ class ChatVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "Chat Conversations"
+        navigationItem.title = "Chat Conversations"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue

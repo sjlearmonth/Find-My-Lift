@@ -1,5 +1,5 @@
 //
-//  LiftsAcceptedHistoryHeader.swift
+//  OffersHistoryHeader.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 06/11/2020.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class LiftsAcceptedHistoryHeader: UIView {
+class OfferedHistoryHeader: UIView {
     
     // MARK: - Properties
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Lifts Accepted History"
+        label.text = "Lifts Offered History"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
@@ -24,9 +24,9 @@ class LiftsAcceptedHistoryHeader: UIView {
         return label
     }()
     
-    private lazy var driverLabel: UILabel = {
+    private lazy var startLabel: UILabel = {
         let label = UILabel()
-        label.text = "Driver"
+        label.text = "Start"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
@@ -36,21 +36,9 @@ class LiftsAcceptedHistoryHeader: UIView {
         return label
     }()
     
-    private lazy var regLabel: UILabel = {
+    private lazy var endLabel: UILabel = {
         let label = UILabel()
-        label.text = "Reg"
-        label.textColor = .white
-        label.textAlignment = .center
-        label.backgroundColor = .systemGreen
-        label.font = UIFont(name: "AvenirNext-Bold", size: 18.0)
-        label.layer.borderWidth = 0.25
-        label.layer.borderColor = UIColor.black.cgColor
-        return label
-    }()
-    
-    private lazy var colourLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Colour"
+        label.text = "End"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
@@ -84,6 +72,18 @@ class LiftsAcceptedHistoryHeader: UIView {
         return label
     }()
     
+    private lazy var detourLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Detour"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.backgroundColor = .systemGreen
+        label.font = UIFont(name: "AvenirNext-Bold", size: 18.0)
+        label.layer.borderWidth = 0.25
+        label.layer.borderColor = UIColor.black.cgColor
+        return label
+    }()
+    
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
@@ -91,11 +91,11 @@ class LiftsAcceptedHistoryHeader: UIView {
         
         self.addSubview(titleLabel)
         titleLabel.anchor(top: self.topAnchor, left: leftAnchor, right: rightAnchor, height: 50.0)
-        let stackView = UIStackView(arrangedSubviews: [driverLabel,
-                                                       regLabel,
-                                                       colourLabel,
+        let stackView = UIStackView(arrangedSubviews: [startLabel,
+                                                       endLabel,
                                                        dateLabel,
-                                                       timeLabel])
+                                                       timeLabel,
+                                                       detourLabel])
         stackView.axis = .horizontal
         stackView.distribution = .fill
         stackView.spacing = 0
@@ -110,11 +110,11 @@ class LiftsAcceptedHistoryHeader: UIView {
                          paddingBottom: 0.0,
                          paddingRight: 0.0, height:40.0)
         
-        driverLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
-        regLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
-        colourLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
+        startLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
+        endLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
         dateLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
         timeLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
+        detourLabel.setWidthProportionalToSuperview(by: 4.0 / 20.0)
     }
     
     required init?(coder: NSCoder) {
