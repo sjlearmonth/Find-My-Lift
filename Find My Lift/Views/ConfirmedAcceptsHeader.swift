@@ -1,5 +1,5 @@
 //
-//  LiftsAcceptedHistoryHeader.swift
+//  ConfirmedLiftsHeader.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 06/11/2020.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class AcceptedHistoryHeader: UIView {
+class ConfirmedAcceptsHeader: UIView {
     
     // MARK: - Properties
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Lifts Accepted History"
+        label.text = "Confirmed Accepts"
         label.textColor = .white
         label.textAlignment = .center
         label.backgroundColor = .systemGreen
@@ -122,7 +122,6 @@ class AcceptedHistoryHeader: UIView {
     }
     
 }
-
 
 
 

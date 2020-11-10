@@ -1,5 +1,5 @@
 //
-//  LiftsOffersHistoryVC.swift
+//  PendingLiftsOffersVC.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 09/11/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiftsOffersHistoryVC: UIViewController {
+class PendingLiftsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -16,35 +16,35 @@ class LiftsOffersHistoryVC: UIViewController {
         return .lightContent
     }
     
-    private let offersHistoryCellID = "OffersHistoryCellID"
+    private let pendingOffersCellID = "PendingOffersCellID"
     
-    private lazy var offersHistoryTableView: UITableView = {
+    private lazy var pendingOffersTableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndLiftsCell.self, forCellReuseIdentifier: offersHistoryCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: pendingOffersCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
-    private let offersHistory: [[String:String]]
+    private let pendingOffers: [[String:String]]
     
-    private let liftsHistoryCellID = "LiftsHistoryCellID"
+    private let pendingAcceptsCellID = "PendingAcceptsCellID"
     
-    private lazy var liftsHistoryTableView: UITableView = {
+    private lazy var pendingAcceptsTableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndLiftsCell.self, forCellReuseIdentifier: liftsHistoryCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: pendingAcceptsCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
-    private let liftsHistory: [[String:String]]
+    private let pendingAccepts: [[String:String]]
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -59,11 +59,13 @@ class LiftsOffersHistoryVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 1.5)
         return cv
     }()
+
+    
     // MARK: - Lifecycle
     
-    init(offers: [[String:String]], lifts: [[String:String]]) {
-        self.offersHistory = offers
-        self.liftsHistory = lifts
+    init(offers: [[String:String]], accepts: [[String:String]]) {
+        self.pendingOffers = offers
+        self.pendingAccepts = accepts
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -86,7 +88,7 @@ class LiftsOffersHistoryVC: UIViewController {
         
         configureGradientLayer()
         
-        navigationItem.title = "History"
+        navigationItem.title = "Pending"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
@@ -94,8 +96,8 @@ class LiftsOffersHistoryVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        contentView.addSubview(offersHistoryTableView)
-        offersHistoryTableView.anchor(top: contentView.topAnchor,
+        contentView.addSubview(pendingOffersTableView)
+        pendingOffersTableView.anchor(top: contentView.topAnchor,
                                       left: contentView.leftAnchor,
                                       right: contentView.rightAnchor,
                                       paddingTop: 0.0,
@@ -103,8 +105,8 @@ class LiftsOffersHistoryVC: UIViewController {
                                       paddingRight: 0.0,
                                       height: 90.0 + 6.0 * 40.0)
         
-        contentView.addSubview(liftsHistoryTableView)
-        liftsHistoryTableView.anchor(top: offersHistoryTableView.bottomAnchor,
+        contentView.addSubview(pendingAcceptsTableView)
+        pendingAcceptsTableView.anchor(top: pendingOffersTableView.bottomAnchor,
                                       left: contentView.leftAnchor,
                                       right: contentView.rightAnchor,
                                       paddingTop: 75.0,
@@ -134,20 +136,21 @@ class LiftsOffersHistoryVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
 
+
 }
 
-extension LiftsOffersHistoryVC: UITableViewDelegate {
+extension PendingLiftsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var header = UIView()
         
         switch tableView {
-        case offersHistoryTableView:
-            header = OfferedHistoryHeader()
+        case pendingOffersTableView:
+            header = PendingOffersHeader()
             break
-        case liftsHistoryTableView:
-            header = AcceptedHistoryHeader()
+        case pendingAcceptsTableView:
+            header = PendingAcceptsHeader()
             break
         default:
             break
@@ -163,17 +166,50 @@ extension LiftsOffersHistoryVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch tableView {
+        case pendingOffersTableView:
+            var offeredLiftData = [String:String]()
+            offeredLiftData["PendingType"] = "LiftOffered"
+            offeredLiftData["Start"] = pendingOffers[indexPath.row]["Start"]
+            offeredLiftData["End"] = pendingOffers[indexPath.row]["End"]
+            offeredLiftData["Date"] = pendingOffers[indexPath.row]["Date"]
+            offeredLiftData["Time"] = pendingOffers[indexPath.row]["Time"]
+            offeredLiftData["Detour"] = pendingOffers[indexPath.row]["Detour"]
+            let controller = PendingDetailsVC(data: offeredLiftData)
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(controller, animated: true)
+            break
+        case pendingAcceptsTableView:
+            var acceptedLiftData = [String:String]()
+            acceptedLiftData["PendingType"] = "LiftAccepted"
+            acceptedLiftData["Driver"] = pendingAccepts[indexPath.row]["Driver"]
+            acceptedLiftData["Reg"] = pendingAccepts[indexPath.row]["Reg"]
+            acceptedLiftData["Colour"] = pendingAccepts[indexPath.row]["Colour"]
+            acceptedLiftData["Date"] = pendingAccepts[indexPath.row]["Date"]
+            acceptedLiftData["Time"] = pendingAccepts[indexPath.row]["Time"]
+            let controller = PendingDetailsVC(data: acceptedLiftData)
+            controller.modalPresentationStyle = .fullScreen
+            controller.modalTransitionStyle = .crossDissolve
+            navigationController?.pushViewController(controller, animated: true)
+            break
+        default:
+            break
+        }
+    }
 
 }
 
-extension LiftsOffersHistoryVC: UITableViewDataSource {
+extension PendingLiftsVC: UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
-        case offersHistoryTableView:
-            return offersHistory.count
-        case liftsHistoryTableView:
-            return liftsHistory.count
+        case pendingOffersTableView:
+            return pendingOffers.count
+        case pendingAcceptsTableView:
+            return pendingAccepts.count
         default:
             return 1
         }
@@ -182,24 +218,24 @@ extension LiftsOffersHistoryVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var blankCell = UITableViewCell()
         switch tableView {
-        case offersHistoryTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: offersHistoryCellID, for: indexPath) as! ActiveOffersAndLiftsCell
+        case pendingOffersTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: pendingOffersCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
-            cell.subHeader0Label.text = offersHistory[indexPath.row]["Start"]
-            cell.subHeader1Label.text = offersHistory[indexPath.row]["End"]
-            cell.subHeader2Label.text = offersHistory[indexPath.row]["Date"]
-            cell.subHeader3Label.text = offersHistory[indexPath.row]["Time"]
-            cell.subHeader4Label.text = offersHistory[indexPath.row]["Detour"]
+            cell.subHeader0Label.text = pendingOffers[indexPath.row]["Start"]
+            cell.subHeader1Label.text = pendingOffers[indexPath.row]["End"]
+            cell.subHeader2Label.text = pendingOffers[indexPath.row]["Date"]
+            cell.subHeader3Label.text = pendingOffers[indexPath.row]["Time"]
+            cell.subHeader4Label.text = pendingOffers[indexPath.row]["Detour"]
             blankCell = cell
             break
-        case liftsHistoryTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: liftsHistoryCellID, for: indexPath) as! ActiveOffersAndLiftsCell
+        case pendingAcceptsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: pendingAcceptsCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
-            cell.subHeader0Label.text = liftsHistory[indexPath.row]["Driver"]
-            cell.subHeader1Label.text = liftsHistory[indexPath.row]["Reg"]
-            cell.subHeader2Label.text = liftsHistory[indexPath.row]["Colour"]
-            cell.subHeader3Label.text = liftsHistory[indexPath.row]["Date"]
-            cell.subHeader4Label.text = liftsHistory[indexPath.row]["Time"]
+            cell.subHeader0Label.text = pendingAccepts[indexPath.row]["Driver"]
+            cell.subHeader1Label.text = pendingAccepts[indexPath.row]["Reg"]
+            cell.subHeader2Label.text = pendingAccepts[indexPath.row]["Colour"]
+            cell.subHeader3Label.text = pendingAccepts[indexPath.row]["Date"]
+            cell.subHeader4Label.text = pendingAccepts[indexPath.row]["Time"]
             blankCell = cell
             break
         default:
@@ -208,6 +244,5 @@ extension LiftsOffersHistoryVC: UITableViewDataSource {
         
         return blankCell
     }
-
-
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfirmedLiftsOffersVC: UIViewController {
+class ConfirmedLiftsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -22,7 +22,7 @@ class ConfirmedLiftsOffersVC: UIViewController {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndLiftsCell.self, forCellReuseIdentifier: confirmedOffersCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: confirmedOffersCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
@@ -31,20 +31,20 @@ class ConfirmedLiftsOffersVC: UIViewController {
     
     private let confirmedOffers: [[String:String]]
     
-    private let confirmedLiftsCellID = "ConfirmedLiftsCellID"
+    private let confirmedAcceptsCellID = "ConfirmedAcceptsCellID"
     
-    private lazy var confirmedLiftsTableView: UITableView = {
+    private lazy var confirmedAcceptsTableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndLiftsCell.self, forCellReuseIdentifier: confirmedLiftsCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: confirmedAcceptsCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
-    private let confirmedLifts: [[String:String]]
+    private let confirmedAccepts: [[String:String]]
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -63,9 +63,9 @@ class ConfirmedLiftsOffersVC: UIViewController {
     
     // MARK: - Lifecycle
     
-    init(offers: [[String:String]], lifts: [[String:String]]) {
+    init(offers: [[String:String]], accepts: [[String:String]]) {
         self.confirmedOffers = offers
-        self.confirmedLifts = lifts
+        self.confirmedAccepts = accepts
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -105,8 +105,8 @@ class ConfirmedLiftsOffersVC: UIViewController {
                                       paddingRight: 0.0,
                                       height: 90.0 + 6.0 * 40.0)
         
-        contentView.addSubview(confirmedLiftsTableView)
-        confirmedLiftsTableView.anchor(top: confirmedOffersTableView.bottomAnchor,
+        contentView.addSubview(confirmedAcceptsTableView)
+        confirmedAcceptsTableView.anchor(top: confirmedOffersTableView.bottomAnchor,
                                       left: contentView.leftAnchor,
                                       right: contentView.rightAnchor,
                                       paddingTop: 75.0,
@@ -138,7 +138,7 @@ class ConfirmedLiftsOffersVC: UIViewController {
 
 }
 
-extension ConfirmedLiftsOffersVC: UITableViewDelegate {
+extension ConfirmedLiftsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -148,8 +148,8 @@ extension ConfirmedLiftsOffersVC: UITableViewDelegate {
         case confirmedOffersTableView:
             header = ConfirmedOffersHeader()
             break
-        case confirmedLiftsTableView:
-            header = ConfirmedLiftsHeader()
+        case confirmedAcceptsTableView:
+            header = ConfirmedAcceptsHeader()
             break
         default:
             break
@@ -168,14 +168,14 @@ extension ConfirmedLiftsOffersVC: UITableViewDelegate {
 
 }
 
-extension ConfirmedLiftsOffersVC: UITableViewDataSource {
+extension ConfirmedLiftsVC: UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
         case confirmedOffersTableView:
             return confirmedOffers.count
-        case confirmedLiftsTableView:
-            return confirmedLifts.count
+        case confirmedAcceptsTableView:
+            return confirmedAccepts.count
         default:
             return 1
         }
@@ -185,7 +185,7 @@ extension ConfirmedLiftsOffersVC: UITableViewDataSource {
         var blankCell = UITableViewCell()
         switch tableView {
         case confirmedOffersTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: confirmedOffersCellID, for: indexPath) as! ActiveOffersAndLiftsCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: confirmedOffersCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
             cell.subHeader0Label.text = confirmedOffers[indexPath.row]["Start"]
             cell.subHeader1Label.text = confirmedOffers[indexPath.row]["End"]
@@ -194,14 +194,14 @@ extension ConfirmedLiftsOffersVC: UITableViewDataSource {
             cell.subHeader4Label.text = confirmedOffers[indexPath.row]["Pass"]
             blankCell = cell
             break
-        case confirmedLiftsTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: confirmedLiftsCellID, for: indexPath) as! ActiveOffersAndLiftsCell
+        case confirmedAcceptsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: confirmedAcceptsCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
-            cell.subHeader0Label.text = confirmedLifts[indexPath.row]["Driver"]
-            cell.subHeader1Label.text = confirmedLifts[indexPath.row]["Reg"]
-            cell.subHeader2Label.text = confirmedLifts[indexPath.row]["Colour"]
-            cell.subHeader3Label.text = confirmedLifts[indexPath.row]["Date"]
-            cell.subHeader4Label.text = confirmedLifts[indexPath.row]["Time"]
+            cell.subHeader0Label.text = confirmedAccepts[indexPath.row]["Driver"]
+            cell.subHeader1Label.text = confirmedAccepts[indexPath.row]["Reg"]
+            cell.subHeader2Label.text = confirmedAccepts[indexPath.row]["Colour"]
+            cell.subHeader3Label.text = confirmedAccepts[indexPath.row]["Date"]
+            cell.subHeader4Label.text = confirmedAccepts[indexPath.row]["Time"]
             blankCell = cell
             break
         default:

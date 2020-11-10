@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActiveOffersAndLiftsCell: UITableViewCell {
+class ActiveOffersAndAcceptsCell: UITableViewCell {
 
     // MARK: - Properties
     
