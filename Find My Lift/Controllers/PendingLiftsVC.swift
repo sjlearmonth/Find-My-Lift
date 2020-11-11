@@ -29,7 +29,7 @@ class PendingLiftsVC: UIViewController {
         return tv
     }()
     
-    private let pendingOffers: [[String:String]]
+    private var pendingOffers: [[String:String]]
     
     private let pendingAcceptsCellID = "PendingAcceptsCellID"
     
@@ -44,7 +44,7 @@ class PendingLiftsVC: UIViewController {
         return tv
     }()
     
-    private let pendingAccepts: [[String:String]]
+    private var pendingAccepts: [[String:String]]
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -59,6 +59,11 @@ class PendingLiftsVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 1.5)
         return cv
     }()
+    
+    var selectedPendingType: String?
+    var selectedTableRow: Int?
+    
+    let pendingLifts = Notification.Name(rawValue: pendingLiftsNotificationKey)
 
     
     // MARK: - Lifecycle
@@ -67,6 +72,10 @@ class PendingLiftsVC: UIViewController {
         self.pendingOffers = offers
         self.pendingAccepts = accepts
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     required init?(coder: NSCoder) {
@@ -79,7 +88,22 @@ class PendingLiftsVC: UIViewController {
         configureUI()
         
         configureScrollView()
+        
+        createObserver()
 
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard let type = selectedPendingType, let row = selectedTableRow else { return }
+        if type == "LiftOffered" {
+            pendingOffers.remove(at: row)
+            pendingOffersTableView.reloadData()
+        } else {
+            pendingAccepts.remove(at: row)
+            pendingAcceptsTableView.reloadData()
+        }
+        selectedPendingType = nil
+        selectedTableRow = nil
     }
     
     // MARK: - Helper Functions
@@ -136,7 +160,27 @@ class PendingLiftsVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
 
+    private func createObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(PendingLiftsVC.updateTableView) , name: pendingLifts, object: nil)
+    }
+    
+    @objc func updateTableView(notification: NSNotification) {
+        let data = notification.userInfo as! [String:String]
+        guard let tableRow = Int(data["TableRow"] ?? "0") else { return }
+        
+        if data["PendingType"] == "LiftOffered" {
+            
+            pendingOffers.remove(at: tableRow)
+            pendingOffers.insert(data, at: tableRow + 1)
+            pendingOffersTableView.reloadData()
+        } else {
+            pendingAccepts.remove(at: tableRow)
+            pendingAccepts.insert(data, at: tableRow + 1)
+            pendingAcceptsTableView.reloadData()
 
+        }
+            
+    }
 }
 
 extension PendingLiftsVC: UITableViewDelegate {
@@ -172,6 +216,8 @@ extension PendingLiftsVC: UITableViewDelegate {
         case pendingOffersTableView:
             var offeredLiftData = [String:String]()
             offeredLiftData["PendingType"] = "LiftOffered"
+            selectedPendingType = "LiftOffered"
+            offeredLiftData["TableRow"] = String(indexPath.row)
             offeredLiftData["Start"] = pendingOffers[indexPath.row]["Start"]
             offeredLiftData["End"] = pendingOffers[indexPath.row]["End"]
             offeredLiftData["Date"] = pendingOffers[indexPath.row]["Date"]
@@ -185,6 +231,9 @@ extension PendingLiftsVC: UITableViewDelegate {
         case pendingAcceptsTableView:
             var acceptedLiftData = [String:String]()
             acceptedLiftData["PendingType"] = "LiftAccepted"
+            selectedPendingType = "LiftAccepted"
+            acceptedLiftData["TableRow"] = String(indexPath.row)
+            acceptedLiftData["TableRow"] = String(indexPath.row)
             acceptedLiftData["Driver"] = pendingAccepts[indexPath.row]["Driver"]
             acceptedLiftData["Reg"] = pendingAccepts[indexPath.row]["Reg"]
             acceptedLiftData["Colour"] = pendingAccepts[indexPath.row]["Colour"]
@@ -198,6 +247,7 @@ extension PendingLiftsVC: UITableViewDelegate {
         default:
             break
         }
+        selectedTableRow = indexPath.row
     }
 
 }

@@ -118,28 +118,6 @@ class PendingDetailsVC: UIViewController {
         return label
     }()
 
-    private lazy var journeyTimeTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Journey Time:"
-        label.textColor = .white
-        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
-        label.backgroundColor = .clear
-        return label
-    }()
-
-    private lazy var journeyTimeValueLabel: UILabel = {
-        let label = UILabel()
-        label.text = "48 mins"
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
-        label.backgroundColor = .white
-        label.setDimensions(height: 40.0, width: 120.0)
-        label.layer.cornerRadius = 5.0
-        label.layer.masksToBounds = true
-        return label
-    }()
-
     private lazy var detourTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Detour:"
@@ -161,19 +139,19 @@ class PendingDetailsVC: UIViewController {
         label.layer.masksToBounds = true
         return label
     }()
-
-    private lazy var passengerTitleLabel: UILabel = {
+    
+    private lazy var driverTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Passengers:"
+        label.text = "Driver:"
         label.textColor = .white
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         label.backgroundColor = .clear
         return label
     }()
 
-    private lazy var passengerValueLabel: UILabel = {
+    private lazy var driverValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "2"
+        label.text = data["Driver"]
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
@@ -184,18 +162,18 @@ class PendingDetailsVC: UIViewController {
         return label
     }()
 
-    private lazy var smokingTitleLabel: UILabel = {
+    private lazy var regTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Smoking:"
+        label.text = "Registration:"
         label.textColor = .white
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         label.backgroundColor = .clear
         return label
     }()
 
-    private lazy var smokingValueLabel: UILabel = {
+    private lazy var regValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "No"
+        label.text = data["Reg"]
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
@@ -206,18 +184,18 @@ class PendingDetailsVC: UIViewController {
         return label
     }()
 
-    private lazy var chargeTitleLabel: UILabel = {
+    private lazy var colourTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Charge:"
+        label.text = "Vehicle Colour:"
         label.textColor = .white
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         label.backgroundColor = .clear
         return label
     }()
 
-    private lazy var chargeValueLabel: UILabel = {
+    private lazy var colourValueLabel: UILabel = {
         let label = UILabel()
-        label.text = "Yes"
+        label.text = data["Colour"]
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
@@ -227,7 +205,53 @@ class PendingDetailsVC: UIViewController {
         label.layer.masksToBounds = true
         return label
     }()
+    
+    private lazy var pickupTimeTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Pickup Time:"
+        label.textColor = .white
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
+        label.backgroundColor = .clear
+        return label
+    }()
 
+    private lazy var pickupTimeValueLabel: UILabel = {
+        let label = UILabel()
+        label.text = data["Time"]
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
+        label.backgroundColor = .white
+        label.setDimensions(height: 40.0, width: 120.0)
+        label.layer.cornerRadius = 5.0
+        label.layer.masksToBounds = true
+        return label
+    }()
+    
+    private lazy var editLiftButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Edit Lift", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
+        button.setHeight(height: 50.0)
+        button.layer.cornerRadius = 25.0
+        button.addTarget(self, action: #selector(handleEditLiftButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private lazy var cancelLiftButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Cancel Lift", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemGreen
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
+        button.setHeight(height: 50.0)
+        button.layer.cornerRadius = 25.0
+        button.addTarget(self, action: #selector(handleCancelLiftButton), for: .touchUpInside)
+        return button
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
@@ -277,85 +301,105 @@ class PendingDetailsVC: UIViewController {
         navigationController?.navigationBar.barStyle = .black
         
         if data["PendingType"] == "LiftOffered" {
+            
             titleLabel.text = "Lift Offered"
-        } else {
-            titleLabel.text = "Lift Accepted"
-        }
-        contentView.addSubview(titleLabel)
-        titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
-        
-        contentView.addSubview(startTitleLabel)
-        startTitleLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
-        
-        contentView.addSubview(startValueLabel)
-        startValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-        startValueLabel.centerY(inView: startTitleLabel)
+            
+            contentView.addSubview(titleLabel)
+            titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            
+            contentView.addSubview(startTitleLabel)
+            startTitleLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(startValueLabel)
+            startValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            startValueLabel.centerY(inView: startTitleLabel)
 
-        contentView.addSubview(endTitleLabel)
-        endTitleLabel.anchor(top: startValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-        
-        contentView.addSubview(endValueLabel)
-        endValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-        endValueLabel.centerY(inView: endTitleLabel)
-        
-        contentView.addSubview(dateTitleLabel)
-        dateTitleLabel.anchor(top: endValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-        
-        contentView.addSubview(dateValueLabel)
-        dateValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-        dateValueLabel.centerY(inView: dateTitleLabel)
-        
-        contentView.addSubview(startTimeTitleLabel)
-        startTimeTitleLabel.anchor(top: dateValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-        
-        contentView.addSubview(startTimeValueLabel)
-        startTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-        startTimeValueLabel.centerY(inView: startTimeTitleLabel)
-
-        contentView.addSubview(journeyTimeTitleLabel)
-        journeyTimeTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-        
-        contentView.addSubview(journeyTimeValueLabel)
-        journeyTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-        journeyTimeValueLabel.centerY(inView: journeyTimeTitleLabel)
-
-        if data["PendingType"] == "LiftOffered" {
+            contentView.addSubview(endTitleLabel)
+            endTitleLabel.anchor(top: startValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(endValueLabel)
+            endValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            endValueLabel.centerY(inView: endTitleLabel)
+            
+            contentView.addSubview(dateTitleLabel)
+            dateTitleLabel.anchor(top: endValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(dateValueLabel)
+            dateValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            dateValueLabel.centerY(inView: dateTitleLabel)
+            
+            contentView.addSubview(startTimeTitleLabel)
+            startTimeTitleLabel.anchor(top: dateValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(startTimeValueLabel)
+            startTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            startTimeValueLabel.centerY(inView: startTimeTitleLabel)
 
             contentView.addSubview(detourTitleLabel)
-            detourTitleLabel.anchor(top: journeyTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            detourTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(detourValueLabel)
             detourValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             detourValueLabel.centerY(inView: detourTitleLabel)
             
-            contentView.addSubview(passengerTitleLabel)
-            passengerTitleLabel.anchor(top: detourValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-            
-            contentView.addSubview(passengerValueLabel)
-            passengerValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-            passengerValueLabel.centerY(inView: passengerTitleLabel)
-            
-            contentView.addSubview(smokingTitleLabel)
-            smokingTitleLabel.anchor(top: passengerValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-            
-            contentView.addSubview(smokingValueLabel)
-            smokingValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-            smokingValueLabel.centerY(inView: smokingTitleLabel)
+            contentView.addSubview(editLiftButton)
+            editLiftButton.anchor(top: detourValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
-            contentView.addSubview(chargeTitleLabel)
-            chargeTitleLabel.anchor(top: smokingValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
-            
-            contentView.addSubview(chargeValueLabel)
-            chargeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-            chargeValueLabel.centerY(inView: chargeTitleLabel)
+            contentView.addSubview(cancelLiftButton)
+            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
+        } else {
             
+            titleLabel.text = "Lift Accepted"
+            
+            contentView.addSubview(titleLabel)
+            titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            
+            contentView.addSubview(driverTitleLabel)
+            driverTitleLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(driverValueLabel)
+            driverValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            driverValueLabel.centerY(inView: driverTitleLabel)
+
+            contentView.addSubview(regTitleLabel)
+            regTitleLabel.anchor(top: driverValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(regValueLabel)
+            regValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            regValueLabel.centerY(inView: regTitleLabel)
+
+            contentView.addSubview(colourTitleLabel)
+            colourTitleLabel.anchor(top: regValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(colourValueLabel)
+            colourValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            colourValueLabel.centerY(inView: colourTitleLabel)
+
+            contentView.addSubview(dateTitleLabel)
+            dateTitleLabel.anchor(top: colourValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(dateValueLabel)
+            dateValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            dateValueLabel.centerY(inView: dateTitleLabel)
+
+            contentView.addSubview(pickupTimeTitleLabel)
+            pickupTimeTitleLabel.anchor(top: dateValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            
+            contentView.addSubview(pickupTimeValueLabel)
+            pickupTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            pickupTimeValueLabel.centerY(inView: pickupTimeTitleLabel)
+            
+            contentView.addSubview(editLiftButton)
+            editLiftButton.anchor(top: pickupTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+            contentView.addSubview(cancelLiftButton)
+            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+
         }
         
-        else {
-            
-        }
-
+        
     }
     
     private func configureScrollView() {
@@ -378,5 +422,19 @@ class PendingDetailsVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
 
+    // MARK: - Selectors
+    
+    @objc func handleEditLiftButton() {
+        print("DEBUG: edit lift button clicked")
+        let controller = PendingEditVC(data: data)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    @objc func handleCancelLiftButton() {
+        print("DEBUG: cancel lift button clicked")
+        navigationController?.popViewController(animated: true)
+    }
 
 }

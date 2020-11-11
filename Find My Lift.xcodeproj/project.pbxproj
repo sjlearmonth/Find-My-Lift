@@ -18,6 +18,7 @@
 		C418BE0A2559B6A90005828B /* LiftsHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BE092559B6A90005828B /* LiftsHistoryVC.swift */; };
 		C418BE0F2559C2360005828B /* ConfirmedLiftsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BE0E2559C2360005828B /* ConfirmedLiftsVC.swift */; };
 		C418BE13255AF8020005828B /* PendingDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BE12255AF8020005828B /* PendingDetailsVC.swift */; };
+		C418BE1F255C35E80005828B /* PendingEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C418BE1E255C35E80005828B /* PendingEditVC.swift */; };
 		C42AA367252243FA00B7A5A6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA366252243FA00B7A5A6 /* AppDelegate.swift */; };
 		C42AA369252243FA00B7A5A6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42AA368252243FA00B7A5A6 /* SceneDelegate.swift */; };
 		C42AA370252243FB00B7A5A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C42AA36F252243FB00B7A5A6 /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		C418BE092559B6A90005828B /* LiftsHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftsHistoryVC.swift; sourceTree = "<group>"; };
 		C418BE0E2559C2360005828B /* ConfirmedLiftsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmedLiftsVC.swift; sourceTree = "<group>"; };
 		C418BE12255AF8020005828B /* PendingDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingDetailsVC.swift; sourceTree = "<group>"; };
+		C418BE1E255C35E80005828B /* PendingEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingEditVC.swift; sourceTree = "<group>"; };
 		C42AA363252243FA00B7A5A6 /* Find My Lift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Find My Lift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C42AA366252243FA00B7A5A6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C42AA368252243FA00B7A5A6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				C4677D432523A0F000DF0870 /* ActiveOffersAndAcceptsVC.swift */,
 				C418BE012559B0820005828B /* PendingLiftsVC.swift */,
 				C418BE12255AF8020005828B /* PendingDetailsVC.swift */,
+				C418BE1E255C35E80005828B /* PendingEditVC.swift */,
 				C418BE0E2559C2360005828B /* ConfirmedLiftsVC.swift */,
 				C418BE092559B6A90005828B /* LiftsHistoryVC.swift */,
 				C4677D462523A10F00DF0870 /* MoreVC.swift */,
@@ -473,6 +476,7 @@
 				C437A1422555BD35002E9B00 /* PendingAcceptsHeader.swift in Sources */,
 				C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */,
 				C4677D942524F14900DF0870 /* LiftRequestDetailsVC.swift in Sources */,
+				C418BE1F255C35E80005828B /* PendingEditVC.swift in Sources */,
 				C4E7D2B42543405600F95265 /* MLRCell.swift in Sources */,
 				C437A1292551C140002E9B00 /* CreateNewChatVC.swift in Sources */,
 				C4E7D2B02543349100F95265 /* MatchedLiftRequestsVC.swift in Sources */,
