@@ -413,8 +413,12 @@ class PendingEditVC: UIViewController {
         print("DEBUG: save button clicked")
         let name = Notification.Name(rawValue: pendingLiftsNotificationKey)
         NotificationCenter.default.post(name: name, object: nil, userInfo: data)
-        guard let controller = navigationController?.viewControllers[1] else { return }
-        navigationController?.popToViewController(controller, animated: true)
+        for controller in self.navigationController!.viewControllers as Array {
+            if controller.isKind(of: PendingLiftsVC.self) {
+                self.navigationController!.popToViewController(controller, animated: true)
+                break
+            }
+        }
     }
 }
 
