@@ -29,7 +29,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return tv
     }()
     
-    private let pendingOffers: [[String:String]] = [
+    private var pendingOffers: [[String:String]] = [
         ["Start":"LU6 1AW","End":"MK45 4JN", "Date":"06-11-20", "Time":"07:45 hrs", "Detour":"5 miles"],
         ["Start":"LU5 4PQ","End":"MK45 9PR","Date":"08-11-20","Time":"18:45 hrs","Detour":"10 miles"],
         ["Start":"LU6 1AW","End":"MK45 9PR","Date":"12-11-20","Time":"12:15 hrs","Detour":"12 miles"],
@@ -57,7 +57,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return tv
     }()
     
-    private let pendingAccepts: [[String:String]] = [
+    private var pendingAccepts: [[String:String]] = [
         ["Driver":"Louise", "Reg":"KN69 PFY", "Colour":"White", "Date":"06-11-20", "Time":"07:45 hrs"],
         ["Driver":"Mark", "Reg":"LP05 TGH", "Colour":"Grey", "Date":"08-11-20", "Time":"18:45 hrs"],
         ["Driver":"John", "Reg":"SY60 PLO", "Colour":"Blue", "Date":"12-11-20", "Time":"12:15 hrs"],
@@ -198,6 +198,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return cv
     }()
  
+    let pendingLiftsEdited = Notification.Name(rawValue: pendingLiftsEditedNotificationKey)
 
     // MARK: - Lifecycle
     
@@ -207,8 +208,15 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         configureUI()
         
         configureScrollView()
+        
+        createObserver()
  
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     
     // MARK: - Helper Functions
     
@@ -300,6 +308,31 @@ class ActiveOffersAndAcceptsVC: UIViewController {
 
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
+    
+    private func createObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updatePendingTableView), name: pendingLiftsEdited, object: nil)
+    }
+    
+    // MARK: - Selectors
+    
+    @objc func updatePendingTableView(notification: NSNotification) {
+        let data = notification.userInfo as! [String:String]
+        guard let tableRow = Int(data["TableRow"] ?? "0") else { return }
+        print("DEBUG: data = \(data)")
+        if data["PendingType"] == "LiftOffered" {
+            
+            pendingOffers.remove(at: tableRow)
+            pendingOffers.insert(data, at: tableRow)
+            pendingOffersTableView.reloadData()
+        } else {
+            pendingAccepts.remove(at: tableRow)
+            pendingAccepts.insert(data, at: tableRow)
+            pendingAcceptsTableView.reloadData()
+
+        }
+            
+    }
+
 }
 
 extension ActiveOffersAndAcceptsVC: UITableViewDelegate {

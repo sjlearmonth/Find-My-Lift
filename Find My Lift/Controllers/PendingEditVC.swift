@@ -8,7 +8,7 @@
 
 import UIKit
 
-let pendingLiftsNotificationKey = "pendingLifts"
+let pendingLiftsEditedNotificationKey = "pendingLiftsEdited"
 
 class PendingEditVC: UIViewController {
 
@@ -186,6 +186,76 @@ class PendingEditVC: UIViewController {
         return textField
     }()
 
+    private let driverNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Driver Name:"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+    
+    private lazy var driverNameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Louise"
+        textField.text = data["Driver"]
+        textField.textColor = .black
+        textField.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 5
+        textField.setDimensions(height: 35, width: 100)
+        textField.textAlignment = .center
+        textField.returnKeyType = .done
+        textField.delegate = self
+        return textField
+    }()
+
+    private let regLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Registration:"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+    
+    private lazy var regTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "KN69 PFY"
+        textField.text = data["Reg"]
+        textField.textColor = .black
+        textField.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 5
+        textField.setDimensions(height: 35, width: 100)
+        textField.textAlignment = .center
+        textField.returnKeyType = .done
+        textField.delegate = self
+        return textField
+    }()
+
+    private let colourLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Vehicle Colour:"
+        label.textColor = UIColor(white: 1.0, alpha: 1.0)
+        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        return label
+    }()
+    
+    private lazy var colourTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "White"
+        textField.text = data["Colour"]
+        textField.textColor = .black
+        textField.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 5
+        textField.setDimensions(height: 35, width: 100)
+        textField.textAlignment = .center
+        textField.returnKeyType = .done
+        textField.delegate = self
+        return textField
+    }()
+
+    
     private lazy var doneButtonItem: UIBarButtonItem = {
         let barButton = UIBarButtonItem()
         barButton.title = "Done"
@@ -206,7 +276,6 @@ class PendingEditVC: UIViewController {
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()
-
 
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -354,6 +423,84 @@ class PendingEditVC: UIViewController {
             
             contentView.addSubview(titleLabel)
             titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            
+            let driverNameStackView = UIStackView(arrangedSubviews: [driverNameLabel,
+                                                                     driverNameTextField])
+            driverNameStackView.axis = .horizontal
+            driverNameStackView.distribution = .fill
+            driverNameStackView.spacing = 5
+            
+            contentView.addSubview(driverNameStackView)
+            driverNameStackView.anchor(top: titleLabel.bottomAnchor,
+                                  left: contentView.leftAnchor,
+                                  right: contentView.rightAnchor,
+                                  paddingTop: 25.0,
+                                  paddingLeft: 32.0,
+                                  paddingRight: 32.0,
+                                  height: 35.0)
+
+            let regStackView = UIStackView(arrangedSubviews: [regLabel,
+                                                              regTextField])
+            regStackView.axis = .horizontal
+            regStackView.distribution = .fill
+            regStackView.spacing = 5
+            
+            contentView.addSubview(regStackView)
+            regStackView.anchor(top: driverNameStackView.bottomAnchor,
+                                  left: contentView.leftAnchor,
+                                  right: contentView.rightAnchor,
+                                  paddingTop: 25.0,
+                                  paddingLeft: 32.0,
+                                  paddingRight: 32.0,
+                                  height: 35.0)
+
+            let colourStackView = UIStackView(arrangedSubviews: [colourLabel,
+                                                                 colourTextField])
+            colourStackView.axis = .horizontal
+            colourStackView.distribution = .fill
+            colourStackView.spacing = 5
+            
+            contentView.addSubview(colourStackView)
+            colourStackView.anchor(top: regStackView.bottomAnchor,
+                                  left: contentView.leftAnchor,
+                                  right: contentView.rightAnchor,
+                                  paddingTop: 25.0,
+                                  paddingLeft: 32.0,
+                                  paddingRight: 32.0,
+                                  height: 35.0)
+
+            let dateStackView = UIStackView(arrangedSubviews: [selectDateButton,
+                                                               selectedDateLabel])
+            dateStackView.axis = .horizontal
+            dateStackView.distribution = .fillEqually
+            dateStackView.spacing = 20
+            
+            contentView.addSubview(dateStackView)
+            dateStackView.anchor(top: colourStackView.bottomAnchor,
+                                     left: contentView.leftAnchor,
+                                     right: contentView.rightAnchor,
+                                     paddingTop: 25.0,
+                                     paddingLeft: 32.0,
+                                     paddingRight: 32.0,
+                                     height: 35.0)
+            
+            let timeStackView = UIStackView(arrangedSubviews: [selectTimeButton,
+                                                               selectedTimeLabel])
+            timeStackView.axis = .horizontal
+            timeStackView.distribution = .fillEqually
+            timeStackView.spacing = 20
+            
+            contentView.addSubview(timeStackView)
+            timeStackView.anchor(top: dateStackView.bottomAnchor,
+                                     left: contentView.leftAnchor,
+                                     right: contentView.rightAnchor,
+                                     paddingTop: 25.0,
+                                     paddingLeft: 32.0,
+                                     paddingRight: 32.0,
+                                     height: 35.0)
+            
+            contentView.addSubview(saveButton)
+            saveButton.anchor(top: timeStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         }
     }
@@ -411,10 +558,10 @@ class PendingEditVC: UIViewController {
 
     @objc func handleSaveButton() {
         print("DEBUG: save button clicked")
-        let name = Notification.Name(rawValue: pendingLiftsNotificationKey)
+        let name = Notification.Name(rawValue: pendingLiftsEditedNotificationKey)
         NotificationCenter.default.post(name: name, object: nil, userInfo: data)
         for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: PendingLiftsVC.self) {
+            if controller.isKind(of: ActiveOffersAndAcceptsVC.self) {
                 self.navigationController!.popToViewController(controller, animated: true)
                 break
             }
@@ -431,6 +578,14 @@ extension PendingEditVC: UITextFieldDelegate {
         case endLocationTextField:
             data["End"] = textField.text
             break
+        case driverNameTextField:
+            data["Driver"] = textField.text
+            break
+        case regTextField:
+            data["Reg"] = textField.text
+            break
+        case colourTextField:
+            data["Colour"] = textField.text
         default:
             break
         }

@@ -356,35 +356,35 @@ class PendingDetailsVC: UIViewController {
             titleLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
             
             contentView.addSubview(driverTitleLabel)
-            driverTitleLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            driverTitleLabel.anchor(top: titleLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(driverValueLabel)
             driverValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             driverValueLabel.centerY(inView: driverTitleLabel)
 
             contentView.addSubview(regTitleLabel)
-            regTitleLabel.anchor(top: driverValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            regTitleLabel.anchor(top: driverValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(regValueLabel)
             regValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             regValueLabel.centerY(inView: regTitleLabel)
 
             contentView.addSubview(colourTitleLabel)
-            colourTitleLabel.anchor(top: regValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            colourTitleLabel.anchor(top: regValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(colourValueLabel)
             colourValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             colourValueLabel.centerY(inView: colourTitleLabel)
 
             contentView.addSubview(dateTitleLabel)
-            dateTitleLabel.anchor(top: colourValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            dateTitleLabel.anchor(top: colourValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(dateValueLabel)
             dateValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             dateValueLabel.centerY(inView: dateTitleLabel)
 
             contentView.addSubview(pickupTimeTitleLabel)
-            pickupTimeTitleLabel.anchor(top: dateValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 32.0)
+            pickupTimeTitleLabel.anchor(top: dateValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
             contentView.addSubview(pickupTimeValueLabel)
             pickupTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)

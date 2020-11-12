@@ -60,12 +60,6 @@ class PendingLiftsVC: UIViewController {
         return cv
     }()
     
-    var selectedPendingType: String?
-    var selectedTableRow: Int?
-    
-    let pendingLifts = Notification.Name(rawValue: pendingLiftsNotificationKey)
-
-    
     // MARK: - Lifecycle
     
     init(offers: [[String:String]], accepts: [[String:String]]) {
@@ -73,11 +67,7 @@ class PendingLiftsVC: UIViewController {
         self.pendingAccepts = accepts
         super.init(nibName: nil, bundle: nil)
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
+        
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,22 +78,7 @@ class PendingLiftsVC: UIViewController {
         configureUI()
         
         configureScrollView()
-        
-        createObserver()
 
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        guard let type = selectedPendingType, let row = selectedTableRow else { return }
-        if type == "LiftOffered" {
-            pendingOffers.remove(at: row)
-            pendingOffersTableView.reloadData()
-        } else {
-            pendingAccepts.remove(at: row)
-            pendingAcceptsTableView.reloadData()
-        }
-        selectedPendingType = nil
-        selectedTableRow = nil
     }
     
     // MARK: - Helper Functions
@@ -160,27 +135,6 @@ class PendingLiftsVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
 
-    private func createObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(PendingLiftsVC.updateTableView) , name: pendingLifts, object: nil)
-    }
-    
-    @objc func updateTableView(notification: NSNotification) {
-        let data = notification.userInfo as! [String:String]
-        guard let tableRow = Int(data["TableRow"] ?? "0") else { return }
-        
-        if data["PendingType"] == "LiftOffered" {
-            
-            pendingOffers.remove(at: tableRow)
-            pendingOffers.insert(data, at: tableRow + 1)
-            pendingOffersTableView.reloadData()
-        } else {
-            pendingAccepts.remove(at: tableRow)
-            pendingAccepts.insert(data, at: tableRow + 1)
-            pendingAcceptsTableView.reloadData()
-
-        }
-            
-    }
 }
 
 extension PendingLiftsVC: UITableViewDelegate {
@@ -216,7 +170,6 @@ extension PendingLiftsVC: UITableViewDelegate {
         case pendingOffersTableView:
             var offeredLiftData = [String:String]()
             offeredLiftData["PendingType"] = "LiftOffered"
-            selectedPendingType = "LiftOffered"
             offeredLiftData["TableRow"] = String(indexPath.row)
             offeredLiftData["Start"] = pendingOffers[indexPath.row]["Start"]
             offeredLiftData["End"] = pendingOffers[indexPath.row]["End"]
@@ -231,7 +184,6 @@ extension PendingLiftsVC: UITableViewDelegate {
         case pendingAcceptsTableView:
             var acceptedLiftData = [String:String]()
             acceptedLiftData["PendingType"] = "LiftAccepted"
-            selectedPendingType = "LiftAccepted"
             acceptedLiftData["TableRow"] = String(indexPath.row)
             acceptedLiftData["TableRow"] = String(indexPath.row)
             acceptedLiftData["Driver"] = pendingAccepts[indexPath.row]["Driver"]
@@ -247,7 +199,7 @@ extension PendingLiftsVC: UITableViewDelegate {
         default:
             break
         }
-        selectedTableRow = indexPath.row
+    
     }
 
 }
