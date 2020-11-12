@@ -230,15 +230,15 @@ class ConfirmedDetailsVC: UIViewController {
         return label
     }()
     
-    private lazy var editLiftButton: UIButton = {
+    private lazy var requestEditLiftButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Edit Lift", for: .normal)
+        button.setTitle("Request Edit Lift", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemGreen
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         button.setHeight(height: 50.0)
         button.layer.cornerRadius = 25.0
-        button.addTarget(self, action: #selector(handleEditLiftButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleRequestEditLiftButton), for: .touchUpInside)
         return button
     }()
     
@@ -344,11 +344,11 @@ class ConfirmedDetailsVC: UIViewController {
             passengerValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             passengerValueLabel.centerY(inView: passengerTitleLabel)
             
-            contentView.addSubview(editLiftButton)
-            editLiftButton.anchor(top: passengerValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(requestEditLiftButton)
+            requestEditLiftButton.anchor(top: passengerValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
             contentView.addSubview(cancelLiftButton)
-            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            cancelLiftButton.anchor(top: requestEditLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         } else {
             
@@ -392,11 +392,11 @@ class ConfirmedDetailsVC: UIViewController {
             pickupTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             pickupTimeValueLabel.centerY(inView: pickupTimeTitleLabel)
             
-            contentView.addSubview(editLiftButton)
-            editLiftButton.anchor(top: pickupTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(requestEditLiftButton)
+            requestEditLiftButton.anchor(top: pickupTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
             contentView.addSubview(cancelLiftButton)
-            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            cancelLiftButton.anchor(top: requestEditLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         }
     }
@@ -423,9 +423,9 @@ class ConfirmedDetailsVC: UIViewController {
     
     // MARK: - Selectors
     
-    @objc func handleEditLiftButton() {
-        print("DEBUG: edit lift button clicked")
-        let controller = ConfirmedEditVC(data: data)
+    @objc func handleRequestEditLiftButton() {
+        print("DEBUG: request edit lift button clicked")
+        let controller = ConfirmedRequestEditVC(data: data)
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         navigationController?.pushViewController(controller, animated: true)

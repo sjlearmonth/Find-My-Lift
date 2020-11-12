@@ -8,9 +8,9 @@
 
 import UIKit
 
-let confirmedLiftEditedNotificationKey = "confirmedLiftEdited"
+let confirmedRequestEditLiftNotificationKey = "confirmedRequestEditLift"
 
-class ConfirmedEditVC: UIViewController {
+class ConfirmedRequestEditVC: UIViewController {
 
     // MARK: - Properties
     
@@ -263,18 +263,30 @@ class ConfirmedEditVC: UIViewController {
         return textField
     }()
     
-    private lazy var saveButton: UIButton = {
+    private lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Save", for: .normal)
+        button.setTitle("Chat", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         button.setHeight(height: 50.0)
         button.layer.cornerRadius = 25.0
-        button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleChatButton), for: .touchUpInside)
         return button
     }()
-    
+
+    private lazy var requestButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Send Edit Request", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
+        button.setHeight(height: 50.0)
+        button.layer.cornerRadius = 25.0
+        button.addTarget(self, action: #selector(handleRequestButton), for: .touchUpInside)
+        return button
+    }()
+
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
@@ -413,8 +425,11 @@ class ConfirmedEditVC: UIViewController {
                                            paddingLeft: 32,
                                            paddingRight: 32)
             
-            contentView.addSubview(saveButton)
-            saveButton.anchor(top: passengerCountStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(chatButton)
+            chatButton.anchor(top: passengerCountStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+            contentView.addSubview(requestButton)
+            requestButton.anchor(top: chatButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
 
         } else {
@@ -499,8 +514,11 @@ class ConfirmedEditVC: UIViewController {
                                      paddingRight: 32.0,
                                      height: 35.0)
             
-            contentView.addSubview(saveButton)
-            saveButton.anchor(top: timeStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(chatButton)
+            chatButton.anchor(top: timeStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+
+            contentView.addSubview(requestButton)
+            requestButton.anchor(top: chatButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         }
     }
@@ -547,16 +565,28 @@ class ConfirmedEditVC: UIViewController {
         return
     }
     
-    @objc func handleSaveButton() {
-        print("DEBUG: save button clicked")
-        let name = Notification.Name(rawValue: confirmedLiftEditedNotificationKey)
-        NotificationCenter.default.post(name: name, object: nil, userInfo: data)
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: ActiveOffersAndAcceptsVC.self) {
-                self.navigationController!.popToViewController(controller, animated: true)
-                break
-            }
+    @objc func handleChatButton() {
+        print("DEBUG: chat button clicked")
+        let name = Notification.Name(rawValue: confirmedRequestEditLiftNotificationKey)
+        NotificationCenter.default.post(name: name, object: nil)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+          let sceneDelegate = windowScene.delegate as? SceneDelegate
+        else {
+          return
         }
+        let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController
+        guard let controller = tabBarController?.viewControllers?[2] as? UINavigationController else { return }
+        print("DEBUG: controller = \(controller.debugDescription)")
+        controller.popToRootViewController(animated: true)
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func handleRequestButton() {
+        print("DEBUG: request edit lift clicked")
+        let alertController = UIAlertController(title: "Edit Request", message: "Edit request sent to admin", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .default, handler: { _ in self.dismiss(animated: true, completion: nil)})
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     @objc func handlePassengerCountClicked() {
@@ -569,7 +599,7 @@ class ConfirmedEditVC: UIViewController {
 
 }
 
-extension ConfirmedEditVC: UITextFieldDelegate {
+extension ConfirmedRequestEditVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case startLocationTextField:
@@ -600,7 +630,7 @@ extension ConfirmedEditVC: UITextFieldDelegate {
 
 }
 
-extension ConfirmedEditVC: DateSelectorDelegate {
+extension ConfirmedRequestEditVC: DateSelectorDelegate {
     func readDateSelected(date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_GB")
@@ -612,7 +642,7 @@ extension ConfirmedEditVC: DateSelectorDelegate {
     }
 }
 
-extension ConfirmedEditVC: TimeSelectorDelegate {
+extension ConfirmedRequestEditVC: TimeSelectorDelegate {
     func readTimeSelected(time: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_GB")
@@ -624,7 +654,7 @@ extension ConfirmedEditVC: TimeSelectorDelegate {
     }
 }
 
-extension ConfirmedEditVC: PassengerSelectorDelegate {
+extension ConfirmedRequestEditVC: PassengerSelectorDelegate {
     func readPassengerCount(count: String) {
         passengerCountLabel.text = count
         data["Pass"] = count

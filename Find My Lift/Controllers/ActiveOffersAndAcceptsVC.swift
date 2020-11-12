@@ -200,7 +200,6 @@ class ActiveOffersAndAcceptsVC: UIViewController {
  
     let pendingLiftsEdited = Notification.Name(rawValue: pendingLiftEditedNotificationKey)
     let pendingLiftsCancelled = Notification.Name(rawValue: pendingLiftCancelledNotificationKey)
-    let confirmedLiftsEdited = Notification.Name(confirmedLiftEditedNotificationKey)
     let confirmedLiftsCancelled = Notification.Name(rawValue: confirmedLiftCancelledNotificationKey)
 
     // MARK: - Lifecycle
@@ -315,7 +314,6 @@ class ActiveOffersAndAcceptsVC: UIViewController {
     private func createObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updatePendingTableView), name: pendingLiftsEdited, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updatePendingTableView), name: pendingLiftsCancelled, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updateConfirmedTableView), name: confirmedLiftsEdited, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updateConfirmedTableView), name: confirmedLiftsCancelled, object: nil)
 
 
@@ -365,28 +363,16 @@ class ActiveOffersAndAcceptsVC: UIViewController {
             
             confirmedOffers.remove(at: tableRow)
             
-            if notification.name == confirmedLiftsEdited {
-                
-                confirmedOffers.insert(data, at: tableRow)
-            }
-            
             confirmedOffersTableView.reloadData()
             
         } else {
             
             confirmedAccepts.remove(at: tableRow)
-            
-            if notification.name == confirmedLiftsEdited {
-                
-                confirmedAccepts.insert(data, at: tableRow)
-                
-            }
-            
+                        
             confirmedAcceptsTableView.reloadData()
 
         }
             
-
     }
 
 }
