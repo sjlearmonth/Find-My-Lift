@@ -59,7 +59,6 @@ class ConfirmedLiftsVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 1.5)
         return cv
     }()
-
     
     // MARK: - Lifecycle
     
@@ -134,6 +133,25 @@ class ConfirmedLiftsVC: UIViewController {
         contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
 
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+        
+        contentView.addSubview(confirmedOffersTableView)
+        confirmedOffersTableView.anchor(top: contentView.topAnchor,
+                                      left: contentView.leftAnchor,
+                                      right: contentView.rightAnchor,
+                                      paddingTop: 0.0,
+                                      paddingLeft: 0.0,
+                                      paddingRight: 0.0,
+                                      height: 90.0 + 6.0 * 40.0)
+        
+        contentView.addSubview(confirmedAcceptsTableView)
+        confirmedAcceptsTableView.anchor(top: confirmedOffersTableView.bottomAnchor,
+                                      left: contentView.leftAnchor,
+                                      right: contentView.rightAnchor,
+                                      paddingTop: 75.0,
+                                      paddingLeft: 0.0,
+                                      paddingRight: 0.0,
+                                      height: 90.0 + 6.0 * 40.0)
+
     }
 
 }
@@ -164,6 +182,39 @@ extension ConfirmedLiftsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var liftData = [String:String]()
+        switch tableView {
+        case confirmedOffersTableView:
+            
+            liftData["ConfirmedType"] = "LiftOffered"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Start"] = confirmedOffers[indexPath.row]["Start"]
+            liftData["End"] = confirmedOffers[indexPath.row]["End"]
+            liftData["Date"] = confirmedOffers[indexPath.row]["Date"]
+            liftData["Time"] = confirmedOffers[indexPath.row]["Time"]
+            liftData["Pass"] = confirmedOffers[indexPath.row]["Pass"]
+            break
+        case confirmedAcceptsTableView:
+            liftData["ConfirmedType"] = "LiftAccepted"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Driver"] = confirmedAccepts[indexPath.row]["Driver"]
+            liftData["Reg"] = confirmedAccepts[indexPath.row]["Reg"]
+            liftData["Colour"] = confirmedAccepts[indexPath.row]["Colour"]
+            liftData["Date"] = confirmedAccepts[indexPath.row]["Date"]
+            liftData["Time"] = confirmedAccepts[indexPath.row]["Time"]
+            break
+        default:
+            break
+        }
+        
+        let controller = ConfirmedDetailsVC(data: liftData)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     }
 
 }

@@ -85,7 +85,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return tv
     }()
     
-    private let confirmedOffers: [[String:String]] = [
+    private var confirmedOffers: [[String:String]] = [
         ["Start":"LU6 1AW", "End":"MK45 4JN", "Date":"06-11-20", "Time":"07:45 hrs", "Pass":"2"],
         ["Start":"LU5 4PQ", "End":"MK45 9PR", "Date":"08-11-20", "Time":"18:45 hrs", "Pass":"1"],
         ["Start":"LU6 1AW", "End":"MK45 9PR", "Date":"12-11-20", "Time":"12:15 hrs", "Pass":"1"],
@@ -113,7 +113,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return tv
     }()
     
-    private let confirmedAccepts: [[String:String]] = [
+    private var confirmedAccepts: [[String:String]] = [
         ["Driver":"Louise", "Reg":"KN69 PFY", "Colour":"White", "Date":"06-11-20", "Time":"07:45 hrs"],
         ["Driver":"Mark", "Reg":"LP05 TGH", "Colour":"Grey", "Date":"08-11-20", "Time":"18:45 hrs"],
         ["Driver":"John", "Reg":"SY60 PLO", "Colour":"Blue", "Date":"12-11-20", "Time":"12:15 hrs"],
@@ -198,7 +198,10 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         return cv
     }()
  
-    let pendingLiftsEdited = Notification.Name(rawValue: pendingLiftsEditedNotificationKey)
+    let pendingLiftsEdited = Notification.Name(rawValue: pendingLiftEditedNotificationKey)
+    let pendingLiftsCancelled = Notification.Name(rawValue: pendingLiftCancelledNotificationKey)
+    let confirmedLiftsEdited = Notification.Name(confirmedLiftEditedNotificationKey)
+    let confirmedLiftsCancelled = Notification.Name(rawValue: confirmedLiftCancelledNotificationKey)
 
     // MARK: - Lifecycle
     
@@ -209,7 +212,7 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         
         configureScrollView()
         
-        createObserver()
+        createObservers()
  
     }
     
@@ -309,28 +312,81 @@ class ActiveOffersAndAcceptsVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
     
-    private func createObserver() {
+    private func createObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updatePendingTableView), name: pendingLiftsEdited, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updatePendingTableView), name: pendingLiftsCancelled, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updateConfirmedTableView), name: confirmedLiftsEdited, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ActiveOffersAndAcceptsVC.updateConfirmedTableView), name: confirmedLiftsCancelled, object: nil)
+
+
     }
     
     // MARK: - Selectors
     
     @objc func updatePendingTableView(notification: NSNotification) {
+        
         let data = notification.userInfo as! [String:String]
+        
         guard let tableRow = Int(data["TableRow"] ?? "0") else { return }
-        print("DEBUG: data = \(data)")
+        
         if data["PendingType"] == "LiftOffered" {
             
             pendingOffers.remove(at: tableRow)
-            pendingOffers.insert(data, at: tableRow)
+            
+            if notification.name == pendingLiftsEdited {
+                pendingOffers.insert(data, at: tableRow)
+            }
+            
             pendingOffersTableView.reloadData()
+            
         } else {
+            
             pendingAccepts.remove(at: tableRow)
-            pendingAccepts.insert(data, at: tableRow)
+            
+            if notification.name == pendingLiftsEdited {
+                
+                pendingAccepts.insert(data, at: tableRow)
+                
+            }
+            
             pendingAcceptsTableView.reloadData()
 
         }
             
+    }
+    
+    @objc func updateConfirmedTableView(notification: NSNotification) {
+        
+        let data = notification.userInfo as! [String:String]
+        
+        guard let tableRow = Int(data["TableRow"] ?? "0") else { return }
+        
+        if data["ConfirmedType"] == "LiftOffered" {
+            
+            confirmedOffers.remove(at: tableRow)
+            
+            if notification.name == confirmedLiftsEdited {
+                
+                confirmedOffers.insert(data, at: tableRow)
+            }
+            
+            confirmedOffersTableView.reloadData()
+            
+        } else {
+            
+            confirmedAccepts.remove(at: tableRow)
+            
+            if notification.name == confirmedLiftsEdited {
+                
+                confirmedAccepts.insert(data, at: tableRow)
+                
+            }
+            
+            confirmedAcceptsTableView.reloadData()
+
+        }
+            
+
     }
 
 }
@@ -436,6 +492,7 @@ extension ActiveOffersAndAcceptsVC: UITableViewDataSource {
             cell.subHeader4Label.text = pendingOffers[indexPath.row]["Detour"]
             blankCell = cell
             break
+            
         case pendingAcceptsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: pendingAcceptsCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
@@ -446,6 +503,7 @@ extension ActiveOffersAndAcceptsVC: UITableViewDataSource {
             cell.subHeader4Label.text = pendingAccepts[indexPath.row]["Time"]
             blankCell = cell
             break
+            
         case confirmedOffersTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: confirmedOffersCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
@@ -456,6 +514,7 @@ extension ActiveOffersAndAcceptsVC: UITableViewDataSource {
             cell.subHeader4Label.text = confirmedOffers[indexPath.row]["Pass"]
             blankCell = cell
             break
+            
         case confirmedAcceptsTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: confirmedAcceptsCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             

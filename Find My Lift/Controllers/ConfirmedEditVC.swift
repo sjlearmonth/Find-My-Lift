@@ -1,16 +1,16 @@
 //
-//  PendingEditVC.swift
+//  ConfirmedEditVC.swift
 //  Find My Lift
 //
-//  Created by Stephen Learmonth on 11/11/2020.
+//  Created by Stephen Learmonth on 12/11/2020.
 //  Copyright © 2020 Stephen Learmonth. All rights reserved.
 //
 
 import UIKit
 
-let pendingLiftEditedNotificationKey = "pendingLiftEdited"
+let confirmedLiftEditedNotificationKey = "confirmedLiftEdited"
 
-class PendingEditVC: UIViewController {
+class ConfirmedEditVC: UIViewController {
 
     // MARK: - Properties
     
@@ -161,29 +161,37 @@ class PendingEditVC: UIViewController {
         tsv.setHeight(height: 250)
         return tsv
     }()
-
-    private let detourLabel: UILabel = {
+    
+    private let passengerCountButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Set Passenger Count", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        button.backgroundColor = .systemGreen
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(handlePassengerCountClicked), for: .touchUpInside)
+        return button
+    }()
+    
+    private let passengerCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "Detour Distance (miles):"
-        label.textColor = UIColor(white: 1.0, alpha: 1.0)
-        label.font = UIFont(name: "AvenirNext-DemiBold", size: 20)
+        label.text = "2"
+        label.textColor = .black
+        label.backgroundColor = .white
+        label.layer.cornerRadius = 5
+        label.layer.masksToBounds = true
+        label.textAlignment = .center
+        label.font = UIFont(name: "AvenirNext-Regular", size: 20)
+        label.setWidth(width: 50)
         return label
     }()
     
-    private lazy var detourTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "10 miles"
-        textField.text = data["Detour"]
-        textField.textColor = .black
-        textField.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
-        textField.backgroundColor = .white
-        textField.layer.cornerRadius = 5
-        textField.setDimensions(height: 35, width: 100)
-        textField.textAlignment = .center
-        textField.returnKeyType = .done
-        textField.delegate = self
-        textField.keyboardType = .numberPad
-        return textField
+    private lazy var passengerSelectorView : PassengerSelectorView = {
+        let psv = PassengerSelectorView()
+        psv.delegate = self
+        psv.setWidth(width: 350)
+        psv.setHeight(height: 250)
+        return psv
     }()
 
     private let driverNameLabel: UILabel = {
@@ -254,16 +262,6 @@ class PendingEditVC: UIViewController {
         textField.delegate = self
         return textField
     }()
-
-    
-    private lazy var doneButtonItem: UIBarButtonItem = {
-        let barButton = UIBarButtonItem()
-        barButton.title = "Done"
-        barButton.style = .done
-        barButton.target = self
-        barButton.action = #selector(doneButtonClicked)
-        return barButton
-    }()
     
     private lazy var saveButton: UIButton = {
         let button = UIButton(type: .system)
@@ -276,7 +274,7 @@ class PendingEditVC: UIViewController {
         button.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         return button
     }()
-
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
@@ -290,7 +288,7 @@ class PendingEditVC: UIViewController {
         cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
         return cv
     }()
-    
+
     // MARK: - Lifecycle
     
     init(data: [String:String]) {
@@ -302,7 +300,6 @@ class PendingEditVC: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -319,7 +316,7 @@ class PendingEditVC: UIViewController {
         
         configureGradientLayer()
         
-        navigationItem.title = "Edit Pending"
+        navigationItem.title = "Edit Confirmed"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
@@ -329,7 +326,7 @@ class PendingEditVC: UIViewController {
             NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        if data["PendingType"] == "LiftOffered" {
+        if data["ConfirmedType"] == "LiftOffered" {
             
             titleLabel.text = "Edit Lift Offered"
             
@@ -401,20 +398,23 @@ class PendingEditVC: UIViewController {
                                      paddingTop: 32,
                                      paddingLeft: 32,
                                      paddingRight: 32)
-
-            contentView.addSubview(detourLabel)
-            detourLabel.anchor(top: timeStackView.bottomAnchor,
-                               left: contentView.leftAnchor,
-                               paddingTop: 32.0,
-                               paddingLeft: 32.0)
             
-            contentView.addSubview(detourTextField)
-            detourTextField.anchor(left: detourLabel.rightAnchor,
-                                   paddingLeft: 8.0)
-            detourTextField.centerY(inView: detourLabel)
+            let passengerCountStackView = UIStackView(arrangedSubviews: [passengerCountButton,
+                                                                         passengerCountLabel])
+            passengerCountStackView.axis = .horizontal
+            passengerCountStackView.distribution = .fill
+            passengerCountStackView.spacing = 20
+            
+            contentView.addSubview(passengerCountStackView)
+            passengerCountStackView.anchor(top: timeStackView.bottomAnchor,
+                                           left: contentView.leftAnchor,
+                                           right: contentView.rightAnchor,
+                                           paddingTop: 32,
+                                           paddingLeft: 32,
+                                           paddingRight: 32)
             
             contentView.addSubview(saveButton)
-            saveButton.anchor(top: detourLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            saveButton.anchor(top: passengerCountStackView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
 
         } else {
@@ -525,6 +525,8 @@ class PendingEditVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
     
+
+    
     // MARK: - Selectors
     
     @objc func handleDisclosure() {
@@ -545,20 +547,9 @@ class PendingEditVC: UIViewController {
         return
     }
     
-    @objc func doneButtonClicked() {
-        print("DEBUG: done button clicked")
-        detourTextField.endEditing(true)
-        guard let detourText = detourTextField.text else { return }
-        if detourText != "" {
-            detourTextField.text! += " miles"
-            data["Detour"] = detourTextField.text
-        }
-        navigationItem.rightBarButtonItem? = UIBarButtonItem()
-    }
-
     @objc func handleSaveButton() {
         print("DEBUG: save button clicked")
-        let name = Notification.Name(rawValue: pendingLiftEditedNotificationKey)
+        let name = Notification.Name(rawValue: confirmedLiftEditedNotificationKey)
         NotificationCenter.default.post(name: name, object: nil, userInfo: data)
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: ActiveOffersAndAcceptsVC.self) {
@@ -567,9 +558,18 @@ class PendingEditVC: UIViewController {
             }
         }
     }
+    
+    @objc func handlePassengerCountClicked() {
+        contentView.addSubview(passengerSelectorView)
+        passengerSelectorView.centerX(inView: contentView)
+        passengerSelectorView.centerY(inView: contentView, constant: -contentView.frame.size.height / 4.0)
+        return
+    }
+    
+
 }
 
-extension PendingEditVC: UITextFieldDelegate {
+extension ConfirmedEditVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch textField {
         case startLocationTextField:
@@ -595,14 +595,12 @@ extension PendingEditVC: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.keyboardType == .numberPad {
-            navigationItem.rightBarButtonItem = doneButtonItem
-        }
         textField.text = ""
     }
+
 }
 
-extension PendingEditVC: DateSelectorDelegate {
+extension ConfirmedEditVC: DateSelectorDelegate {
     func readDateSelected(date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_GB")
@@ -614,7 +612,7 @@ extension PendingEditVC: DateSelectorDelegate {
     }
 }
 
-extension PendingEditVC: TimeSelectorDelegate {
+extension ConfirmedEditVC: TimeSelectorDelegate {
     func readTimeSelected(time: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_GB")
@@ -623,5 +621,12 @@ extension PendingEditVC: TimeSelectorDelegate {
         selectedTimeLabel.text = timeString
         data["Time"] = timeString
         return
+    }
+}
+
+extension ConfirmedEditVC: PassengerSelectorDelegate {
+    func readPassengerCount(count: String) {
+        passengerCountLabel.text = count
+        data["Pass"] = count
     }
 }

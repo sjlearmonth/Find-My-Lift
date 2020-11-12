@@ -55,6 +55,8 @@
 		C439FA0325262E870057ED26 /* DateSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0225262E870057ED26 /* DateSelectorView.swift */; };
 		C439FA07252634C80057ED26 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA06252634C80057ED26 /* TimeSelectorView.swift */; };
 		C439FA0B25263DB20057ED26 /* PassengerSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */; };
+		C450A5EE255D90260013B99A /* ConfirmedDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C450A5ED255D90260013B99A /* ConfirmedDetailsVC.swift */; };
+		C450A5F2255D9CED0013B99A /* ConfirmedEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C450A5F1255D9CED0013B99A /* ConfirmedEditVC.swift */; };
 		C4644470253A0CC9008A4FC4 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */; };
 		C4644475253DD18E008A4FC4 /* LASortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4644474253DD18E008A4FC4 /* LASortView.swift */; };
 		C4677D3E2523A0B700DF0870 /* GroupsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4677D3D2523A0B700DF0870 /* GroupsVC.swift */; };
@@ -131,6 +133,8 @@
 		C439FA0225262E870057ED26 /* DateSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectorView.swift; sourceTree = "<group>"; };
 		C439FA06252634C80057ED26 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
 		C439FA0A25263DB20057ED26 /* PassengerSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerSelectorView.swift; sourceTree = "<group>"; };
+		C450A5ED255D90260013B99A /* ConfirmedDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedDetailsVC.swift; sourceTree = "<group>"; };
+		C450A5F1255D9CED0013B99A /* ConfirmedEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmedEditVC.swift; sourceTree = "<group>"; };
 		C464446F253A0CC9008A4FC4 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		C4644474253DD18E008A4FC4 /* LASortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LASortView.swift; sourceTree = "<group>"; };
 		C4677D3D2523A0B700DF0870 /* GroupsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsVC.swift; sourceTree = "<group>"; };
@@ -241,6 +245,8 @@
 				C418BE12255AF8020005828B /* PendingDetailsVC.swift */,
 				C418BE1E255C35E80005828B /* PendingEditVC.swift */,
 				C418BE0E2559C2360005828B /* ConfirmedLiftsVC.swift */,
+				C450A5ED255D90260013B99A /* ConfirmedDetailsVC.swift */,
+				C450A5F1255D9CED0013B99A /* ConfirmedEditVC.swift */,
 				C418BE092559B6A90005828B /* LiftsHistoryVC.swift */,
 				C4677D462523A10F00DF0870 /* MoreVC.swift */,
 				C4677D932524F14900DF0870 /* LiftRequestDetailsVC.swift */,
@@ -491,10 +497,12 @@
 				C42AA38725224F2600B7A5A6 /* Extensions.swift in Sources */,
 				C437A1262551B566002E9B00 /* ChatVCCell.swift in Sources */,
 				C437A13425544612002E9B00 /* CustomInputAccessoryView.swift in Sources */,
+				C450A5EE255D90260013B99A /* ConfirmedDetailsVC.swift in Sources */,
 				C4143048254750CB00462CA7 /* LiftOfferSentVC.swift in Sources */,
 				C437A14B2555C16D002E9B00 /* OffersHistoryHeader.swift in Sources */,
 				C437A10025505B7C002E9B00 /* Misc.swift in Sources */,
 				C414303E2547414F00462CA7 /* MatchesReview.swift in Sources */,
+				C450A5F2255D9CED0013B99A /* ConfirmedEditVC.swift in Sources */,
 				C41430792548A4E600462CA7 /* OpenAGroupVC.swift in Sources */,
 				C4E7D2B92543427400F95265 /* MLRHeader.swift in Sources */,
 				C4677D412523A0D500DF0870 /* ChatVC.swift in Sources */,

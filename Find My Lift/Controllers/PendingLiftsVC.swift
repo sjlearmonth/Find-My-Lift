@@ -29,7 +29,7 @@ class PendingLiftsVC: UIViewController {
         return tv
     }()
     
-    private var pendingOffers: [[String:String]]
+    private let pendingOffers: [[String:String]]
     
     private let pendingAcceptsCellID = "PendingAcceptsCellID"
     
@@ -44,7 +44,7 @@ class PendingLiftsVC: UIViewController {
         return tv
     }()
     
-    private var pendingAccepts: [[String:String]]
+    private let pendingAccepts: [[String:String]]
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -166,39 +166,36 @@ extension PendingLiftsVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var liftData = [String:String]()
         switch tableView {
         case pendingOffersTableView:
-            var offeredLiftData = [String:String]()
-            offeredLiftData["PendingType"] = "LiftOffered"
-            offeredLiftData["TableRow"] = String(indexPath.row)
-            offeredLiftData["Start"] = pendingOffers[indexPath.row]["Start"]
-            offeredLiftData["End"] = pendingOffers[indexPath.row]["End"]
-            offeredLiftData["Date"] = pendingOffers[indexPath.row]["Date"]
-            offeredLiftData["Time"] = pendingOffers[indexPath.row]["Time"]
-            offeredLiftData["Detour"] = pendingOffers[indexPath.row]["Detour"]
-            let controller = PendingDetailsVC(data: offeredLiftData)
-            controller.modalPresentationStyle = .fullScreen
-            controller.modalTransitionStyle = .crossDissolve
-            navigationController?.pushViewController(controller, animated: true)
+            liftData["PendingType"] = "LiftOffered"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Start"] = pendingOffers[indexPath.row]["Start"]
+            liftData["End"] = pendingOffers[indexPath.row]["End"]
+            liftData["Date"] = pendingOffers[indexPath.row]["Date"]
+            liftData["Time"] = pendingOffers[indexPath.row]["Time"]
+            liftData["Detour"] = pendingOffers[indexPath.row]["Detour"]
             break
+            
         case pendingAcceptsTableView:
-            var acceptedLiftData = [String:String]()
-            acceptedLiftData["PendingType"] = "LiftAccepted"
-            acceptedLiftData["TableRow"] = String(indexPath.row)
-            acceptedLiftData["TableRow"] = String(indexPath.row)
-            acceptedLiftData["Driver"] = pendingAccepts[indexPath.row]["Driver"]
-            acceptedLiftData["Reg"] = pendingAccepts[indexPath.row]["Reg"]
-            acceptedLiftData["Colour"] = pendingAccepts[indexPath.row]["Colour"]
-            acceptedLiftData["Date"] = pendingAccepts[indexPath.row]["Date"]
-            acceptedLiftData["Time"] = pendingAccepts[indexPath.row]["Time"]
-            let controller = PendingDetailsVC(data: acceptedLiftData)
-            controller.modalPresentationStyle = .fullScreen
-            controller.modalTransitionStyle = .crossDissolve
-            navigationController?.pushViewController(controller, animated: true)
+            liftData["PendingType"] = "LiftAccepted"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Driver"] = pendingAccepts[indexPath.row]["Driver"]
+            liftData["Reg"] = pendingAccepts[indexPath.row]["Reg"]
+            liftData["Colour"] = pendingAccepts[indexPath.row]["Colour"]
+            liftData["Date"] = pendingAccepts[indexPath.row]["Date"]
+            liftData["Time"] = pendingAccepts[indexPath.row]["Time"]
             break
         default:
             break
         }
+        
+        let controller = PendingDetailsVC(data: liftData)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
     
     }
 

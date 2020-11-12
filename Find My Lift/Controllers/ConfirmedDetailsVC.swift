@@ -1,16 +1,16 @@
 //
-//  PendingDetailsVC.swift
+//  ConfirmedDetailsVC.swift
 //  Find My Lift
 //
-//  Created by Stephen Learmonth on 10/11/2020.
+//  Created by Stephen Learmonth on 12/11/2020.
 //  Copyright © 2020 Stephen Learmonth. All rights reserved.
 //
 
 import UIKit
 
-let pendingLiftCancelledNotificationKey = "pendingLiftCancelled"
+let confirmedLiftCancelledNotificationKey = "confirmedLiftCancelled"
 
-class PendingDetailsVC: UIViewController {
+class ConfirmedDetailsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -120,18 +120,18 @@ class PendingDetailsVC: UIViewController {
         return label
     }()
 
-    private lazy var detourTitleLabel: UILabel = {
+    private lazy var passengerTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Detour:"
+        label.text = "Passengers:"
         label.textColor = .white
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         label.backgroundColor = .clear
         return label
     }()
 
-    private lazy var detourValueLabel: UILabel = {
+    private lazy var passengerValueLabel: UILabel = {
         let label = UILabel()
-        label.text = data["Detour"]
+        label.text = data["Pass"]
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
@@ -268,7 +268,7 @@ class PendingDetailsVC: UIViewController {
         return cv
     }()
 
-    // MARK: -  Lifecycle
+    // MARK: - Lifecycle
     
     init(data: [String:String]) {
         self.data = data
@@ -279,13 +279,13 @@ class PendingDetailsVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         configureUI()
         
         configureScrollView()
-
     }
     
     // MARK: - Helper Functions
@@ -294,7 +294,7 @@ class PendingDetailsVC: UIViewController {
         
         configureGradientLayer()
         
-        navigationItem.title = "Pending Details"
+        navigationItem.title = "Confirmed"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
@@ -302,7 +302,7 @@ class PendingDetailsVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        if data["PendingType"] == "LiftOffered" {
+        if data["ConfirmedType"] == "LiftOffered" {
             
             titleLabel.text = "Lift Offered"
             
@@ -337,15 +337,15 @@ class PendingDetailsVC: UIViewController {
             startTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             startTimeValueLabel.centerY(inView: startTimeTitleLabel)
 
-            contentView.addSubview(detourTitleLabel)
-            detourTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            contentView.addSubview(passengerTitleLabel)
+            passengerTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
-            contentView.addSubview(detourValueLabel)
-            detourValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-            detourValueLabel.centerY(inView: detourTitleLabel)
+            contentView.addSubview(passengerValueLabel)
+            passengerValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            passengerValueLabel.centerY(inView: passengerTitleLabel)
             
             contentView.addSubview(editLiftButton)
-            editLiftButton.anchor(top: detourValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            editLiftButton.anchor(top: passengerValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
             contentView.addSubview(cancelLiftButton)
             cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
@@ -398,12 +398,9 @@ class PendingDetailsVC: UIViewController {
             contentView.addSubview(cancelLiftButton)
             cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
-
         }
-        
-        
     }
-    
+
     private func configureScrollView() {
         view.addSubview(scrollView)
         scrollView.anchor(top: self.view.topAnchor,
@@ -423,12 +420,12 @@ class PendingDetailsVC: UIViewController {
 
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
-
+    
     // MARK: - Selectors
     
     @objc func handleEditLiftButton() {
         print("DEBUG: edit lift button clicked")
-        let controller = PendingEditVC(data: data)
+        let controller = ConfirmedEditVC(data: data)
         controller.modalPresentationStyle = .fullScreen
         controller.modalTransitionStyle = .crossDissolve
         navigationController?.pushViewController(controller, animated: true)
@@ -436,7 +433,7 @@ class PendingDetailsVC: UIViewController {
     
     @objc func handleCancelLiftButton() {
         print("DEBUG: cancel lift button clicked")
-        let name = Notification.Name(rawValue: pendingLiftCancelledNotificationKey)
+        let name = Notification.Name(rawValue: confirmedLiftCancelledNotificationKey)
         NotificationCenter.default.post(name: name, object: nil, userInfo: data)
         for controller in self.navigationController!.viewControllers as Array {
             if controller.isKind(of: ActiveOffersAndAcceptsVC.self) {
@@ -445,5 +442,4 @@ class PendingDetailsVC: UIViewController {
             }
         }
     }
-
 }
