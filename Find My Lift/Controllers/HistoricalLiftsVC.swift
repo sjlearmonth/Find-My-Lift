@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LiftsHistoryVC: UIViewController {
+class HistoricalLiftsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -16,35 +16,35 @@ class LiftsHistoryVC: UIViewController {
         return .lightContent
     }
     
-    private let offersHistoryCellID = "OffersHistoryCellID"
+    private let historicalOffersCellID = "historicalOffersCellID"
     
-    private lazy var offersHistoryTableView: UITableView = {
+    private lazy var historicalOffersTableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: offersHistoryCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: historicalOffersCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
-    private let offersHistory: [[String:String]]
+    private let historicalOffers: [[String:String]]
     
-    private let acceptsHistoryCellID = "AcceptsHistoryCellID"
+    private let historicalAcceptsCellID = "historicalAcceptsCellID"
     
-    private lazy var acceptsHistoryTableView: UITableView = {
+    private lazy var historicalAcceptsTableView: UITableView = {
         let tv = UITableView()
         tv.delegate = self
         tv.dataSource = self
-        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: acceptsHistoryCellID)
+        tv.register(ActiveOffersAndAcceptsCell.self, forCellReuseIdentifier: historicalAcceptsCellID)
         tv.bounces = false
         tv.rowHeight = 40.0
         tv.showsVerticalScrollIndicator = false
         return tv
     }()
     
-    private let acceptsHistory: [[String:String]]
+    private let historicalAccepts: [[String:String]]
     
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
@@ -62,8 +62,8 @@ class LiftsHistoryVC: UIViewController {
     // MARK: - Lifecycle
     
     init(offers: [[String:String]], accepts: [[String:String]]) {
-        self.offersHistory = offers
-        self.acceptsHistory = accepts
+        self.historicalOffers = offers
+        self.historicalAccepts = accepts
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -94,8 +94,8 @@ class LiftsHistoryVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        contentView.addSubview(offersHistoryTableView)
-        offersHistoryTableView.anchor(top: contentView.topAnchor,
+        contentView.addSubview(historicalOffersTableView)
+        historicalOffersTableView.anchor(top: contentView.topAnchor,
                                       left: contentView.leftAnchor,
                                       right: contentView.rightAnchor,
                                       paddingTop: 0.0,
@@ -103,8 +103,8 @@ class LiftsHistoryVC: UIViewController {
                                       paddingRight: 0.0,
                                       height: 90.0 + 6.0 * 40.0)
         
-        contentView.addSubview(acceptsHistoryTableView)
-        acceptsHistoryTableView.anchor(top: offersHistoryTableView.bottomAnchor,
+        contentView.addSubview(historicalAcceptsTableView)
+        historicalAcceptsTableView.anchor(top: historicalOffersTableView.bottomAnchor,
                                       left: contentView.leftAnchor,
                                       right: contentView.rightAnchor,
                                       paddingTop: 75.0,
@@ -136,17 +136,17 @@ class LiftsHistoryVC: UIViewController {
 
 }
 
-extension LiftsHistoryVC: UITableViewDelegate {
+extension HistoricalLiftsVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         var header = UIView()
         
         switch tableView {
-        case offersHistoryTableView:
+        case historicalOffersTableView:
             header = OffersHistoryHeader()
             break
-        case acceptsHistoryTableView:
+        case historicalAcceptsTableView:
             header = AcceptsHistoryHeader()
             break
         default:
@@ -163,17 +163,52 @@ extension LiftsHistoryVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var liftData = [String:String]()
+        switch tableView {
+        case historicalOffersTableView:
+            
+            liftData["HistoricalType"] = "LiftOffered"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Start"] = historicalOffers[indexPath.row]["Start"]
+            liftData["End"] = historicalOffers[indexPath.row]["End"]
+            liftData["Date"] = historicalOffers[indexPath.row]["Date"]
+            liftData["Time"] = historicalOffers[indexPath.row]["Time"]
+            liftData["Detour"] = historicalOffers[indexPath.row]["Detour"]
+            break
+            
+        case historicalAcceptsTableView:
+            liftData["HistoricalType"] = "LiftAccepted"
+            liftData["TableRow"] = String(indexPath.row)
+            liftData["Driver"] = historicalAccepts[indexPath.row]["Driver"]
+            liftData["Reg"] = historicalAccepts[indexPath.row]["Reg"]
+            liftData["Colour"] = historicalAccepts[indexPath.row]["Colour"]
+            liftData["Date"] = historicalAccepts[indexPath.row]["Date"]
+            liftData["Time"] = historicalAccepts[indexPath.row]["Time"]
+            break
+        default:
+            break
+        }
+        
+        let controller = HistoricalDetailsVC(data: liftData)
+        controller.modalPresentationStyle = .fullScreen
+        controller.modalTransitionStyle = .crossDissolve
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
 
 }
 
-extension LiftsHistoryVC: UITableViewDataSource {
+extension HistoricalLiftsVC: UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch tableView {
-        case offersHistoryTableView:
-            return offersHistory.count
-        case acceptsHistoryTableView:
-            return acceptsHistory.count
+        case historicalOffersTableView:
+            return historicalOffers.count
+        case historicalAcceptsTableView:
+            return historicalAccepts.count
         default:
             return 1
         }
@@ -182,24 +217,24 @@ extension LiftsHistoryVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var blankCell = UITableViewCell()
         switch tableView {
-        case offersHistoryTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: offersHistoryCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
+        case historicalOffersTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: historicalOffersCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
-            cell.subHeader0Label.text = offersHistory[indexPath.row]["Start"]
-            cell.subHeader1Label.text = offersHistory[indexPath.row]["End"]
-            cell.subHeader2Label.text = offersHistory[indexPath.row]["Date"]
-            cell.subHeader3Label.text = offersHistory[indexPath.row]["Time"]
-            cell.subHeader4Label.text = offersHistory[indexPath.row]["Detour"]
+            cell.subHeader0Label.text = historicalOffers[indexPath.row]["Start"]
+            cell.subHeader1Label.text = historicalOffers[indexPath.row]["End"]
+            cell.subHeader2Label.text = historicalOffers[indexPath.row]["Date"]
+            cell.subHeader3Label.text = historicalOffers[indexPath.row]["Time"]
+            cell.subHeader4Label.text = historicalOffers[indexPath.row]["Detour"]
             blankCell = cell
             break
-        case acceptsHistoryTableView:
-            let cell = tableView.dequeueReusableCell(withIdentifier: acceptsHistoryCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
+        case historicalAcceptsTableView:
+            let cell = tableView.dequeueReusableCell(withIdentifier: historicalAcceptsCellID, for: indexPath) as! ActiveOffersAndAcceptsCell
             
-            cell.subHeader0Label.text = acceptsHistory[indexPath.row]["Driver"]
-            cell.subHeader1Label.text = acceptsHistory[indexPath.row]["Reg"]
-            cell.subHeader2Label.text = acceptsHistory[indexPath.row]["Colour"]
-            cell.subHeader3Label.text = acceptsHistory[indexPath.row]["Date"]
-            cell.subHeader4Label.text = acceptsHistory[indexPath.row]["Time"]
+            cell.subHeader0Label.text = historicalAccepts[indexPath.row]["Driver"]
+            cell.subHeader1Label.text = historicalAccepts[indexPath.row]["Reg"]
+            cell.subHeader2Label.text = historicalAccepts[indexPath.row]["Colour"]
+            cell.subHeader3Label.text = historicalAccepts[indexPath.row]["Date"]
+            cell.subHeader4Label.text = historicalAccepts[indexPath.row]["Time"]
             blankCell = cell
             break
         default:

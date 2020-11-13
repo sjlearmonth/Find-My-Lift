@@ -433,7 +433,7 @@ extension ActiveOffersAndAcceptsVC: UITableViewDelegate {
             navigationController?.pushViewController(controller, animated: true)
             break
         case offersHistoryTableView, acceptsHistoryTableView:
-            let controller = LiftsHistoryVC(offers: offersHistory, accepts: acceptsHistory)
+            let controller = HistoricalLiftsVC(offers: offersHistory, accepts: acceptsHistory)
             controller.modalPresentationStyle = .fullScreen
             controller.modalTransitionStyle = .crossDissolve
             navigationController?.pushViewController(controller, animated: true)

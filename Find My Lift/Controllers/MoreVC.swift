@@ -25,9 +25,8 @@ class MoreVC: UIViewController {
         
         configureGradientLayer()
         
-        title = "More Content"
-
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "", style: .done, target: self, action: #selector(handleLogOut))
+        navigationItem.title = "More Content"
+        navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
         navigationController?.navigationBar.tintColor = .white

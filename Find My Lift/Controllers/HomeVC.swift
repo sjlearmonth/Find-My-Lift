@@ -41,6 +41,35 @@ class HomeVC: UIViewController {
         return button
     }()
     
+    private lazy var homeTitleView : HomeTitleView = {
+        let htv = HomeTitleView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 350.0))
+        let greeting: String
+        let currentDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_GB")
+        dateFormatter.setLocalizedDateFormatFromTemplate("HH")
+        let hours = Int(dateFormatter.string(from: currentDate))!
+        
+        if hours >= 0 && hours < 12 {
+            greeting = "Good Morning, Stephen"
+        } else if hours >= 12 && hours < 18 {
+            greeting = "Good Afternoon, Stephen"
+        } else {
+            greeting = "Good Evening, Stephen"
+        }
+        htv.homeTitleLabel.text = greeting
+        
+//        let gradient = CAGradientLayer()
+//        gradient.colors = [UIColor.clear.cgColor , UIColor.black.cgColor]
+//        gradient.locations = [0.85, 1]
+//        htv.layer.insertSublayer(gradient, at: 0)
+//        gradient.frame = htv.bounds
+//        htv.layoutIfNeeded()
+
+        return htv
+        
+    }()
+    
     private lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
@@ -91,6 +120,9 @@ class HomeVC: UIViewController {
         
         configureNavigationBar()
         
+        contentView.addSubview(homeTitleView)
+        homeTitleView.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 0.0, paddingLeft: 0.0, paddingRight: 0.0, height: 350.0)
+        
         let stackView = UIStackView(arrangedSubviews: [findALiftButton,
                                                        offerALiftButton])
         stackView.axis = .vertical
@@ -98,10 +130,10 @@ class HomeVC: UIViewController {
         stackView.distribution = .fill
         
         contentView.addSubview(stackView)
-        stackView.anchor(top: contentView.topAnchor,
+        stackView.anchor(top: homeTitleView.bottomAnchor,
                          left: contentView.leftAnchor,
                          right: contentView.rightAnchor,
-                         paddingTop: 300.0,
+                         paddingTop: 25.0,
                          paddingLeft: 32.0,
                          paddingRight: 32.0)
     }

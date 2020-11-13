@@ -70,12 +70,29 @@ class CreateNewChatVC: UIViewController {
         return .lightContent
     }
 
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView()
+        sv.isScrollEnabled = true
+        sv.bounces = false
+        sv.showsVerticalScrollIndicator = false
+        return sv
+    }()
+    
+    private lazy var contentView: UIView = {
+        let cv = UIView()
+        cv.frame.size = CGSize(width: self.view.frame.width, height: self.view.frame.height * 2.0)
+        return cv
+    }()
+        
+
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        
+        configureScrollView()
 
     }
     
@@ -93,20 +110,41 @@ class CreateNewChatVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        view.addSubview(memberSearchLabel)
-        memberSearchLabel.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, paddingTop: 40.0, paddingLeft: 16.0)
+        contentView.addSubview(memberSearchLabel)
+        memberSearchLabel.anchor(top: contentView.topAnchor, left: contentView.leftAnchor, paddingTop: 40.0, paddingLeft: 16.0)
         
-        view.addSubview(searchTextField)
+        contentView.addSubview(searchTextField)
         searchTextField.anchor(left: memberSearchLabel.rightAnchor, paddingLeft: 8.0)
         searchTextField.centerY(inView: memberSearchLabel)
         
-        view.addSubview(messageTextView)
-        messageTextView.anchor(top: searchTextField.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+        contentView.addSubview(messageTextView)
+        messageTextView.anchor(top: searchTextField.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
         
-        view.addSubview(sendButton)
-        sendButton.anchor(top: messageTextView.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+        contentView.addSubview(sendButton)
+        sendButton.anchor(top: messageTextView.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
     }
+    
+    private func configureScrollView() {
+        view.addSubview(scrollView)
+        scrollView.anchor(top: self.view.topAnchor,
+                          bottom: self.view.bottomAnchor,
+                          paddingTop: 0,
+                          paddingBottom: 0)
+        scrollView.trail(left: self.view.leadingAnchor,
+                         right: self.view.trailingAnchor,
+                         leftT: 0,
+                         rightT: 0)
+        
+        scrollView.addSubview(contentView)
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true;
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true;
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true;
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true;
+
+        contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
+    }
+
     
     // MARK: - Selectors
     

@@ -1,16 +1,14 @@
 //
-//  ConfirmedDetailsVC.swift
+//  HistoricalDetailsVC.swift
 //  Find My Lift
 //
-//  Created by Stephen Learmonth on 12/11/2020.
+//  Created by Stephen Learmonth on 13/11/2020.
 //  Copyright © 2020 Stephen Learmonth. All rights reserved.
 //
 
 import UIKit
 
-let confirmedLiftCancelledNotificationKey = "confirmedLiftCancelled"
-
-class ConfirmedDetailsVC: UIViewController {
+class HistoricalDetailsVC: UIViewController {
 
     // MARK: - Properties
     
@@ -120,18 +118,18 @@ class ConfirmedDetailsVC: UIViewController {
         return label
     }()
 
-    private lazy var passengerTitleLabel: UILabel = {
+    private lazy var detourTitleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Passengers:"
+        label.text = "Detour:"
         label.textColor = .white
         label.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         label.backgroundColor = .clear
         return label
     }()
 
-    private lazy var passengerValueLabel: UILabel = {
+    private lazy var detourValueLabel: UILabel = {
         let label = UILabel()
-        label.text = data["Pass"]
+        label.text = data["Detour"]
         label.textColor = .black
         label.textAlignment = .center
         label.font = UIFont(name: "AvenirNext-Regular", size: 20.0)
@@ -229,28 +227,16 @@ class ConfirmedDetailsVC: UIViewController {
         label.layer.masksToBounds = true
         return label
     }()
-    
-    private lazy var editLiftButton: UIButton = {
+        
+    private lazy var chatButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Edit Lift", for: .normal)
+        button.setTitle("Chat", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
+        button.backgroundColor = .systemBlue
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
         button.setHeight(height: 50.0)
         button.layer.cornerRadius = 25.0
-        button.addTarget(self, action: #selector(handleEditLiftButton), for: .touchUpInside)
-        return button
-    }()
-    
-    private lazy var cancelLiftButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Cancel Lift", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemGreen
-        button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
-        button.setHeight(height: 50.0)
-        button.layer.cornerRadius = 25.0
-        button.addTarget(self, action: #selector(handleCancelLiftButton), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleChatButtonClicked), for: .touchUpInside)
         return button
     }()
     
@@ -268,7 +254,7 @@ class ConfirmedDetailsVC: UIViewController {
         return cv
     }()
 
-    // MARK: - Lifecycle
+    // MARK: -  Lifecycle
     
     init(data: [String:String]) {
         self.data = data
@@ -279,13 +265,13 @@ class ConfirmedDetailsVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         configureUI()
         
         configureScrollView()
+
     }
     
     // MARK: - Helper Functions
@@ -294,7 +280,7 @@ class ConfirmedDetailsVC: UIViewController {
         
         configureGradientLayer()
         
-        navigationItem.title = "Confirmed"
+        navigationItem.title = "Pending Details"
         navigationItem.backButtonTitle = ""
 
         navigationController?.navigationBar.barTintColor = .systemBlue
@@ -302,7 +288,7 @@ class ConfirmedDetailsVC: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
         navigationController?.navigationBar.barStyle = .black
         
-        if data["ConfirmedType"] == "LiftOffered" {
+        if data["HistoricalType"] == "LiftOffered" {
             
             titleLabel.text = "Lift Offered"
             
@@ -337,18 +323,15 @@ class ConfirmedDetailsVC: UIViewController {
             startTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             startTimeValueLabel.centerY(inView: startTimeTitleLabel)
 
-            contentView.addSubview(passengerTitleLabel)
-            passengerTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
+            contentView.addSubview(detourTitleLabel)
+            detourTitleLabel.anchor(top: startTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, paddingTop: 25.0, paddingLeft: 32.0)
             
-            contentView.addSubview(passengerValueLabel)
-            passengerValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
-            passengerValueLabel.centerY(inView: passengerTitleLabel)
+            contentView.addSubview(detourValueLabel)
+            detourValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
+            detourValueLabel.centerY(inView: detourTitleLabel)
             
-            contentView.addSubview(editLiftButton)
-            editLiftButton.anchor(top: passengerValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
-
-            contentView.addSubview(cancelLiftButton)
-            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(chatButton)
+            chatButton.anchor(top: detourValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         } else {
             
@@ -392,15 +375,13 @@ class ConfirmedDetailsVC: UIViewController {
             pickupTimeValueLabel.anchor(right: contentView.rightAnchor, paddingRight: 32.0)
             pickupTimeValueLabel.centerY(inView: pickupTimeTitleLabel)
             
-            contentView.addSubview(editLiftButton)
-            editLiftButton.anchor(top: pickupTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
-
-            contentView.addSubview(cancelLiftButton)
-            cancelLiftButton.anchor(top: editLiftButton.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
+            contentView.addSubview(chatButton)
+            chatButton.anchor(top: pickupTimeValueLabel.bottomAnchor, left: contentView.leftAnchor, right: contentView.rightAnchor, paddingTop: 25.0, paddingLeft: 32.0, paddingRight: 32.0)
 
         }
+        
     }
-
+    
     private func configureScrollView() {
         view.addSubview(scrollView)
         scrollView.anchor(top: self.view.topAnchor,
@@ -420,26 +401,16 @@ class ConfirmedDetailsVC: UIViewController {
 
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
-    
+
     // MARK: - Selectors
     
-    @objc func handleEditLiftButton() {
-        print("DEBUG: request edit lift button clicked")
-        let controller = ConfirmedRequestEditVC(data: data)
-        controller.modalPresentationStyle = .fullScreen
-        controller.modalTransitionStyle = .crossDissolve
-        navigationController?.pushViewController(controller, animated: true)
+    @objc func handleChatButtonClicked() {
+        print("DEBUG: chat button clicked")
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
+        let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController
+        tabBarController?.selectedIndex = 2
     }
-    
-    @objc func handleCancelLiftButton() {
-        print("DEBUG: cancel lift button clicked")
-        let name = Notification.Name(rawValue: confirmedLiftCancelledNotificationKey)
-        NotificationCenter.default.post(name: name, object: nil, userInfo: data)
-        for controller in self.navigationController!.viewControllers as Array {
-            if controller.isKind(of: ActiveOffersAndAcceptsVC.self) {
-                self.navigationController!.popToViewController(controller, animated: true)
-                break
-            }
-        }
-    }
+
 }
+

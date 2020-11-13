@@ -62,7 +62,7 @@ class LiftOfferAcceptedVC: UIViewController {
     
     private lazy var amendButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Amend Lift Requirements", for: .normal)
+        button.setTitle("Amend Lift", for: .normal)
         button.layer.cornerRadius = 25.0
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 25)
         button.backgroundColor = .systemGreen

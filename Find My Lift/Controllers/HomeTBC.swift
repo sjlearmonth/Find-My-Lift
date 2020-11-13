@@ -18,6 +18,10 @@ class HomeTBC: UITabBarController {
         configureUI()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     private func configureUI() {
         
         let homeVC = HomeVC()

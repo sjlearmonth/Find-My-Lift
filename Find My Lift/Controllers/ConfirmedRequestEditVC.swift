@@ -8,8 +8,6 @@
 
 import UIKit
 
-let confirmedRequestEditLiftNotificationKey = "confirmedRequestEditLift"
-
 class ConfirmedRequestEditVC: UIViewController {
 
     // MARK: - Properties
@@ -277,7 +275,7 @@ class ConfirmedRequestEditVC: UIViewController {
 
     private lazy var requestButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Send Edit Request", for: .normal)
+        button.setTitle("Request Edit", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
         button.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 20.0)
@@ -543,8 +541,6 @@ class ConfirmedRequestEditVC: UIViewController {
         contentView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true;
     }
     
-
-    
     // MARK: - Selectors
     
     @objc func handleDisclosure() {
@@ -567,18 +563,10 @@ class ConfirmedRequestEditVC: UIViewController {
     
     @objc func handleChatButton() {
         print("DEBUG: chat button clicked")
-        let name = Notification.Name(rawValue: confirmedRequestEditLiftNotificationKey)
-        NotificationCenter.default.post(name: name, object: nil)
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-          let sceneDelegate = windowScene.delegate as? SceneDelegate
-        else {
-          return
-        }
+              let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
         let tabBarController = sceneDelegate.window?.rootViewController as? UITabBarController
-        guard let controller = tabBarController?.viewControllers?[2] as? UINavigationController else { return }
-        print("DEBUG: controller = \(controller.debugDescription)")
-        controller.popToRootViewController(animated: true)
-        dismiss(animated: true, completion: nil)
+        tabBarController?.selectedIndex = 2
     }
     
     @objc func handleRequestButton() {
