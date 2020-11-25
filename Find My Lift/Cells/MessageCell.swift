@@ -25,7 +25,7 @@ class MessageCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.textColor = .white
-        label.font = UIFont(name: "AvenirNext-DemiBold", size: 16.0)
+        label.font = UIFont(name: LABEL_FONT_DEMIBOLD, size: 16.0)
         label.backgroundColor = .clear
         return label
     }()
@@ -33,7 +33,7 @@ class MessageCell: UICollectionViewCell {
     private let messageTextView: UITextView = {
         let textView = UITextView()
         textView.backgroundColor = .clear
-        textView.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        textView.font = UIFont(name: LABEL_FONT_REGULAR, size: 16.0)
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.textColor = .white

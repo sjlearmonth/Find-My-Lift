@@ -1,5 +1,5 @@
 //
-//  ActiveOffersAndLiftsCell.swift
+//  ActiveOffersAndAcceptsCell.swift
 //  Find My Lift
 //
 //  Created by Stephen Learmonth on 06/11/2020.
@@ -16,7 +16,7 @@ class ActiveOffersAndAcceptsCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        label.font = UIFont(name: LABEL_FONT_REGULAR, size: 14.0)
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
@@ -27,7 +27,7 @@ class ActiveOffersAndAcceptsCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        label.font = UIFont(name: LABEL_FONT_REGULAR, size: 14.0)
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
@@ -38,7 +38,7 @@ class ActiveOffersAndAcceptsCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        label.font = UIFont(name: LABEL_FONT_REGULAR, size: 14.0)
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
@@ -48,7 +48,7 @@ class ActiveOffersAndAcceptsCell: UITableViewCell {
     lazy var subHeader3Label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        label.font = UIFont(name: LABEL_FONT_REGULAR, size: 14.0)
         label.textColor = .black
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
@@ -60,7 +60,7 @@ class ActiveOffersAndAcceptsCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        label.font = UIFont(name: LABEL_FONT_REGULAR, size: 14.0)
         label.backgroundColor = .white
         label.layer.borderWidth = 0.25
         label.layer.borderColor = UIColor.black.cgColor
